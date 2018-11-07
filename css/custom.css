@@ -39,16 +39,16 @@ color: white;
 #floater ul {
   display: block;
   margin: 50px auto 0;
-  width: 70px;
-  height: 70px;
-  padding: 0;
+  width: 50px;
+  height: 50px;
+  padding: 40px;
   position: relative;
 }
 
 #floater  li {
   display: block;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   background-color: blue;
   border-radius: 50%;
   opacity: 0.6;
@@ -59,7 +59,7 @@ color: white;
   transition: transform 0.12s ease-out, opacity 0.12s ease-out, color 0.12s ease-out;
   cursor: pointer;
   text-align: center;
-  line-height: 70px;
+  line-height: 50px;
   color: white;
   font-family: 'fontawesome';
   color: transparent;
