@@ -9,59 +9,17 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>Narrow Jumbotron Template for Bootstrap</title>
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
-
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"> -->
-
-    <!-- Custom styles for this template -->
-    <link href="narrow-jumbotron.css" rel="stylesheet">
-     <!-- <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="css/tooltip.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
      <style>
-     #canvas {
-       /* width:2000px; */
-       /* height:2000px; */
-       border: 10px solid transparent;
-   }
-   .rectangle {
-       border: 1px solid black;
-       position: absolute;
-   }
-           #floater {
-             position:absolute;
-             top:5;
-             right:0;
-             text-align: right;
-             z-index: 1;
-             padding: 15px;
 
-             /* position: absolute; */
-             /* top: 50px;
-             right: 1px;
-             width: 10px;
-             height: 10px;
-             border-radius: 3px 0 0 3px;
-             padding: 10px;
-             background-color: #41a6d9;
-             z-index: 1; */
-             /* -webkit-transition: all 2s ease-in-out;
-             transition: all 2s ease-in-out;
-             z-index: 1;
-             border-radius: 3px 0 0 3px;
-             padding: 10px;
-             background-color: #41a6d9;
-             color: white;
-             text-align: center;
-             box-sizing: border-box; */
-         }
-
-         .red {
-             background-color: green;
-             color: white;
-         }
      </style>
   </head>
 
@@ -160,7 +118,9 @@
       <footer class="footer">
         <p>&copy; Company 2017</p>
       </footer>
-
+      <!-- <div class="tooltip">Hover over me
+        <span class="tooltiptext">Tooltip text</span>
+      </div> -->
     </div> <!-- /container -->
 
     <!-- Bootstrap core JavaScript
@@ -168,251 +128,12 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="https://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script>
-      var element = null;
-      var firstClick = true
+    <!-- <script>
 
-      var mouse = {
-         x: 0,
-         y: 0,
-         startX: 0,
-         startY: 0
-      };
-      $(document).ready(function(){
-        var body = document.body
-        var firstChild = body.firstElementChild // main
-        var newHtml = retriveForm ()+ ' <div id="canvas">' + firstChild.outerHTML + '</div>'
-        body.innerHTML   = newHtml
-
-        var floaterDiv = document.createElement('div')
-        floaterDiv.setAttribute('id', 'floater')
-
-
-        var menuImg = document.createElement('img')
-        menuImg.src = 'setting.png'
-        floaterDiv.appendChild(menuImg)
-        $('body').prepend(floaterDiv)
-
-
-         var buttonState = false
-
-
-         $("#floater").sticky({topSpacing:5});
-
-         $( "#floater" ).click(function() {
-           var currentCanvasElement = document.getElementById('canvas')
-           if (buttonState === false) {
-             createMouseMoveEvent(currentCanvasElement)
-             createMouseClickEvent(currentCanvasElement)
-             buttonState = true
-         } else {
-            var new_element = currentCanvasElement.cloneNode(true);
-            currentCanvasElement.parentNode.replaceChild(new_element, currentCanvasElement);
-            buttonState = false
-         }
-         });
-
-         function setMousePosition(e) {
-               var ev = e || window.event; //Moz || IE
-               if (ev.pageX) { //Moz
-                   mouse.x = ev.pageX + window.pageXOffset;
-                   mouse.y = ev.pageY + window.pageYOffset;
-               } else if (ev.clientX) { //IE
-                   mouse.x = ev.clientX + document.body.scrollLeft;
-                   mouse.y = ev.clientY + document.body.scrollTop;
-               }
-           };
-
-         function retriveForm() {
-           return ` <div class="container-box">
-             <button style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Contact Us</button>
-          </div>
-           <div id="myModal" class="modal fade" role="dialog" style="display: none;">
-               <div class="modal-dialog">
-
-                 <div class="modal-content">
-                   <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">×</button>
-                       <h4 class="modal-title">Contact Us</h4>
-                   </div>
-                   <div class="modal-body">
-
-                     <form role="form" method="post" id="reused_form">
-                       <p>
-                           Send your message in the form below and we will get back to you as early as possible.
-                       </p>
-
-                       <div class="form-group">
-                           <label for="name">
-                               Subject:</label>
-                           <input type="text" class="form-control" id="name" name="name" required="" maxlength="50">
-
-                       </div>
-                       <div class="form-group">
-                           <label for="email">
-                               Email:</label>
-                           <input type="email" class="form-control" id="email" name="email" required="" maxlength="50" value="avibenb@gmail.com">
-                       </div>
-                       <div class="form-group">
-                           <label for="name">
-                               Message:</label>
-                           <textarea class="form-control" type="textarea" name="message" id="message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
-                       </div>
-                       <div class="form-group">
-                           <label> Preview:  </label>
-                           <img id="preview" ></img>
-
-                       </div>
-                       <button type="submit" class="btn btn-lg btn-success btn-block" id="btnContactUs">Post It! →</button>
-
-                   </form>
-                     <div id="success_message" style="width:100%; height:100%; display:none; ">
-                       <h3>Sent your message successfully!</h3>
-                   </div>
-                     <div id="error_message" style="width:100%; height:100%; display:none; ">
-                       <h3>Error</h3>
-                       Sorry there was an error sending your form.
-
-                   </div>
-                   </div>
-                </div>
-              </div>
-           </div> `
-         }
-         function createMouseMoveEvent(e) {
-               canvas.onmousemove = function (e) {
-                   if (firstClick === true) {
-                     firstClick = false
-                   } else {
-                     setMousePosition(e);
-                   }
-                   if (element !== null) {
-                       element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
-                       element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
-                       element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
-                       element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
-                   }
-               }
-         }
-
-         function createMouseClickEvent(e) {
-           canvas.onclick = function (e) {
-             // active buttom, show form and clean inputs
-             $('form#reused_form').css('display', 'block');
-             document.getElementById('btnContactUs').setAttribute('type', 'submit')
-             document.getElementById('name').value = ''
-             document.getElementById('message').value = ''
-
-               if (element !== null) {
-                 var rec = document.querySelector('.rectangle')
-                 if (rec !== null ) {
-                   var newWidth = rec.style.width.toString().replace('px', '')
-                   var newHeight = rec.style.height.toString().replace('px', '')
-                   var startX = rec.style.left.toString().replace('px', '')
-                   var startY = rec.style.top.toString().replace('px', '') - 50
-
-                   rec.parentNode.removeChild(rec)
-                   canvas.style.cursor = "default";
-                   html2canvas(document.querySelector("#canvas")).then(canvas => {
-                     var tnCanvas = document.createElement('canvas');
-                     var tnCanvasContext = tnCanvas.getContext('2d');
-                     tnCanvas.width = newWidth; tnCanvas.height = newHeight;
-                     tnCanvasContext.drawImage(canvas, startX , startY  ,newWidth * 2, newHeight * 2,0,0,newWidth,newHeight);
-                     document.querySelector('[class="btn btn-info btn-lg"]').click()
-                     document.querySelector('#preview').src = tnCanvas.toDataURL()
-                   });
-                   element = null;
-                 }
-                   console.log("finsihed.");
-               } else {
-                   console.log("begun.");
-                   mouse.startX = mouse.x;
-                   mouse.startY = mouse.y;
-                   element = document.createElement('div');
-                   element.className = 'rectangle'
-                   element.style.left = mouse.x + 'px';
-                   element.style.top = mouse.y + 'px';
-                   canvas.appendChild(element)
-                   canvas.style.cursor = "crosshair";
-               }
-          }
-   }
-      });
-
-
-
-
-
-$(function()
-{
-  function after_form_submitted(data)
-  {
-      if(data.result == 'success')
-      {
-          $('form#reused_form').hide();
-          // $('#success_message').show();
-          // $('#error_message').hide();
-      }
-      else
-      {
-          // $('#error_message').append('<ul></ul>');
-          //
-          // jQuery.each(data.errors,function(key,val)
-          // {
-          //     $('#error_message ul').append('<li>'+key+':'+val+'</li>');
-          // });
-          // $('#success_message').hide();
-          // $('#error_message').show();
-
-          //reverse the response on the button
-
-          $('button[type="button"]', $form).each(function()
-          {
-
-              $btn = $(this);
-              label = $btn.prop('orig_label');
-              if(label)
-              {
-                  $btn.prop('type','submit' );
-                  $btn.text(label);
-                  $btn.prop('orig_label','');
-              }
-          });
-
-      }//else
-  }
-
-$('#reused_form').submit(function(e)
-    {
-      e.preventDefault();
-
-      $form = $(this);
-      //show some response on the button
-      $('button[type="submit"]', $form).each(function()
-      {
-          $btn = $(this);
-          $btn.prop('type','button' );
-          $btn.prop('orig_label',$btn.text());
-          $btn.text('Sending ...');
-      });
-        document.querySelector('#floater').click()
-        var data = {
-          result: 'success'
-        }
-        after_form_submitted(data)
-          //         $.ajax({
-          //     type: "POST",
-          //     url: 'http://reusableforms.com/handler/p/bootstrap-popup-email-form',
-          //     data: $form.serialize(),
-          //     success: after_form_submitted,
-          //     dataType: 'json'
-          // });
-
-    });
-});
-  </script>
+  </script> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <script src="jquery.sticky.js"></script>
+  <script src="js/jquery.sticky.js"></script>
+  <script src="js/custom.js"></script>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   </body>
 </html>
