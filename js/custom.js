@@ -54,8 +54,10 @@
 
       outerMenuUl.appendChild(menuli1)
       // floaterDiv.appendChild(menuImg)
+
      $('body').prepend(floaterDiv)
-     floaterDiv.appendChild(outerMenuUl)
+     floaterDiv.innerHTML = '<ul> <li id="openBug" class="fa-home"></li><li id="highlightElem" class="fa-suitcase"></li><li class="fa-flask"></li>  <li class="fa-user"></li></ul>'
+     // floaterDiv.appendChild(outerMenuUl)
 
      $("#floater").sticky({topSpacing:5});
 
@@ -82,26 +84,23 @@
            $(elem).mouseover(function() {
              $(this).css('border-width', '1px')
              $(this).css('backgroundColor', '#e5a0b3')
-             var clazz = $(this).attr('class');
-             var className = (clazz && clazz.length > 0 ) ? clazz + ' tooltip' : 'tooltip'
-             console.log(className);
-
-
-
-             // $(this).parent().is( "div" )
-
-             console.log($(this).find('.tooltip').length);
-             if ($(this).find('.tooltip').length === 0) {
-                if ($(this).is( "div" )) {
-                  $(this).attr('className', className)
-                } else {
-                  $(this).wrap( '<div class="tooltip"></div>' );
-                }
-
-                $(this).prepend(`<span class="tooltiptext"><span class="fa fa-star checked"><span class="fa fa-star checked"></span><span class="fa fa-star checked"><span class="fa fa-star"></span></span>`)
-             } else {
-               // $(this).wrap(`<div class="tooltip">Hover over me <span class="tooltiptext">Tooltip text</span></div>`)
-             }
+             // var clazz = $(this).attr('class');
+             // var className = (clazz && clazz.length > 0 ) ? clazz + ' tooltip' : 'tooltip'
+             // console.log(className);
+             // // $(this).parent().is( "div" )
+             //
+             // console.log($(this).find('.tooltip').length);
+             // if ($(this).find('.tooltip').length === 0) {
+             //    if ($(this).is( "div" )) {
+             //      $(this).attr('className', className)
+             //    } else {
+             //      $(this).wrap( '<div class="tooltip"></div>' );
+             //    }
+             //
+             //    $(this).prepend(`<span class="tooltiptext"><span class="fa fa-star checked"><span class="fa fa-star checked"></span><span class="fa fa-star checked"><span class="fa fa-star"></span></span>`)
+             // } else {
+             //   // $(this).wrap(`<div class="tooltip">Hover over me <span class="tooltiptext">Tooltip text</span></div>`)
+             // }
             });
            $(elem).mouseleave(function() {
             var clazz = $(this).attr('class');
@@ -109,16 +108,16 @@
             $(this).css('border-width', width)
             $(this).css('backgroundColor', 'inherit')
 
-            if (clazz && clazz.length > 0  && clazz.includes('tooltip')) {
-              if (clazz && clazz.length > 0 ) $(this).attr('className', clazz.replace('tooltip', ''))
-              $(this).remove('.tooltiptext')
-            } else {
-               if ($(this).parent().is( "div" )){
-                 var clazzParent =$(this).parent().prop('className')
-                 if (clazzParent && clazzParent.length > 0 && clazzParent.includes('tooltip')) $(this).parent().attr('className', clazzParent.replace('tooltip', ''))
-                   $(this).parent().remove('.tooltiptext')
-               }
-            }
+            // if (clazz && clazz.length > 0  && clazz.includes('tooltip')) {
+            //   if (clazz && clazz.length > 0 ) $(this).attr('className', clazz.replace('tooltip', ''))
+            //   $(this).remove('.tooltiptext')
+            // } else {
+            //    if ($(this).parent().is( "div" )){
+            //      var clazzParent =$(this).parent().prop('className')
+            //      if (clazzParent && clazzParent.length > 0 && clazzParent.includes('tooltip')) $(this).parent().attr('className', clazzParent.replace('tooltip', ''))
+            //        $(this).parent().remove('.tooltiptext')
+            //    }
+            // }
 
             //   if ($(this).parent().is( "div" )){
             //     var clazzParent =$(this).parent().attr('class');

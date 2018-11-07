@@ -1,42 +1,11 @@
-.checked {
-    color: orange;
-}
+<html lang="en" class=""><head><script src="//static.codepen.io/assets/editor/live/console_runner-ce3034e6bde3912cc25f83cccb7caa2b0f976196f2f2d52303a462c826d54a73.js"></script><script src="//static.codepen.io/assets/editor/live/css_reload-2a5c7ad0fe826f66e054c6020c99c1e1c63210256b6ba07eb41d7a4cb0d0adab.js"></script><meta charset="UTF-8"><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//static.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico"><link rel="mask-icon" type="" href="//static.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111"><link rel="canonical" href="https://codepen.io/j4n/pen/JoWwpp">
 
-#floater-sticky-wrapper{
-padding: 45px;
-position:absolute;
-right:10px
-top:5px;
-
-}
-
-#canvas {
-  /* width:2000px; */
-  /* height:2000px; */
-  border: 10px solid transparent;
-}
-.rectangle {
-  border: 1px solid black;
-  position: absolute;
-}
-
-#floater {
-top:5px;
-right:0px;
-text-align: right;
-z-index: 1;
-padding: 15px;
-}
-
-.red {
-background-color: green;
-color: white;
-}
-/* body {
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+<style class="cp-pen-styles">body {
   background-color: #33325D;
-} */
+}
 
-#floater ul {
+ul {
   display: block;
   margin: 50px auto 0;
   width: 70px;
@@ -45,7 +14,7 @@ color: white;
   position: relative;
 }
 
-#floater  li {
+li {
   display: block;
   width: 70px;
   height: 70px;
@@ -78,95 +47,104 @@ li:after{
   background-color: inherit;
   opacity: 0;
   transition: opacity $transitionTime ease-out;
-} */
-
-#floater li:first-child:after {
+}
+*/
+li:first-child:after {
   display: none;
 }
 
-#floater li:nth-child(1) {
+li:nth-child(1) {
   background-color: #004DB3;
   transform: translate(0, -20%);
   z-index: 3;
   transition-duration: 0.12s;
 }
 
-#floater li:nth-child(2) {
+li:nth-child(2) {
   background-color: #26B85A;
   transform: translate(20%, 0);
   z-index: 2;
   transition-duration: 0.24s;
 }
 
-#floater li:nth-child(3) {
+li:nth-child(3) {
   background-color: #FFCB00;
   transform: translate(0, 20%);
   z-index: 1;
   transition-duration: 0.36s;
 }
 
-#floater li:nth-child(4) {
+li:nth-child(4) {
   background-color: #D88E8E;
   transform: translate(-20%, 0);
   z-index: 0;
   transition-duration: 0.48s;
 }
 
-#floater ul:hover {
+ul:hover {
   height: 308px;
 }
-#floater ul:hover li {
+ul:hover li {
   color: white;
 }
-#floater ul:hover li:nth-child(1) {
+ul:hover li:nth-child(1) {
   transform: translate(0, 0%);
 }
-#floater ul:hover li:nth-child(1):hover {
+ul:hover li:nth-child(1):hover {
   opacity: 1;
   transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
   transform: translate(0, 0%) scale(1.15, 1.15);
   transition-duration: 0.24s;
 }
-#floater ul:hover li:nth-child(1):after {
+ul:hover li:nth-child(1):after {
   opacity: 1;
   transition-delay: 0.08s;
 }
-#floater ul:hover li:nth-child(2) {
+ul:hover li:nth-child(2) {
   transform: translate(0, 110%);
 }
-#floater ul:hover li:nth-child(2):hover {
+ul:hover li:nth-child(2):hover {
   opacity: 1;
   transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
   transform: translate(0, 110%) scale(1.15, 1.15);
   transition-duration: 0.24s;
 }
-#floater ul:hover li:nth-child(2):after {
+ul:hover li:nth-child(2):after {
   opacity: 1;
   transition-delay: 0.16s;
 }
-#floater ul:hover li:nth-child(3) {
+ul:hover li:nth-child(3) {
   transform: translate(0, 220%);
 }
-#floater ul:hover li:nth-child(3):hover {
+ul:hover li:nth-child(3):hover {
   opacity: 1;
   transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
   transform: translate(0, 220%) scale(1.15, 1.15);
   transition-duration: 0.24s;
 }
-#floater ul:hover li:nth-child(3):after {
+ul:hover li:nth-child(3):after {
   opacity: 1;
   transition-delay: 0.24s;
 }
-#floater ul:hover li:nth-child(4) {
+ul:hover li:nth-child(4) {
   transform: translate(0, 330%);
 }
-#floater ul:hover li:nth-child(4):hover {
+ul:hover li:nth-child(4):hover {
   opacity: 1;
   transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
   transform: translate(0, 330%) scale(1.15, 1.15);
   transition-duration: 0.24s;
 }
-#floater ul:hover li:nth-child(4):after {
+ul:hover li:nth-child(4):after {
   opacity: 1;
   transition-delay: 0.32s;
 }
+</style></head><body>
+<ul>
+  <li class="fa-home"></li>
+  <li class="fa-suitcase"></li>
+  <li class="fa-flask"></li>
+  <li class="fa-user"></li>
+</ul>
+
+</body></html>

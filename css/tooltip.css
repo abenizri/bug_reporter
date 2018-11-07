@@ -2,20 +2,20 @@
   position: relative;
   display: inline-block;
   /* border-bottom: 1px dotted black; */
-  opacity: 1
+  opacity: 3
 }
 
 .tooltip .tooltiptext {
    visibility: hidden;
    width: 120px;
    height: : 120px;
-   background-color: silver;
+   background-color: black;
    color: #fff;
    text-align: center;
    border-radius: 6px;
    padding: 5px 0;
    position: absolute;
-   z-index: 1;
+   z-index: 2;
    top: 150%;
    left: 50%;
    margin-left: -60px;
@@ -23,7 +23,6 @@
 }
 
 .tooltip .tooltiptext::after {
-
    content: "";
    position: absolute;
    top: 100%;
