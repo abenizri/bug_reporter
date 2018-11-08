@@ -7,7 +7,8 @@ var mouse = {
    startX: 0,
    startY: 0
 };
-var elementArray = ['img', 'p','a', 'button', 'input', 'canvas', 'h1' , 'h2', 'h3' , 'h4', 'h5', 'table' ]
+// var elementArray = ['img', 'p','a', 'button', 'input', 'canvas', 'h1' , 'h2', 'h3' , 'h4', 'h5', 'table' ]
+var elementArray = ['span:not(.coupontooltip):not(#mainSideMenu2):not(.tooltiptext-menu2) ' , 'ul:not(#mainSideMenu)  li' ,'p']
 
 $(document).ready(function(){
     var buttonState = false
@@ -20,8 +21,7 @@ $(document).ready(function(){
 
     var floaterDiv = document.createElement('div')
     floaterDiv.setAttribute('id', 'floater')
-    // var menuImg = document.createElement('img')
-    // menuImg.src = 'setting.png'
+
     var outerMenuUl = document.createElement('ul')
     outerMenuUl .setAttribute('id', 'nav')
     var menuli1 = document.createElement('li')
@@ -29,7 +29,6 @@ $(document).ready(function(){
     menuA.setAttribute('href','#')
     menuA.setAttribute('title','Get in touch with us')
     menuA.text = 'Support'
-
 
     var innerMenuUl = document.createElement('ul')
     var innerMenuli1 = document.createElement('li')
@@ -53,10 +52,27 @@ $(document).ready(function(){
     menuli1.appendChild(innerMenuUl)
 
     outerMenuUl.appendChild(menuli1)
-    // floaterDiv.appendChild(menuImg)
 
    $('body').prepend(floaterDiv)
-   floaterDiv.innerHTML = '<ul> <li id="openBug" class="fas fa-bug"></li><li id="highlightElem" class="fa fa-comments-o"></li><li class="fa-flask"></li>  <li class="fa-user"></li></ul>'
+   floaterDiv.innerHTML = `<ul id="mainSideMenu">
+       <li id="openBug" class="tooltip fas fa-bug">
+         <span class="tooltiptext">Bug Reporting</span>
+       </li>
+       <li id="highlightElem" class="tooltip fa fa-comments-o">
+         <span class="tooltiptext-menu2"><ul id="mainSideMenu2">
+             <li id="openBug" class="tooltip fas fa-bug">
+             </li>
+             <li id="highlightElem" class="tooltip fa fa-comments-o">
+             </li>
+            </ul></span>
+       </li>
+       <li class="tooltip fa-flask">
+         <span class="tooltiptext">Surveys</span>
+       </li>
+        <li class="tooltip fa-user">
+          <span class="tooltiptext">Help</span>
+        </li>
+      </ul>`
    // floaterDiv.appendChild(outerMenuUl)
 
    $("#floater").sticky({topSpacing:5});
@@ -64,74 +80,91 @@ $(document).ready(function(){
    $( "#openBug" ).click(function() {
      resetHighlight()
      var currentCanvasElement = document.getElementById('canvas')
+     currentCanvasElement.style.cursor = "crosshair";
+     // var span = document.createElement(span)
+     // span.setAttribute("coupontooltip")
+     $('#canvas').prepend('<span class="coupontooltip">Mark the section you want to report</span>')
+
+     var tooltip = document.querySelectorAll('.coupontooltip');
+
+     document.addEventListener('mousemove', fn, false);
+
+     function fn(e) {
+        for (var i=tooltip.length; i--;) {
+            tooltip[i].style.left = e.pageX + 'px';
+            tooltip[i].style.top = e.pageY + 'px';
+            tooltip[i].style.background = '#004DB3'
+            tooltip[i].innerHTML = 'Mark the section you want to report'
+          }
+      }
+
      if (buttonState === false) {
        createMouseMoveEvent(currentCanvasElement)
        createMouseClickEvent(currentCanvasElement)
        buttonState = true
      } else {
+       currentCanvasElement.style.cursor = "default";
        resetImgCapture()
+       $('.coupontooltip').remove()
      }
    });
+
+   $('.close').click(function(){
+     resetImgCapture()
+     resetHighlight()
+   })
+
    $('#highlightElem').click(function() {
      resetImgCapture()
+     $('.coupontooltip').remove()
      if (highlight === false) {
       for (var elem of elementArray) {
         var color = $(this).css('border-color')
         var style = $(this).css('border-style')
         var width = $(this).css('border-width')
         var backgroundColor = $(this).css('backgroundColor')
+        var clazz = $(this).attr('className');
 
+
+        $('#canvas').prepend('<span class="coupontooltip">Mark the section you want to report</span>')
+
+        // var tooltip = document.querySelectorAll('.coupontooltip');
+        //
+        //
+        // document.addEventListener('mousemove', fn, false);
+        //
+        // function fn(e) {
+        //    for (var i=tooltip.length; i--;) {
+        //        tooltip[i].style.left = e.pageX + 'px';
+        //        tooltip[i].style.top = e.pageY + 'px';
+        //        tooltip[i].style.background = '#26B85A'
+        //        tooltip[i].innerHTML = 'green'
+        //      }
+        //  }
+        $(this).remove('.tooltip2');
          $(elem).mouseover(function() {
            $(this).css('border-width', '1px')
            $(this).css('backgroundColor', '#e5a0b3')
-           // var clazz = $(this).attr('class');
-           // var className = (clazz && clazz.length > 0 ) ? clazz + ' tooltip' : 'tooltip'
-           // console.log(className);
-           // // $(this).parent().is( "div" )
-           //
-           // console.log($(this).find('.tooltip').length);
-           // if ($(this).find('.tooltip').length === 0) {
-           //    if ($(this).is( "div" )) {
-           //      $(this).attr('className', className)
-           //    } else {
-           //      $(this).wrap( '<div class="tooltip"></div>' );
-           //    }
-           //
-           //    $(this).prepend(`<span class="tooltiptext"><span class="fa fa-star checked"><span class="fa fa-star checked"></span><span class="fa fa-star checked"><span class="fa fa-star"></span></span>`)
-           // } else {
-           //   // $(this).wrap(`<div class="tooltip">Hover over me <span class="tooltiptext">Tooltip text</span></div>`)
-           // }
+
+           let tooltipDiv = document.createElement('div')
+           tooltipDiv.setAttribute('class', 'tooltip2')
+           tooltipDiv.innerHTML = '<span class="tooltiptext2"><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></span>'
+           $(this).prepend(tooltipDiv)
+
+
           });
+
          $(elem).mouseleave(function() {
-          var clazz = $(this).attr('class');
-          // var c = (clazz && clazz.length > 0 )
+          var clazz = $(this).attr('className');
           $(this).css('border-width', width)
           $(this).css('backgroundColor', 'inherit')
-
-          // if (clazz && clazz.length > 0  && clazz.includes('tooltip')) {
-          //   if (clazz && clazz.length > 0 ) $(this).attr('className', clazz.replace('tooltip', ''))
-          //   $(this).remove('.tooltiptext')
-          // } else {
-          //    if ($(this).parent().is( "div" )){
-          //      var clazzParent =$(this).parent().prop('className')
-          //      if (clazzParent && clazzParent.length > 0 && clazzParent.includes('tooltip')) $(this).parent().attr('className', clazzParent.replace('tooltip', ''))
-          //        $(this).parent().remove('.tooltiptext')
-          //    }
-          // }
-
-          //   if ($(this).parent().is( "div" )){
-          //     var clazzParent =$(this).parent().attr('class');
-          //     var cP = (clazzParent && clazzParent.length > 0 )
-          //     $(this).parent().remove('.tooltip')
-          //     $(this).parent().unwrap('.tooltip')
-          //   }
-          // }
-
+          $(this).find('div.tooltip2').remove()
          });
       }
        highlight = true
      } else {
      resetHighlight()
+     $('.coupontooltip').remove()
     }
    })
 
@@ -200,7 +233,7 @@ $(document).ready(function(){
                var tnCanvasContext = tnCanvas.getContext('2d');
                tnCanvas.width = newWidth; tnCanvas.height = newHeight;
 
-               tnCanvasContext.drawImage(canvas, startX * 2, startY * 2, newWidth * 2, newHeight * 2,0,0,newWidth,newHeight);
+               tnCanvasContext.drawImage(canvas, startX , startY , newWidth , newHeight ,0,0,newWidth,newHeight);
                document.querySelector('[class="btn btn-info btn-lg"]').click()
                document.querySelector('#preview').src = tnCanvas.toDataURL()
              });
@@ -220,6 +253,37 @@ $(document).ready(function(){
          }
     }
     }
+
+    $(".priority").change(function() {
+        if($(this).is(":checked")) {
+            $(".priority").each(function() {
+                $(this).prop('checked', false);
+            });
+            $(this).prop('checked', true);
+        }
+        else {
+            $(".priority").each(function() {
+                $(this).prop('checked', true);
+            });
+            $(this).prop('checked', false);
+        }
+    });
+
+    $(".uiBug").change(function() {
+        if($(this).is(":checked")) {
+            $(".uiBug").each(function() {
+                $(this).prop('checked', false);
+            });
+            $(this).prop('checked', true);
+        }
+        else {
+            $(".uiBug").each(function() {
+                $(this).prop('checked', true);
+            });
+            $(this).prop('checked', false);
+        }
+    });
+
 
    function after_form_submitted(data) {
         if(data.result == 'success')
@@ -243,7 +307,8 @@ $(document).ready(function(){
 
             $('button[type="button"]', $form).each(function()
             {
-
+              resetImgCapture()
+              resetHighlight()
                 $btn = $(this);
                 label = $btn.prop('orig_label');
                 if(label)
@@ -286,60 +351,5 @@ $(document).ready(function(){
             // });
 
       });
-      function retriveForm() {
-        return ` <div class="container-box">
-          <button style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Contact Us</button>
-       </div>
-        <div id="myModal" class="modal fade" role="dialog" style="display: none;">
-            <div class="modal-dialog">
-
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">×</button>
-                    <h4 class="modal-title">Contact Us</h4>
-                </div>
-                <div class="modal-body">
-
-                  <form role="form" method="post" id="reused_form">
-                    <p>
-                        Send your message in the form below and we will get back to you as early as possible.
-                    </p>
-
-                    <div class="form-group">
-                        <label for="name">
-                            Subject:</label>
-                        <input type="text" class="form-control" id="name" name="name" required="" maxlength="50">
-
-                    </div>
-                    <div class="form-group">
-                        <label for="email">
-                            Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" required="" maxlength="50" value="avibenb@gmail.com">
-                    </div>
-                    <div class="form-group">
-                        <label for="name">
-                            Message:</label>
-                        <textarea class="form-control" type="textarea" name="message" id="message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label> Preview:  </label>
-                        <img id="preview" ></img>
-
-                    </div>
-                    <button type="submit" class="btn btn-lg btn-success btn-block" id="btnContactUs">Post It! →</button>
-
-                </form>
-                  <div id="success_message" style="width:100%; height:100%; display:none; ">
-                    <h3>Sent your message successfully!</h3>
-                </div>
-                  <div id="error_message" style="width:100%; height:100%; display:none; ">
-                    <h3>Error</h3>
-                    Sorry there was an error sending your form.
-
-                </div>
-                </div>
-             </div>
-           </div>
-        </div> `
-      }
+    
 });
