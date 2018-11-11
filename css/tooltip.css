@@ -22,17 +22,18 @@
 }
 
 .menu-tooltip .secondery-menu-tooltiptext {
-    visibility: hidden;
-    width: 50px;
-    /* background-color: inherit; */
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 10;
-    position: absolute;
-    z-index: 1;
-    top: -5px;
-    right: 140%;
+  visibility: hidden;
+  width: 150px;
+  background-color: inherit;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+
+  /* padding: 2px 10; */
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  right: 140%;
 
 }
 
@@ -48,13 +49,14 @@
 }
 
 .menu-tooltip .secondery-menu-tooltiptext::after {
-   content: "";
-   position: absolute;
-   top: 50%;
-   left: 100%;
-   margin-top: -5px;
-   border-width: 5px;
-   border-style: solid;
+  content: "";
+  position: absolute;
+  top: 22%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent var(--transparent-background-color);
 
 }
 
@@ -75,7 +77,7 @@
 .feedback-tooltip .feedback-tooltip-window {
   /* visibility: hidden; */
  width: 220px;
- 
+
  background-color: #f5f5f5;
  color: #fff;
  text-align: center;
