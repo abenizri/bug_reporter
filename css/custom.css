@@ -1,34 +1,38 @@
+:root {
+  --transparent-background-color: transparent;
+  --first-background-color: #004DB3;
+  --second-background-color: #26B85A;
+  --third-background-color: #FFCB00;
+  --forth-background-color: #D88E8E;
+
+}
 .checked {
     color: orange;
 }
 
 #floater-sticky-wrapper{
-padding: 45px;
+
+  /* width: 100% */
+/* padding: 45px;
 position:absolute;
 right:10px
-top:5px;
+top:5px; */
+ position: relative;
+z-index: 1000;
 
 }
 
 #canvas {
-  /* width:2000px;
-  height:2000px; */
-  border: 10px solid transparent;
+  /* width:2000px; */
+  /* height:2000px; */
+  /* border: transparent; */
 }
 
-/* .tooltip {
-  position: relative;
-  display: inline-block; */
-  /* border-bottom: 1px dotted black; */
-  /* opacity: 3;
-} */
-#canvas:hover .coupontooltip {
+#canvas:hover .mouse-follower-tooltip {
     display: block;
 }
 
-  
-
-.coupontooltip {
+.mouse-follower-tooltip {
     display: none;
     margin-left: 10px;
     position: absolute;
@@ -42,33 +46,28 @@ top:5px;
 
 
 .rectangle {
-  border: 1px solid black;
+  border: 2px solid black;
   position: absolute;
+  z-index: 3000
 }
 
 #floater {
-top:5px;
-right:0px;
-text-align: right;
-z-index: auto ;
-padding: 15px;
+    /* z-index: 1000; */
+  /* z-index: 1000; */
+  /* opacity: 3; */
 }
-
-.red {
-background-color: green;
-color: white;
-}
-/* body {
-  background-color: #33325D;
-} */
 
 #floater ul {
+  z-index: 200;
+
   display: block;
   margin: auto 0;
   width: 50px;
   height: auto;
   padding: 40px;
-  position: relative;
+  position: absolute;
+  right: 15px;
+  top: 15px;
 }
 
 #floater  li {
@@ -91,48 +90,33 @@ color: white;
   color: transparent;
 }
 
-/*
-li:after{
-  content: "";
-  display: block;
-  bottom: 100%;
-  left: 50%;
-  height: ($offsetAmount*100%)-100;
-  margin-left: -1px;
-  position: absolute;
-  width: 4px;
-  background-color: inherit;
-  opacity: 0;
-  transition: opacity $transitionTime ease-out;
-} */
-
 #floater li:first-child:after {
   display: none;
 }
 
 #floater li:nth-child(1) {
-  background-color: #004DB3;
+  background-color: var(--first-background-color);
   transform: translate(0, -20%);
   z-index: 3;
   transition-duration: 0.12s;
 }
 
 #floater li:nth-child(2) {
-  background-color: #26B85A;
+  background-color: var(--second-background-color);
   transform: translate(20%, 0);
   z-index: 2;
   transition-duration: 0.24s;
 }
 
 #floater li:nth-child(3) {
-  background-color: #FFCB00;
+  background-color: var(--third-background-color);
   transform: translate(0, 20%);
   z-index: 1;
   transition-duration: 0.36s;
 }
 
 #floater li:nth-child(4) {
-  background-color: #D88E8E;
+  background-color: var(--forth-background-color);
   transform: translate(-20%, 0);
   z-index: 0;
   transition-duration: 0.48s;

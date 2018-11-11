@@ -29,25 +29,7 @@ function retriveForm() {
                   <input type="email" class="form-control" id="email" name="email" required="" maxlength="50" value="avibenb@gmail.com">
               </div>
 
-              <div class="form-check form-check-inline">
-              <label for="checkbox">
-                  UI Bug:
-                </label><br/>
-                <input style="margin: 5px" class="form-check-input uiBug" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">Yes</label>
-                <input class="form-check-input uiBug" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2">No</label>
-              </div>
-
-              <div class="form-check form-check-inline">
-              <label for="checkbox">
-                  Priority:
-                </label><br/>
-                <input style="margin: 5px" class="form-check-input priority" type="checkbox" id="inlineCheckbox1" value="option1">
-                <label class="form-check-label" for="inlineCheckbox1">Critical</label>
-                <input class="form-check-input priority" type="checkbox" id="inlineCheckbox2" value="option2">
-                <label class="form-check-label" for="inlineCheckbox2"> Minor</label>
-              </div>
+    
 
               <div class="form-group">
                   <label for="name">
@@ -75,3 +57,102 @@ function retriveForm() {
      </div>
   </div> `
 }
+
+function after_form_submitted(data) {
+     if(data.result == 'success')
+     {
+         $('form#reused_form').hide();
+         // $('#success_message').show();
+         // $('#error_message').hide();
+     }
+     else
+     {
+         // $('#error_message').append('<ul></ul>');
+         //
+         // jQuery.each(data.errors,function(key,val)
+         // {
+         //     $('#error_message ul').append('<li>'+key+':'+val+'</li>');
+         // });
+         // $('#success_message').hide();
+         // $('#error_message').show();
+
+         //reverse the response on the button
+
+         $('button[type="button"]', $form).each(function()
+         {
+           resetImgCapture()
+           resetHighlight()
+             $btn = $(this);
+             label = $btn.prop('orig_label');
+             if(label)
+             {
+                 $btn.prop('type','submit' );
+                 $btn.text(label);
+                 $btn.prop('orig_label','');
+             }
+         });
+
+     }//else
+ }
+
+$(function () {
+    $(".priority").change(function() {
+        if($(this).is(":checked")) {
+            $(".priority").each(function() {
+                $(this).prop('checked', false);
+            });
+            $(this).prop('checked', true);
+        }
+        else {
+            $(".priority").each(function() {
+                $(this).prop('checked', true);
+            });
+            $(this).prop('checked', false);
+        }
+    });
+
+    $(".uiBug").change(function() {
+        if($(this).is(":checked")) {
+            $(".uiBug").each(function() {
+                $(this).prop('checked', false);
+            });
+            $(this).prop('checked', true);
+        }
+        else {
+            $(".uiBug").each(function() {
+                $(this).prop('checked', true);
+            });
+            $(this).prop('checked', false);
+        }
+    });
+
+    $('#reused_form').submit(function(e)
+      {
+        e.preventDefault();
+
+        $form = $(this);
+        //show some response on the button
+        $('button[type="submit"]', $form).each(function()
+        {
+            $btn = $(this);
+            $btn.prop('type','button' );
+            $btn.prop('orig_label',$btn.text());
+            $btn.text('Sending ...');
+        });
+          // document.querySelector('#floater').click()
+          resetImgCapture()
+          resetHighlight()
+          var data = {
+            result: 'success'
+          }
+          after_form_submitted(data)
+            //         $.ajax({
+            //     type: "POST",
+            //     url: 'http://reusableforms.com/handler/p/bootstrap-popup-email-form',
+            //     data: $form.serialize(),
+            //     success: after_form_submitted,
+            //     dataType: 'json'
+            // });
+
+      });
+})

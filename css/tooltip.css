@@ -1,26 +1,27 @@
-.tooltip {
-  position: relative;
+.menu-tooltip {
+  position: absolute;
   display: inline-block;
+  height: 20px;
   /* border-bottom: 1px dotted black; */
-  opacity: 3;
+  opacity: 1;
 }
 
-.tooltip .tooltiptext {
+.menu-tooltip .menu-tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 150px;
     background-color: inherit;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 10;
+    padding: 2px 10;
     position: absolute;
     z-index: 1;
-    top: -5px;
+    top: 0px;
     right: 140%;
 
 }
 
-.tooltip .tooltiptext-menu2 {
+.menu-tooltip .secondery-menu-tooltiptext {
     visibility: hidden;
     width: 50px;
     /* background-color: inherit; */
@@ -35,7 +36,7 @@
 
 }
 
-.tooltip .tooltiptext::after {
+.menu-tooltip .menu-tooltiptext::after {
    content: "";
    position: absolute;
    top: 50%;
@@ -43,10 +44,10 @@
    margin-top: -5px;
    border-width: 5px;
    border-style: solid;
-   border-color: transparent transparent transparent inherit;
+   border-color: transparent transparent transparent var(--transparent-background-color);
 }
 
-.tooltip .tooltiptext-menu2::after {
+.menu-tooltip .secondery-menu-tooltiptext::after {
    content: "";
    position: absolute;
    top: 50%;
@@ -57,48 +58,109 @@
 
 }
 
-.tooltip:hover .tooltiptext {
+.menu-tooltip:hover .menu-tooltiptext {
    visibility: visible;
 }
 
-.tooltip:hover .tooltiptext-menu2{
+.menu-tooltip:hover .secondery-menu-tooltiptext{
    visibility: visible;
 }
 
-.tooltip2 {
+.feedback-tooltip {
   position: relative;
-     display: inline-block;
-     border-bottom: 1px dotted black;
+  display: inline-block;
+  border-bottom: 1px dotted black;
 }
 
-.tooltip2 .tooltiptext2 {
+.feedback-tooltip .feedback-tooltip-window {
   /* visibility: hidden; */
- width: 120px;
- background-color: black;
+ width: 220px;
+ 
+ background-color: #f5f5f5;
  color: #fff;
  text-align: center;
  border-radius: 6px;
+ border-style: solid;
+ border-color: #ccc #ccc #ccc #ccc;
+ border-width: 1px;
  padding: 5px 0;
 
  /* Position the tooltip */
  position: absolute;
  z-index: 2;
- bottom: 100%;
+ bottom: 20px;
  left: 50%;
  margin-left: -60px;
+ border-color: #ccc #ccc #ccc #ccc;
 
 }
 
-.tooltip2 .tooltiptext2::after {
+#feedback-window-title {
+  color: black;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.feedback-tooltip .feedback-tooltip-window::after {
    content: "";
    position: absolute;
    z-index: 1;
-   bottom: 100%;
+   /* bottom: 100%;
    left: 50%;
-   margin-left: -60px;
-   border-color: transparent transparent transparent black;
+   margin-left: -60px; */
+
+
+   /* border-color: #ccc #ccc #ccc #ccc; */
+   /* border-color: transparent black transparent #ccc; */
+   /* border: 2px solid #ccc; */
+
+   content: "";
+   position: absolute;
+   bottom: -11px;
+   left: 100px;
+   margin-top: -5px;
+   border-width: 5px;
+   border-style: solid;
+   border-color: #ccc transparent transparent  transparent;
+   /*
+   background-color: #f5f5f5;
+   border-radius: 4px; */
 }
 
-.tooltip2:hover .tooltiptext2 {
+.feedback-tooltip:hover .feedback-tooltip-window {
    visibility: visible;
 }
+
+.rate {
+  /* border: 1px solid #cccccc; */
+  float: left;
+  height: 46px;
+  padding: 10px 10px;
+  margin-left: 10%;
+}
+
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+
+.rate:not(:checked) > label:before { content: '★ '; }
+
+.rate > input:checked ~ label { color: #ffc700; }
+
+.rate:not(:checked) > label:hover, .rate:not(:checked) > label:hover ~ label { color: #deb217; }
+
+.rate > input:checked + label:hover, .rate > input:checked + label:hover ~ label, .rate > input:checked ~ label:hover, .rate > input:checked ~ label:hover ~ label, .rate > label:hover ~ input:checked ~ label { color: #c59b08; }
+
+
+	/* content: '\2605'; /*unicode star character*/
