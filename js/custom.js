@@ -1,4 +1,4 @@
-var elementArray = ['span:not(.mouse-follower-tooltip):not(#mainSideMenu2):not(.secondery-menu-tooltiptext) ' , 'ul:not(#mainSideMenu)  li' ,'p']
+var elementArray = ['span:not(.mouse-follower-tooltip):not(#mainSideMenu2):not(.secondery-menu-tooltiptext span):not(.secondery-menu-tooltiptext):not(#feature-feedback):not(newIdea) ' , 'ul:not(#mainSideMenu)  li' ,'p']
 var element = null;
 var firstClick = true
 var buttonState = false
@@ -38,11 +38,33 @@ $(document).ready(function(){
      resetHighlight()
    })
 
+   $('#feedback-menuItem').mouseover(function() {
+      $('#feedback-menuItem > span').css('visibility', 'visible')
+   })
+
+   $('#newIdea , #feature-feedback').mouseleave(function() {
+     // setTimeout(function(){ $('#feedback-menuItem > span').css('visibility', 'hidden')}, 5000);
+     $('#feedback-menuItem > span').css('visibility', 'hidden')
+
+   })
+
+   $('.single-item').mouseover(function() {
+      $('#feedback-menuItem > span').css('visibility', 'hidden')
+   })
+
+
    $('#feedback-menuItem').click(function() {
+     resetHighlight()
+   })
+
+   $('#feature-feedback').click(function() {
      resetImgCapture()
      var currentCanvasElement = document.getElementById('canvas')
      currentCanvasElement.style.cursor = "default";
      $('.mouse-follower-tooltip').remove()
+
+
+
      if (highlight === false) {
       for (var elem of elementArray) {
         var color = $(this).css('border-color')
@@ -54,6 +76,7 @@ $(document).ready(function(){
 
         $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
         mouseFollower('Please give feedback', '#26B85A')
+
 
         $(this).remove('.feedback-tooltip');
          $(elem).mouseover(function() {

@@ -7,7 +7,7 @@ var mouse = {
 
 function setMousePosition(e) {
     var ev = e || window.event;
-    if (ev.clientX) { //Moz
+    if (ev.clientX || window.width) { //Moz
         mouse.x = ev.clientX + window.pageXOffset;
         mouse.y = ev.clientY + window.pageYOffset;
     } else if (ev.pageX) { //Moz
@@ -32,10 +32,6 @@ function createMousemoveEvent(e) {
           element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
           element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
           element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
-          console.log('width: ' + element.style.width);
-          console.log('height: ' + element.style.height);
-          console.log('left: ' + element.style.left);
-          console.log('top: ' + element.style.top);
       }
   }
 }
@@ -59,6 +55,7 @@ function createMouseupEvent(e) {
 
         tnCanvasContext.drawImage(canvas, startX * 2, startY * 2, newWidth * 2 , newHeight * 2,0,0,newWidth,newHeight);
         document.querySelector('[class="btn btn-info btn-lg"]').click()
+        // let resizeImg = imageResize(tnCanvas.toDataURL(), 550, 300)
         document.querySelector('#preview').src = tnCanvas.toDataURL()
       });
       element = null;
@@ -88,3 +85,40 @@ function createMouseclickEvent(e) {
 
   }
  }
+
+
+function imageResize(base64, maxWidth, maxHeight) {
+  console.log('hre');
+// Max size for thumbnail
+  if(typeof(maxWidth) === 'undefined')  maxWidth = 500;
+  if(typeof(maxHeight) === 'undefined')  maxHeight = 500;
+
+  // Create and initialize two canvas
+  var tempCanvas = document.createElement("canvas");
+  var ctx = tempCanvas.getContext("2d");
+  var canvasCopy = document.createElement("canvas");
+  var copyContext = canvasCopy.getContext("2d");
+
+  // Create original image
+  var img = new Image();
+  img.src = base64;
+
+  // Determine new ratio based on max size
+  var ratio = 1;
+  if(img.width > maxWidth)
+    ratio = maxWidth / img.width;
+  else if(img.height > maxHeight)
+    ratio = maxHeight / img.height;
+
+  // Draw original image in second canvas
+  canvasCopy.width = img.width;
+  canvasCopy.height = img.height;
+  copyContext.drawImage(img, 0, 0);
+
+  // Copy and resize second canvas to first canvas
+  tempCanvas.width = img.width * ratio;
+  tempCanvas.height = img.height * ratio;
+  ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, tempCanvas.width, tempCanvas.height);
+
+  return tempCanvas.toDataURL();
+}
