@@ -12,6 +12,7 @@ function createMenu() {
             <li id="feedback-menuItem" class="menu-tooltip fa fa-comments-o multi-item"  style="--transparent-background-color:#26B85A;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown" >
+                  <a id="feature-NPS">NPS <span class="fas fa-thumbs-up"></span></a>
                   <a  id="newIdea">New Idea <span class="fa-lightbulb-o"></span></a>
                   <a id="feature-feedback">Feature Feedback <span class="fa-check-square-o"></span></a>
                 </div>

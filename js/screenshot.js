@@ -70,7 +70,7 @@ function createMouseclickEvent(e) {
     // active buttom, show form and clean inputs
     $('form#reused_form').css('display', 'block');
     document.getElementById('btnContactUs').setAttribute('type', 'submit')
-    document.getElementById('name').value = ''
+    // document.getElementById('name').value = ''
     document.getElementById('message').value = ''
 
     console.log("begun.");

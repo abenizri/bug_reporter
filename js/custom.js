@@ -1,4 +1,4 @@
-var elementArray = ['span:not(.mouse-follower-tooltip):not(#mainSideMenu2):not(.secondery-menu-tooltiptext span):not(.secondery-menu-tooltiptext):not(#feature-feedback):not(newIdea) ' , 'ul:not(#mainSideMenu)  li' ,'p']
+var elementArray = ['[class="btn btn-lg btn-success"]']
 var element = null;
 var firstClick = true
 var buttonState = false
@@ -42,7 +42,7 @@ $(document).ready(function(){
       $('#feedback-menuItem > span').css('visibility', 'visible')
    })
 
-   $('#newIdea , #feature-feedback').mouseleave(function() {
+   $('#newIdea , #feature-feedback, #feature-NPS').mouseleave(function() {
      // setTimeout(function(){ $('#feedback-menuItem > span').css('visibility', 'hidden')}, 5000);
      $('#feedback-menuItem > span').css('visibility', 'hidden')
 
@@ -86,27 +86,18 @@ $(document).ready(function(){
            let tooltipDiv = document.createElement('div')
            tooltipDiv.setAttribute('class', 'feedback-tooltip')
            tooltipDiv.innerHTML = `<span class="feedback-tooltip-window">
-                  <span style="border-bottom:1px solid black" id="feedback-window-title"> Overall Rating</span>
-                  <br/>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                  <br/>
-                  <span id="feedback-window-title"> What do you thing about this feature?</span>
-                  <div class="rate">
-                      <input type="radio" id="star5" name="rate" value="5" />
-                      <label for="star5" title="Amazing">5 stars</label>
-                      <input type="radio" id="star4" name="rate" value="4" />
-                      <label for="star4" title="Very Good">4 stars</label>
-                      <input type="radio" id="star3" name="rate" value="3" />
-                      <label for="star3" title="Average">3 stars</label>
-                      <input type="radio" id="star2" name="rate" value="2" />
-                      <label for="star2" title="Not Good">2 stars</label>
-                      <input type="radio" id="star1" name="rate" value="1" />
-                      <label for="star1" title="Terrible">1 star</label>
-                 </div>
+           <form class="text-center border border-light p-5">
+           <div style="margin: 15px;">
+               <img src="images/feedback-form-icon.png"/>
+               <p style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">What do you think about it?</p>
+               <img src="images/smile-inRow.png"/>
+               <div class="form-group">
+                   <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px">Would you like to add a comment?</label>
+                   <textarea class="form-control" type="textarea" name="message" id="message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
+               </div>
+                  <button style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" class="" type="submit">Submit</button>
+               </form>
+              <div>
               </span>`
            $(this).prepend(tooltipDiv)
           });

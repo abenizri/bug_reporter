@@ -1,19 +1,24 @@
-function retriveForm() {
+function retriveFeedBackForm() {
           return ` <div class="container-box">
-            <button style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Contact Us</button>
+            <button style="display: none;" type="button" class="btn btn-info btn-lg feedback-form" data-toggle="modal" data-target="#myFeedbackModal">Contact Us</button>
          </div>
-          <div id="myModal" class="modal fade" role="dialog" style="display: none;">
-              <div class="modal-dialog" style="width: 500px">
+          <div id="myFeedbackModal" class="modal fade" role="dialog" style="display: none;">
+              <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header" style="padding: 20px">
                     <button type="button" id="close" class="close" data-dismiss="modal">×</button>
-                      <img id="bugImg" src="images/bug-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
+                      <i class="fa fa-comments-o" aria-hidden="true"></i>
                   </div>
                   <div class="modal-body">
                     <form role="form" method="post" id="reused_form">
                       <div class="form-group">
                           <label for="name">
-                              Yikes! Can you describe the bug?</label>
+                              Subject:</label>
+                          <input type="text" class="form-control" id="name" placeholder="Add any subject"  name="name" required="" maxlength="50">
+                      </div>
+                      <div class="form-group">
+                          <label for="name">
+                              Message:</label>
                           <textarea class="form-control" type="textarea" name="message" id="message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
                       </div>
                       <div class="form-group">
@@ -48,14 +53,14 @@ function retriveForm() {
                          <label style="font-size: 14px;font-family: Helvetica Neue,Helvetica,Arial,sans-serif;">Priview: </label>
                        </div>
                        <div>
-                         <img id="preview" style="width: 470px; height: 150px; border-style: solid; border-width: 1px; border-color: grey; border-radius: 6px;"></img>
+                         <img id="preview" style="width: 570px; height: 150px; border-style: solid; border-width: 1px; border-color: grey; border-radius: 6px;"></img>
                        </div>
                      </div>
                      <div id="container" style="display: table">
                          <div style=" display: table-cell;width:120px">
                              <button type="submit"  class="btn btn-lg btn-success btn-block" id="btnContactUs">Report</button>
                          </div>
-                         <div class="right" style="text-align: right; font-color: black; width: 180px; margin-left: 200px">
+                         <div class="right" style="text-align: right; font-color: black; width: 200px; margin-left: 250px">
                              <p>Powered By LetUsKnow </p>
                          </div>
                      </div>
