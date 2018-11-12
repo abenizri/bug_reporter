@@ -51,7 +51,7 @@
 .menu-tooltip .secondery-menu-tooltiptext::after {
   content: "";
   position: absolute;
-  top: 22%;
+  top: 25%;
   left: 100%;
   margin-top: -5px;
   border-width: 5px;
