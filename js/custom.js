@@ -1,9 +1,9 @@
-var elementArray = ['[class="btn btn-lg btn-success"]']
+var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link']
 var element = null;
 var firstClick = true
 var buttonState = false
 var highlight = false
-
+var styleMap = new Map()
 
 $(document).ready(function(){
 
@@ -33,88 +33,125 @@ $(document).ready(function(){
      }
    });
 
-   $('.close').click(function(){
-     resetImgCapture()
-     resetHighlight()
-   })
-
    $('#feedback-menuItem').mouseover(function() {
       $('#feedback-menuItem > span').css('visibility', 'visible')
    })
 
    $('#newIdea , #feature-feedback, #feature-NPS').mouseleave(function() {
      // setTimeout(function(){ $('#feedback-menuItem > span').css('visibility', 'hidden')}, 5000);
-     $('#feedback-menuItem > span').css('visibility', 'hidden')
-
-   })
+   $('#feedback-menuItem > span').css('visibility', 'hidden')
+    })
 
    $('.single-item').mouseover(function() {
       $('#feedback-menuItem > span').css('visibility', 'hidden')
    })
 
-
    $('#feedback-menuItem').click(function() {
      resetHighlight()
    })
 
-   $('#feature-feedback').click(function() {
+   function stopBtn(e) {
+      e.preventDefault()
+      e.stopPropagation()
+      $('body').find('.feedback-tooltip').remove()
+      var path = $(this).first().getPath()
+      var style = styleMap.get(path)
+      document.querySelector(path).style = style
+      highlightClicked = true
+      $(this).bind( "mouseover", changeColor);
+      $(this).bind( "mouseleave", stopChangingColor);
+      $(this).off('click.disabled');
+     }
+
+   function changeColor(e) {
+       var path = $(this).first().getPath()
+       var selectorStyle = document.querySelector(path).style
+       styleMap.set(path, selectorStyle);
+        $(this).css( {
+          background: '-webkit-gradient(linear, left top, left bottom, from(#e5a0b3), to(#e5a0b3))',
+          'border-color': '#e5a0b3'})
+     }
+
+   function stopChangingColor() {
+       var path = $(this).first().getPath()
+       var style = styleMap.get(path)
+       document.querySelector(path).style = style
+       highlightClicked = true
+     }
+
+   function submitBtn(e) {
+       e.stopPropagation()
+       $('#feedback-form, #feature-NPS-form, #new-idea-form').hide();
+       $('#feedback-success_message, #nps-success_message, #new-idea-success_message').show();
+       var path = $(this).first().getPath()
+       var style = styleMap.get(path)
+       document.querySelector(path).style = style
+
+       highlightClicked = true
+       $(this).off('click.disabled');
+       $('.header-img').prop('src', 'images/checkmark-48.png')
+       e.preventDefault()
+     }
+
+   $('#feature-feedback, #feature-NPS , #newIdea').click(function(e) {
+     $('body').find('div.feedback-tooltip').remove()
      resetImgCapture()
-     var currentCanvasElement = document.getElementById('canvas')
-     currentCanvasElement.style.cursor = "default";
-     $('.mouse-follower-tooltip').remove()
-
-
-
-     if (highlight === false) {
-      for (var elem of elementArray) {
-        var color = $(this).css('border-color')
-        var style = $(this).css('border-style')
-        var width = $(this).css('border-width')
-        var backgroundColor = $(this).css('backgroundColor')
-        var clazz = $(this).attr('className');
-
-
-        $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
-        mouseFollower('Please give feedback', '#26B85A')
-
-
-        $(this).remove('.feedback-tooltip');
-         $(elem).mouseover(function() {
-           // $(this).css('border-width', '1px')
-           // $(this).css('backgroundColor', '#e5a0b3')
-
-           let tooltipDiv = document.createElement('div')
-           tooltipDiv.setAttribute('class', 'feedback-tooltip')
-           tooltipDiv.innerHTML = `<span class="feedback-tooltip-window">
-           <form class="text-center border border-light p-5">
-           <div style="margin: 15px;">
-               <img src="images/feedback-form-icon.png"/>
-               <p style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">What do you think about it?</p>
-               <img src="images/smile-inRow.png"/>
-               <div class="form-group">
-                   <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px">Would you like to add a comment?</label>
-                   <textarea class="form-control" type="textarea" name="message" id="message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
-               </div>
-                  <button style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" class="" type="submit">Submit</button>
-               </form>
-              <div>
-              </span>`
-           $(this).prepend(tooltipDiv)
-          });
-
-         $(elem).mouseleave(function() {
-          var clazz = $(this).attr('className');
-          // $(this).css('border-width', width)
-          // $(this).css('backgroundColor', 'inherit')
-          $(this).find('div.feedback-tooltip').remove()
-         });
-      }
-       highlight = true
-     } else {
      resetHighlight()
-     $('.mouse-follower-tooltip').remove()
-    }
-   })
+     var currentCanvasElement = document.getElementById('canvas')
+
+     currentCanvasElement.style.cursor = "default";
+      if (highlight === false) {
+       for (var elem of elementArray) {
+         var id = $(this).attr('id')
+         var highlightClicked = false
+         $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
+         setMouseFollowerColorAndText(id)
+         $(elem).bind( "mouseover", changeColor);
+         $(elem).bind( "mouseleave", stopChangingColor);
+
+         $(elem).click(function(e) {
+           $(this).unbind( "mouseover", changeColor.bind(this));
+           $(this).unbind( "mouseleave", stopChangingColor.bind(this));
+           $(this).find('feedback-tooltip').remove()
+           var tooltipDiv = document.createElement('div')
+           tooltipDiv.setAttribute('class', 'feedback-tooltip')
+           tooltipDiv.innerHTML = retriveFormFeedback(id)
+           $(this).prepend(tooltipDiv)
+           $(elem).on('click.disabled', false);
+           $('.close').bind("click", stopBtn.bind(this))
+           $('[id*="-submit"]').bind("click", submitBtn.bind(this))
+
+           var path = $(this).first().getPath()
+           var style = styleMap.get(path)
+           document.querySelector(path).style = style
+           highlightClicked = true
+         })
+        }
+      } else {
+        highlight === true
+      }
+    })
+
+   function setMouseFollowerColorAndText(id){
+       if (id === 'feature-feedback') {
+         mouseFollower('Wanna giva a feedback', '#26B85A')
+      } else if (id === 'feature-NPS') {
+         mouseFollower("let's share", '#26B85A')
+      } else {
+         mouseFollower("Have a new idea", '#26B85A')
+      }
+   }
+
+   function retriveFormFeedback(id) {
+       if (id === 'feature-feedback') {
+         return retriveFeedBackForm()
+      } else if (id === 'feature-NPS') {
+        return retriveNpsForm()
+      } else {
+          return retriveNewIdeaForm()
+      }
+
+   }
 
    function resetImgCapture(){
      var currentCanvasElement = document.getElementById('canvas')
@@ -143,4 +180,32 @@ $(document).ready(function(){
            }
        }
     }
+
+   $.fn.extend({
+        getPath: function () {
+            var path, node = this;
+            while (node.length) {
+                var realNode = node[0], name = realNode.localName;
+                if (!name) break;
+                name = name.toLowerCase();
+
+                var parent = node.parent();
+
+                var sameTagSiblings = parent.children(name);
+                if (sameTagSiblings.length > 1) {
+                    var allSiblings = parent.children();
+                    var index = allSiblings.index(realNode) + 1;
+                    if (index > 1) {
+                        name += ':nth-child(' + index + ')';
+                    }
+                }
+
+                path = name + (path ? '>' + path : '');
+                node = parent;
+            }
+
+            return path;
+        }
+    });
+
 });
