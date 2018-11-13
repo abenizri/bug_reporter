@@ -10,7 +10,7 @@ function retriveFeedBackForm() {
                       <i class="fa fa-comments-o" aria-hidden="true"></i>
                   </div>
                   <div class="modal-body">
-                    <form role="form" method="post" id="reused_form">
+                    <form role="form" method="post" id="bug-report-form">
                       <div class="form-group">
                           <label for="name">
                               Subject:</label>
@@ -82,7 +82,7 @@ function retriveFeedBackForm() {
 function after_form_submitted(data) {
      if(data.result == 'success')
      {
-         $('form#reused_form').hide();
+         $('form#bug-report-form').hide();
          $('#success_message').show();
          $('#error_message').hide();
      }
@@ -117,14 +117,14 @@ function after_form_submitted(data) {
  }
 
 $(function () {
-    $('#close').click(function() {
-      $('#bugImg').prop('src', 'images/bug-icon.png')
-      $('form#reused_form').show();
-      $('#success_message').hide();
-      $('#error_message').hide();
-    })
+    // $('#close').click(function() {
+    //   $('#bugImg').prop('src', 'images/bug-icon.png')
+    //   $('form#bug-report-form').show();
+    //   $('#success_message').hide();
+    //   $('#error_message').hide();
+    // })
 
-    $('#reused_form').submit(function(e)
+    $('#bug-report-form').submit(function(e)
       {
         e.preventDefault();
 

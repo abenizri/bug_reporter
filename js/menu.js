@@ -7,14 +7,14 @@ function createMenu() {
   document.getElementById('floater').innerHTML =`
   <ul id="mainSideMenu">
             <li id="open-bug" class="menu-tooltip fas fa-bug single-item" style="--transparent-background-color:#004DB3;">
-              <span class="menu-tooltiptext">Bug Reporting</span>
+              <span class="menu-tooltiptext">Found a bug, let's report</span>
             </li>
             <li id="feedback-menuItem" class="menu-tooltip fa fa-comments-o multi-item"  style="--transparent-background-color:#26B85A;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown" >
-                  <a id="feature-NPS">NPS <span class="fas fa-thumbs-up"></span></a>
-                  <a  id="newIdea">New Idea <span class="fa-lightbulb-o"></span></a>
-                  <a id="feature-feedback">Feature Feedback <span class="fa-check-square-o"></span></a>
+                  <a id="feature-NPS">  Let's share <span class="fas fa-thumbs-up"></span></a>
+                  <a  id="newIdea">  Have a new Idea <span class="fa-lightbulb-o"></span></a>
+                  <a id="feature-feedback">  Feature Feedback <span class="fa-check-square-o"></span></a>
                 </div>
                 </span>
               </li>

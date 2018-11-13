@@ -54,9 +54,11 @@ function createMouseupEvent(e) {
         tnCanvas.width = newWidth; tnCanvas.height = newHeight;
 
         tnCanvasContext.drawImage(canvas, startX * 2, startY * 2, newWidth * 2 , newHeight * 2,0,0,newWidth,newHeight);
-        document.querySelector('[class="btn btn-info btn-lg"]').click()
-        // let resizeImg = imageResize(tnCanvas.toDataURL(), 550, 300)
-        document.querySelector('#preview').src = tnCanvas.toDataURL()
+        if (tnCanvas.toDataURL().length > 20) {
+          document.querySelector('[class="btn btn-info btn-lg"]').click()
+          // let resizeImg = imageResize(tnCanvas.toDataURL(), 550, 300)
+          document.querySelector('#preview').src = tnCanvas.toDataURL()
+        }
       });
       element = null;
     }
@@ -68,7 +70,7 @@ function createMouseupEvent(e) {
 function createMouseclickEvent(e) {
   canvas.onmousedown = function (e) {
     // active buttom, show form and clean inputs
-    $('form#reused_form').css('display', 'block');
+    $('form#bug-report-form').css('display', 'block');
     document.getElementById('btnContactUs').setAttribute('type', 'submit')
     // document.getElementById('name').value = ''
     document.getElementById('message').value = ''
