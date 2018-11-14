@@ -47,7 +47,7 @@ function createMouseupEvent(e) {
       var startY = rec.style.top.toString().replace('px', '')
 
       rec.parentNode.removeChild(rec)
-      canvas.style.cursor = "default";
+    //  canvas.style.cursor = "default";
       html2canvas(document.querySelector("#canvas")).then(canvas => {
         var tnCanvas = document.createElement('canvas');
         var tnCanvasContext = tnCanvas.getContext('2d');
@@ -58,6 +58,7 @@ function createMouseupEvent(e) {
           document.querySelector('[class="btn btn-info btn-lg"]').click()
           // let resizeImg = imageResize(tnCanvas.toDataURL(), 550, 300)
           document.querySelector('#preview').src = tnCanvas.toDataURL()
+          document.querySelector('#canvas').style.cursor = "default";
         }
       });
       element = null;

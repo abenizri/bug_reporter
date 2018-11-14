@@ -16,8 +16,11 @@
     padding: 2px 10;
     position: absolute;
     z-index: 1;
-    top: 0px;
-    right: 140%;
+    top: 6px;
+    right: 115%;
+    height: 35px !important;
+    vertical-align: middle;
+    line-height: 35px;
 
 }
 
@@ -33,15 +36,14 @@
   position: absolute;
   z-index: 1;
   top: 0px;
-  right: 140%;
-
+  right: 115%;
 }
 
 .menu-tooltip .menu-tooltiptext::after {
    content: "";
    position: absolute;
    top: 50%;
-   left: 100%;
+   right: -9px;
    margin-top: -5px;
    border-width: 5px;
    border-style: solid;
