@@ -22,6 +22,7 @@ function setMousePosition(e) {
 
 function createMousemoveEvent(e) {
   canvas.onmousemove = function (e) {
+    e.stopPropagation()
       if (firstClick === true) {
         firstClick = false
       } else {
@@ -33,11 +34,14 @@ function createMousemoveEvent(e) {
           element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
           element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
       }
+      e.preventDefault()
   }
 }
 
 function createMouseupEvent(e) {
+
   canvas.onmouseup = function (e) {
+    e.stopPropagation()
     var rec = document.querySelector('.rectangle')
 
     if (rec !== null ) {
@@ -60,16 +64,19 @@ function createMouseupEvent(e) {
           document.querySelector('#preview').src = tnCanvas.toDataURL()
           document.querySelector('#canvas').style.cursor = "default";
         }
+
       });
       element = null;
     }
       console.log("finsihed.");
       $('.mouse-follower-tooltip').remove()
+      e.preventDefault()
   }
 }
 
 function createMouseclickEvent(e) {
   canvas.onmousedown = function (e) {
+    e.stopPropagation()
     // active buttom, show form and clean inputs
     $('form#bug-report-form').css('display', 'block');
     document.getElementById('btnContactUs').setAttribute('type', 'submit')
@@ -85,13 +92,13 @@ function createMouseclickEvent(e) {
     element.style.top = mouse.y + 'px';
     canvas.appendChild(element)
     canvas.style.cursor = "crosshair";
-
+    e.preventDefault()
   }
  }
 
 
 function imageResize(base64, maxWidth, maxHeight) {
-  console.log('hre');
+
 // Max size for thumbnail
   if(typeof(maxWidth) === 'undefined')  maxWidth = 500;
   if(typeof(maxHeight) === 'undefined')  maxHeight = 500;

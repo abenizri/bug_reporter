@@ -1,4 +1,4 @@
-var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link']
+var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item']
 var element = null;
 var firstClick = true
 var buttonState = false
@@ -50,6 +50,7 @@ $(document).ready(function(){
 
      resetHighlight()
      for (var elem of elementArray) {
+       if ($(elem).length === 0) continue
        $(elem).each(function( index ) {
          var path = $(this).first().getPath()
          var style = styleMap.get(path)
@@ -114,10 +115,12 @@ $(document).ready(function(){
      currentCanvasElement.style.cursor = "default";
       if (highlight === false) {
        for (var elem of elementArray) {
+         if ($(elem).length === 0) continue
          var id = $(this).attr('id')
          var highlightClicked = false
          $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
          setMouseFollowerColorAndText(id)
+
          var path = $(elem).first().getPath()
          var selectorStyle = document.querySelector(path).style
          styleMap.set(path, selectorStyle);
@@ -135,10 +138,11 @@ $(document).ready(function(){
       } else {
         highlight === true
       }
+      e.preventDefault()
     })
 
    function clickFeedbackHandler(e) {
-
+     e.stopPropagation()
      $('body').find('div.feedback-tooltip').remove()
      var id = $('#' + e.data.elementId).attr('id')
      var tooltipDiv = document.createElement('div')
@@ -149,6 +153,7 @@ $(document).ready(function(){
      $('.close').bind("click", stopBtn.bind(e.data.elemenToAdd))
      $('[id*="-submit"]').bind("click", submitBtn.bind(e.data.elemenToAdd))
      highlightClicked = true
+       e.preventDefault()
    }
 
    function setMouseFollowerColorAndText(id){
@@ -182,6 +187,7 @@ $(document).ready(function(){
 
    function resetHighlight() {
      for (var elem of elementArray) {
+       if ($(elem).length === 0) continue
        $('body').off( "mouseover", elem, function() {} )
      }
      highlight = false
