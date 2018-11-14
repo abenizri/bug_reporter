@@ -136,7 +136,7 @@ $(document).ready(function(){
        if (id === 'feature-feedback') {
          mouseFollower('Wanna giva a feedback', '#26B85A')
       } else if (id === 'feature-NPS') {
-         mouseFollower("let's share", '#26B85A')
+         mouseFollower("Let's share", '#26B85A')
       } else {
          mouseFollower("Have a new idea", '#26B85A')
       }
