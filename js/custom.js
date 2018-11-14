@@ -9,27 +9,6 @@ $(document).ready(function(){
 
    createMenu()
 
-   $(document).on('keyup',function(evt) {
-       if (evt.keyCode == 27) {
-         resetHighlight()
-         resetImgCapture()
-         var currentCanvasElement = document.getElementById('canvas')
-         currentCanvasElement.style.cursor = "default";
-         $('body').find('.feedback-tooltip').remove()
-         
-         for (var elem of elementArray) {
-           if ($(elem).length === 0) continue
-           $(elem).each(function( index ) {
-             var path = $(this).first().getPath()
-             var style = styleMap.get(path)
-             document.querySelector(path).style = style
-           });
-           $('.mouse-follower-tooltip').remove()
-           $(elem).unbind('click', clickFeedbackHandler)
-          }
-       }
-   });
-
    $("#floater").sticky({topSpacing:5});
 
    $( "#open-bug" ).click(function() {
@@ -373,5 +352,24 @@ $(document).ready(function(){
       });
 
 
+      $(document).on('keyup',function(evt) {
+          if (evt.keyCode == 27) {
+            resetHighlight()
+            resetImgCapture()
+            var currentCanvasElement = document.getElementById('canvas')
+            currentCanvasElement.style.cursor = "default";
+            $('body').find('.feedback-tooltip').remove()
 
+            for (var elem of elementArray) {
+              if ($(elem).length === 0) continue
+              $(elem).each(function( index ) {
+                var path = $(this).first().getPath()
+                var style = styleMap.get(path)
+                document.querySelector(path).style = style
+              });
+              $('.mouse-follower-tooltip').remove()
+              $(elem).unbind('click', clickFeedbackHandler)
+             }
+          }
+      });
 });
