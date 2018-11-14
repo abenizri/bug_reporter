@@ -107,7 +107,7 @@ function retriveNpsForm() {
 function retriveNewIdeaForm() {
   return `<span class="feedback-tooltip-window">
       <div class="modal-header" style="padding: 20px">
-        <button type="button" id="new-idea-close" class="close" data-dismiss="avi">×</button>
+          <button type="button" id="new-idea-close" class="close" data-dismiss="avi">×</button>
           <img class="header-img" src="images/light-bulb.png" style="position: absolute;top: 5px;left: 45%; "/>
       </div>
       <div id="new-idea-success_message" style="width:100%; height:100%; display:none; ">
@@ -120,9 +120,9 @@ function retriveNewIdeaForm() {
        </div>
        <form role="form" method="post" id="new-idea-form" class="text-center border border-light p-5 avi">
          <div style="margin: 15px;">
-             <div class="form-row mb-4">
-                 <div>
-                   <label style="margin-left: 0px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px">Wow! Name you Idea</label>
+             <div class="form-group">
+                 <div class="col">
+                 <p style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px"> Wow! Name you Idea </p>
                  </div>
                  <div class="col">
                    <input onclick="return false;" type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Idea Name">
@@ -172,7 +172,6 @@ function retriveNewIdeaForm() {
          </div>
          <button id="new-idea-submit" style="margin-top: 15px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" type="submit">Submit</button>
        </form>
-      </div>
     </span>`
 }
 
@@ -201,7 +200,6 @@ function retriveFeedBackForm() {
          <button id="feedback-submit" style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button>
      </form>
      <script>
-
      </script>
    </span>`
 }

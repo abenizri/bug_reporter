@@ -1,4 +1,4 @@
-var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item']
+var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item', '.peers.ai-c.fxw-nw']
 var element = null;
 var firstClick = true
 var buttonState = false
@@ -128,9 +128,12 @@ $(document).ready(function(){
             background: '-webkit-gradient(linear, left top, left bottom, from(#e5a0b3), to(#e5a0b3))',
             'border-color': 'red',
             'border-style': 'solid',
-            'border-width': '2px'})
+            'border-width': '2px'
+          })
 
             $(elem).each(function( index ) {
+              // $(elem).parents().outerHeight(550)
+              $(elem).parents().css('backgroundColor', 'transparent')
               var path = $(this).first().getPath()
               $(this).bind('click', { elementId: id , elemenToAdd: this }, clickFeedbackHandler)
             });
@@ -148,12 +151,13 @@ $(document).ready(function(){
      var tooltipDiv = document.createElement('div')
      tooltipDiv.setAttribute('class', 'feedback-tooltip')
      tooltipDiv.innerHTML = retriveFormFeedback(id)
-     $(e.data.elemenToAdd).prepend(tooltipDiv)
+     $('body').prepend(tooltipDiv)
+     $(e.data.elemenToAdd).popupDiv("body > .feedback-tooltip");
      $(e.data.elemenToAdd).on('click.disabled', false);
      $('.close').bind("click", stopBtn.bind(e.data.elemenToAdd))
      $('[id*="-submit"]').bind("click", submitBtn.bind(e.data.elemenToAdd))
      highlightClicked = true
-       e.preventDefault()
+     e.preventDefault()
    }
 
    function setMouseFollowerColorAndText(id){
@@ -233,4 +237,35 @@ $(document).ready(function(){
         }
     });
 
+    $.fn.popupDiv = function (divToPop) {
+        var pos=$(this).offset();
+        var h=$(this).height();
+        var w=$(this).width();
+        var windowWidht = screen.width;
+        var windowHeight = screen.height;
+
+        var reverse = 0;
+        var top = 0
+        if ((pos.left + 600) >  windowWidht) {
+            reverse = ((pos.left + 600) -  windowWidht) + 150
+        }
+
+        if ((pos.top + 500) > windowHeight ) {
+            top =   ((pos.top + 500) -  windowHeight) + 150
+        }
+
+        if (w < 280 ) w = 350
+
+        $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h  - 55 });
+
+        $(this).click(function(e) {
+            $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h - 55});
+            if ($(divToPop).css('display') !== 'none') {
+                $(divToPop).hide();
+            }
+            else {
+                $(divToPop).show();
+            }
+        });
+    };
 });
