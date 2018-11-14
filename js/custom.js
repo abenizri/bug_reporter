@@ -118,8 +118,6 @@ $(document).ready(function(){
          var highlightClicked = false
          $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
          setMouseFollowerColorAndText(id)
-         // $(elem).bind( "mouseover", changeColor);
-         // $(elem).bind( "mouseleave", stopChangingColor);
          var path = $(elem).first().getPath()
          var selectorStyle = document.querySelector(path).style
          styleMap.set(path, selectorStyle);
@@ -129,7 +127,10 @@ $(document).ready(function(){
             'border-style': 'solid',
             'border-width': '2px'})
 
-            $(elem).bind('click', { elementId: id , elemenToAdd: elem }, clickFeedbackHandler)
+            $(elem).each(function( index ) {
+              var path = $(this).first().getPath()
+              $(this).bind('click', { elementId: id , elemenToAdd: this }, clickFeedbackHandler)
+            });
         }
       } else {
         highlight === true
@@ -137,18 +138,9 @@ $(document).ready(function(){
     })
 
    function clickFeedbackHandler(e) {
-    // console.log(msg.elementId);
-     console.log(e.data.elementId);
-     console.log(e.data.elemenToAdd);
-     // console.log(elemenToAdd);
-     // console.log(this);
-     // console.log(id);
+
      $('body').find('div.feedback-tooltip').remove()
      var id = $('#' + e.data.elementId).attr('id')
-     // console.log(retriveFormFeedback(id));
-     // $(this).unbind( "mouseover", changeColor.bind(this));
-     // $(this).unbind( "mouseleave", stopChangingColor.bind(this));
-     // $(this).find('feedback-tooltip').remove()
      var tooltipDiv = document.createElement('div')
      tooltipDiv.setAttribute('class', 'feedback-tooltip')
      tooltipDiv.innerHTML = retriveFormFeedback(id)
@@ -156,10 +148,6 @@ $(document).ready(function(){
      $(e.data.elemenToAdd).on('click.disabled', false);
      $('.close').bind("click", stopBtn.bind(e.data.elemenToAdd))
      $('[id*="-submit"]').bind("click", submitBtn.bind(e.data.elemenToAdd))
-
-     // var path = $(this).first().getPath()
-     // var style = styleMap.get(path)
-     // document.querySelector(path).style = style
      highlightClicked = true
    }
 
@@ -174,7 +162,6 @@ $(document).ready(function(){
    }
 
    function retriveFormFeedback(id) {
-     console.log(id);
        if (id === 'feature-feedback') {
          return retriveFeedBackForm()
       } else if (id === 'feature-NPS') {
