@@ -9,6 +9,22 @@ $(document).ready(function(){
 
    createMenu()
 
+   $(document).on('keyup',function(evt) {
+       if (evt.keyCode == 27) {
+         resetHighlight()
+         for (var elem of elementArray) {
+           if ($(elem).length === 0) continue
+           $(elem).each(function( index ) {
+             var path = $(this).first().getPath()
+             var style = styleMap.get(path)
+             document.querySelector(path).style = style
+           });
+           $('.mouse-follower-tooltip').remove()
+           $(elem).unbind('click', clickFeedbackHandler)
+          }
+       }
+   });
+
    $("#floater").sticky({topSpacing:5});
 
    $( "#open-bug" ).click(function() {

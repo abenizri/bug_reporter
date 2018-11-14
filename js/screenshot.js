@@ -92,7 +92,7 @@ function createMouseclickEvent(e) {
     element.style.top = mouse.y + 'px';
     canvas.appendChild(element)
     canvas.style.cursor = "crosshair";
-    e.preventDefault()
+  //  e.preventDefault()
   }
  }
 
