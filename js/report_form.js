@@ -6,7 +6,7 @@ function retriveForm() {
               <div class="modal-dialog" style="width: 500px">
                 <div class="modal-content">
                   <div class="modal-header" style="padding: 20px">
-                    <button type="button" id="bug-report-close" class="close" data-dismiss="modal">×</button>
+                      <button type="button" id="bug-report-close" class="close" data-dismiss="modal">×</button>
                       <img id="bugImg" src="images/bug-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
                   </div>
                   <div class="modal-body">
@@ -61,13 +61,13 @@ function retriveForm() {
                      </div>
                   </form>
                     <div id="bug-report-success_message" style="width:100%; height:100%; display:none; ">
-                    <label style="width: 550px;text-align: center;position: absolute; top: 10px;font-size: 14px;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;">Thank you</label>
+                      <label style="width: 550px;text-align: center;position: absolute; top: 0px;font-size: 14px;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;">Thank you</label>
                       <h4 style="text-align: center">We value anf appricate your commitment!</h4>
-                  </div>
+                   </div>
                     <div id="bug-report-error_message" style="width:100%; height:100%; display:none; ">
                       <h3>Error</h3>
                       Sorry there was an error sending your form.
-                  </div>
+                   </div>
                   </div>
                </div>
              </div>
@@ -204,69 +204,92 @@ function retriveFeedBackForm() {
    </span>`
 }
 
-function after_form_submitted(data, id) {
-    var formId = '#' + id + 'form'
-    var success = '#' + id + 'success_message'
-    var error = '#' + id + '#error_message'
-     if(data.result == 'success')
-     {
-         $(formId).hide();
-         $(success).show();
-         $(error).hide();
-     }
-     else
-     {
-         $(error).append('<ul></ul>');
-
-         jQuery.each(data.errors,function(key,val)
-         {
-             $(error + 'ul').append('<li>'+key+':'+val+'</li>');
-         });
-         $(success).hide();
-         $(error).show();
-
-         //reverse the response on the button
-
-         $('button[type="button"]', $form).each(function()
-         {
-           resetImgCapture()
-           resetHighlight()
-             $btn = $(this);
-             label = $btn.prop('orig_label');
-             if(label)
-             {
-                 $btn.prop('type','submit' );
-                 $btn.text(label);
-                 $btn.prop('orig_label','');
-             }
-         });
-
-     }//else
- }
+// $(function () {
+//   $('#btnContactUs').click(function(e){
+//      e.preventDefault()
+//      e.stopPropagation()
+//       $('#bug-report-form').hide();
+//       $('#bug-report-success_message').show();
+//       $('#bug-report-error_message').hide();
+//   })
+//
+//   $('#bug-report-close').click(function(e) {
+//     e.preventDefault()
+//     e.stopPropagation()
+//     $('#bug-report-success_message').hide();
+//     $('#bug-report-error_message').hide();
+//     $('#myModal').hide();
+//
+//   })
+// })
+//
+//
+//
+// function after_form_submitted(data) {
+//      if(data.result == 'success')
+//      {
+//          $('#bug-report-form').hide();
+//          $('#bug-report-success_message').show();
+//          $('#error_message').hide();
+//      }
+//      else
+//      {
+//          $('#bug-report-error_message').append('<ul></ul>');
+//
+//          jQuery.each(data.errors,function(key,val)
+//          {
+//              $('#bug-report-error_message ul').append('<li>'+key+':'+val+'</li>');
+//          });
+//          $('#bug-report-success_message').hide();
+//          $('#bug-report-error_message').show();
+//
+//          //reverse the response on the button
+//
+//          $('button[type="button"]', $form).each(function(e)
+//          {
+//            e.preventDefault()
+//            e.stopPropagation()
+//            resetImgCapture()
+//            resetHighlight()
+//              $btn = $(this);
+//              label = $btn.prop('orig_label');
+//              if(label)
+//              {
+//                  $btn.prop('type','submit' );
+//                  $btn.text(label);
+//                  $btn.prop('orig_label','');
+//              }
+//              e.preventDefault()
+//          });
+//
+//      }//else
+//  }
 //
 // $(function () {
-//     // $('.close').click(function() {
-//     //   console.log('here');
-//     //   var id = '#' + $(this).prop('id').replace('close', '')
-//     //   console.log(id);
-//     //   $('#bugImg').prop('src', 'images/bug-icon.png')
-//     //
-//     //   $(id + 'form').show();
-//     //   $(id + 'success_message').hide();
-//     //   $(id + 'error_message').hide();
-//     // })
+//     $('#bug-report-close').click(function() {
+//       $('#bugImg').prop('src', 'images/bug-icon.png')
+//       // $('form#reused_form').show();
+//       $('#bug-report-success_message').hide();
+//       // $('#error_message').hide();
+//     })
 //
-//     $('form').submit(function(e)
+//     $('#bug-report-form').submit(function(e)
 //       {
-//         // e.preventDefault();
+//         e.preventDefault()
+//         e.stopPropagation()
+//
+//
 //         $form = $(this);
 //         //show some response on the button
-//         $('button[type="submit"]', $form).each(function()
+//         $('#btnContactUs', $form).each(function(e)
 //         {
+//
 //             $btn = $(this);
 //             $btn.prop('type','button' );
 //             $btn.prop('orig_label',$btn.text());
 //             $btn.text('Sending ...');
+//             resetImgCapture()
+//             resetHighlight()
 //
 //         });
 //           $('#bugImg').prop('src', 'images/checkmark-48.png')
@@ -275,7 +298,7 @@ function after_form_submitted(data, id) {
 //           var data = {
 //             result: 'success'
 //           }
-//           after_form_submitted(data, id)
+//           after_form_submitted(data)
 //             //         $.ajax({
 //             //     type: "POST",
 //             //     url: 'http://reusableforms.com/handler/p/bootstrap-popup-email-form',
@@ -283,6 +306,6 @@ function after_form_submitted(data, id) {
 //             //     success: after_form_submitted,
 //             //     dataType: 'json'
 //             // });
-//
+//             e.preventDefault();
 //       });
 // })

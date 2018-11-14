@@ -268,4 +268,89 @@ $(document).ready(function(){
             }
         });
     };
+
+    $('#bug-report-close').click(function() {
+      $('#bugImg').prop('src', 'images/bug-icon.png')
+      // $('form#reused_form').show();
+      $('#bug-report-success_message').hide();
+      // $('#error_message').hide();
+      $('#btnContactUs').text('Report')
+    })
+
+    function after_form_submitted(data) {
+         if(data.result == 'success')
+         {
+             $('#bug-report-form').hide();
+             $('#bug-report-success_message').show();
+             $('#error_message').hide();
+         }
+         else
+         {
+             $('#bug-report-error_message').append('<ul></ul>');
+
+             jQuery.each(data.errors,function(key,val)
+             {
+                 $('#bug-report-error_message ul').append('<li>'+key+':'+val+'</li>');
+             });
+             $('#bug-report-success_message').hide();
+             $('#bug-report-error_message').show();
+
+             //reverse the response on the button
+
+             $('button[type="button"]', $form).each(function(e)
+             {
+               e.preventDefault()
+               e.stopPropagation()
+               resetImgCapture()
+               resetHighlight()
+                 $btn = $(this);
+                 label = $btn.prop('orig_label');
+                 if(label)
+                 {
+                     $btn.prop('type','submit' );
+                     $btn.text(label);
+                     $btn.prop('orig_label','');
+                 }
+                 e.preventDefault()
+             });
+
+         }//else
+     }
+
+    $('#bug-report-form').click(function(e)
+      {
+        e.preventDefault()
+        e.stopPropagation()
+        $form = $(this);
+        //show some response on the button
+        $('#btnContactUs', $form).each(function(e)
+        {
+
+            $btn = $(this);
+            $btn.prop('type','button' );
+            $btn.prop('orig_label',$btn.text());
+            $btn.text('Sending ...');
+            resetImgCapture()
+            resetHighlight()
+
+        });
+          $('#bugImg').prop('src', 'images/checkmark-48.png')
+          resetImgCapture()
+          resetHighlight()
+          var data = {
+            result: 'success'
+          }
+          after_form_submitted(data)
+            //         $.ajax({
+            //     type: "POST",
+            //     url: 'http://reusableforms.com/handler/p/bootstrap-popup-email-form',
+            //     data: $form.serialize(),
+            //     success: after_form_submitted,
+            //     dataType: 'json'
+            // });
+            e.preventDefault();
+      });
+
+
+
 });
