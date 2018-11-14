@@ -110,7 +110,7 @@ $(document).ready(function(){
      resetImgCapture()
      resetHighlight()
      var currentCanvasElement = document.getElementById('canvas')
-
+     var self = this
      currentCanvasElement.style.cursor = "default";
       if (highlight === false) {
        for (var elem of elementArray) {
@@ -129,44 +129,33 @@ $(document).ready(function(){
             'border-style': 'solid',
             'border-width': '2px'})
 
-            $(elem).bind('click', clickFeedbackHandler)
-         // $(elem).click(function(e) {
-         //   $('body').find('div.feedback-tooltip').remove()
-         //   // $(this).unbind( "mouseover", changeColor.bind(this));
-         //   // $(this).unbind( "mouseleave", stopChangingColor.bind(this));
-         //   // $(this).find('feedback-tooltip').remove()
-         //   var tooltipDiv = document.createElement('div')
-         //   tooltipDiv.setAttribute('class', 'feedback-tooltip')
-         //   tooltipDiv.innerHTML = retriveFormFeedback(id)
-         //   $(this).prepend(tooltipDiv)
-         //   $(elem).on('click.disabled', false);
-         //   $('.close').bind("click", stopBtn.bind(this))
-         //   $('[id*="-submit"]').bind("click", submitBtn.bind(this))
-         //
-         //   // var path = $(this).first().getPath()
-         //   // var style = styleMap.get(path)
-         //   // document.querySelector(path).style = style
-         //   highlightClicked = true
-         // })
+            $(elem).bind('click', { elementId: id , elemenToAdd: elem }, clickFeedbackHandler)
         }
       } else {
         highlight === true
       }
     })
 
-   function clickFeedbackHandler() {
+   function clickFeedbackHandler(e) {
+    // console.log(msg.elementId);
+     console.log(e.data.elementId);
+     console.log(e.data.elemenToAdd);
+     // console.log(elemenToAdd);
+     // console.log(this);
+     // console.log(id);
      $('body').find('div.feedback-tooltip').remove()
+     var id = $('#' + e.data.elementId).attr('id')
+     // console.log(retriveFormFeedback(id));
      // $(this).unbind( "mouseover", changeColor.bind(this));
      // $(this).unbind( "mouseleave", stopChangingColor.bind(this));
      // $(this).find('feedback-tooltip').remove()
-     var id = $(this).attr('id')
      var tooltipDiv = document.createElement('div')
      tooltipDiv.setAttribute('class', 'feedback-tooltip')
      tooltipDiv.innerHTML = retriveFormFeedback(id)
-     $(this).prepend(tooltipDiv)
-     $(this).on('click.disabled', false);
-     $('.close').bind("click", stopBtn.bind(this))
-     $('[id*="-submit"]').bind("click", submitBtn.bind(this))
+     $(e.data.elemenToAdd).prepend(tooltipDiv)
+     $(e.data.elemenToAdd).on('click.disabled', false);
+     $('.close').bind("click", stopBtn.bind(e.data.elemenToAdd))
+     $('[id*="-submit"]').bind("click", submitBtn.bind(e.data.elemenToAdd))
 
      // var path = $(this).first().getPath()
      // var style = styleMap.get(path)
@@ -185,6 +174,7 @@ $(document).ready(function(){
    }
 
    function retriveFormFeedback(id) {
+     console.log(id);
        if (id === 'feature-feedback') {
          return retriveFeedBackForm()
       } else if (id === 'feature-NPS') {

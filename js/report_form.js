@@ -146,7 +146,7 @@ function retriveNewIdeaForm() {
              </div>
          </div>
          <div style="margin-top: 45px;width: 100%">
-             <input onclick="return false;" id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0"/>
+             <input onclick="e.stopPropagation() ; return false;" id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0"/>
              <div style="position: absolute; left: 15px;">
                <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Nice to have</label>
              </div>
@@ -178,10 +178,10 @@ function retriveNewIdeaForm() {
 
 function retriveFeedBackForm() {
   return  `<span class="feedback-tooltip-window">
-    <div class="modal-header" style="padding: 20px">
-        <label style="width: 50px;text-align: center; top: 50px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Thank you</label>
-        <h4 style="text-align: center;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">We value and appricate your commitment!</h4>
-    </div>
+  <div class="modal-header" style="padding: 20px">
+    <button type="button" id="feedback-close" class="close">×</button>
+      <img class="header-img" src="images/feedback-form-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
+  </div>
     <div id="feedback-success_message" style="width:100%; height:100%; display:none; ">
        <label style="width: 50px;text-align: center; top: 50px;font-size: 14px;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;">Thank you</label>
        <h4 style="text-align: center">We value and appricate your commitment!</h4>
