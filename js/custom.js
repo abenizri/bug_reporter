@@ -129,7 +129,11 @@ $(document).ready(function(){
             'border-style': 'solid',
             'border-width': '2px'})
 
-            $(elem).bind('click', { elementId: id , elemenToAdd: elem }, clickFeedbackHandler)
+            $(elem).each(function( index ) {
+              var path = $(this).first().getPath()            
+              $(this).bind('click', { elementId: id , elemenToAdd: this }, clickFeedbackHandler)
+            });
+
         }
       } else {
         highlight === true
