@@ -6,7 +6,7 @@ function retriveForm() {
               <div class="modal-dialog" style="width: 500px">
                 <div class="modal-content">
                   <div class="modal-header" style="padding: 20px">
-                      <button type="button" id="bug-report-close" class="close" data-dismiss="modal">×</button>
+                      <button type="button" id="bug-report-close" class="close" data-dismiss="modal">X</button>
                       <img id="bugImg" src="images/bug-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
                   </div>
                   <div class="modal-body">
@@ -77,7 +77,7 @@ function retriveForm() {
 function retriveNpsForm() {
     return `<span class="feedback-tooltip-window">
     <div class="modal-header" style="padding: 20px">
-        <button type="button" id="feature-NPS-close" class="close" data-dismiss="modal">×</button>
+        <button type="button" id="feature-NPS-close" class="close" data-dismiss="modal">X</button>
         <img class="header-img" src="images/feedback-form-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
     </div>
     <div id="nps-success_message" style="width:100%; height:100%; display:none; ">
@@ -107,7 +107,7 @@ function retriveNpsForm() {
 function retriveNewIdeaForm() {
   return `<span class="feedback-tooltip-window">
       <div class="modal-header" style="padding: 20px">
-          <button type="button" id="new-idea-close" class="close" data-dismiss="avi">×</button>
+          <button type="button" id="new-idea-close" class="close" data-dismiss="modal">X</button>
           <img class="header-img" src="images/light-bulb.png" style="position: absolute;top: 5px;left: 45%; "/>
       </div>
       <div id="new-idea-success_message" style="width:100%; height:100%; display:none; ">
@@ -178,7 +178,7 @@ function retriveNewIdeaForm() {
 function retriveFeedBackForm() {
   return  `<span class="feedback-tooltip-window">
   <div class="modal-header" style="padding: 20px">
-    <button type="button" id="feedback-close" class="close">×</button>
+    <button type="button" id="feedback-close" class="close">X</button>
       <img class="header-img" src="images/feedback-form-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
   </div>
     <div id="feedback-success_message" style="width:100%; height:100%; display:none; ">
@@ -210,7 +210,7 @@ function newIdeapopup() {
 	<div class="modal-content">
   <div class="modal-header" style="padding: 20px">
 
-      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
 
       <img class="header-img" src="images/light-bulb.png" style="position: absolute;top: 5px;left: 45%; "/>
   </div>
@@ -272,10 +272,9 @@ function newIdeapopup() {
     </form>
 
 		</div>
-		<div class="modal-footer">
-			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+
       <div id="new-idea-success_message" style="width:100%; height:100%; display:none; ">
-          <label style="width: 50px;text-align: center; top: 50px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Thank you</label>
+          <label style="width: 100px;text-align: center;margin-left: 200px;top: 50px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;">Thank you</label>
           <h4 style="text-align: center;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">We value and appricate your commitment!</h4>
        </div>
        <div id="new-idea-error_message" style="width:100%; height:100%; display:none; ">
@@ -283,9 +282,6 @@ function newIdeapopup() {
            Sorry there was an error sending your form.
        </div>
 
-
-			</div>
-		</div>
 	</div>
   </div>
 </div>`

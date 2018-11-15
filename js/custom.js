@@ -48,21 +48,6 @@ $(document).ready(function(){
       }
     })
 
-    // $('#help').click(function(e) {
-    //   $('#canvas').prepend('<span class="mouse-follower-tooltip">Press escape to cancel</span>')
-    //   mouseFollower('Press escape to cancel', '#D88E8E')
-    //   for (var elem of elementArray) {
-    //     if ($(elem).length === 0) continue
-    //     $(elem).each(function( index ) {
-    //       var path = $(this).first().getPath()
-    //       var style = styleHelpMap.get(path)
-    //       document.querySelector(path).style = style
-    //     });
-    //     // $('.mouse-follower-tooltip').remove()
-    //     // $(elem).unbind('click', clickFeedbackHandler)
-    //    }
-    // })
-
    $('#feedback-menuItem').mouseover(function() {
       $('#feedback-menuItem > span').css('visibility', 'visible')
    })
@@ -75,6 +60,9 @@ $(document).ready(function(){
       $('#feedback-menuItem > span').css('visibility', 'hidden')
    })
 
+   $('#new-idea-submit').click(function(e) {
+     submitBtn(e).bind(this)
+   })
 
    function stopBtn(e) {
       e.preventDefault()
