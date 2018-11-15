@@ -22,7 +22,6 @@ function setMousePosition(e) {
 
 function createMousemoveEvent(e) {
   canvas.onmousemove = function (e) {
-    e.stopPropagation()
       if (firstClick === true) {
         firstClick = false
       } else {
@@ -33,6 +32,7 @@ function createMousemoveEvent(e) {
           element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
           element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
           element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
+          e.stopPropagation()
       }
       e.preventDefault()
   }
@@ -51,6 +51,7 @@ function createMouseupEvent(e) {
       var startY = rec.style.top.toString().replace('px', '')
 
       rec.parentNode.removeChild(rec)
+      $('body').find('.rectangle').remove()
     //  canvas.style.cursor = "default";
       html2canvas(document.querySelector("#canvas")).then(canvas => {
         var tnCanvas = document.createElement('canvas');
@@ -69,6 +70,8 @@ function createMouseupEvent(e) {
       element = null;
     }
       console.log("finsihed.");
+      $(".cover").fadeOut(0);
+      $(".cover").fadeOut(0);
       $('.mouse-follower-tooltip').remove()
       e.preventDefault()
   }

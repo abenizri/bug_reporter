@@ -118,7 +118,7 @@ function retriveNewIdeaForm() {
            <h3>Error</h3>
            Sorry there was an error sending your form.
        </div>
-       <form role="form" method="post" id="new-idea-form" class="text-center border border-light p-5 avi">
+       <form role="form" method="post" id="new-idea-form" class="text-center border border-light">
          <div style="margin: 15px;">
              <div class="form-group">
                  <div class="col">
@@ -134,17 +134,17 @@ function retriveNewIdeaForm() {
              </div>
              <div class="form-group" >
                    <div id="container" style="display: table;width: 100%;">
-                      <div style="position: absolute; left: 15px;display: table-cell;">
+                       <div style="position: absolute; left: 15px;display: table-cell;">
                           <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Which section does it affect?</label>
-                      </div>
-                      <div class="right" style="position: absolute; right: 15px;">
+                       </div>
+                       <div class="right" style="position: absolute; right: 15px;">
                           <select onclick="return false;" id="inputState" class="form-control" style="height: 30px;">
                              <option>Products</option>
                              <option>Test</option>
                           </select>
                        </div>
-             </div>
-         </div>
+                  </div>
+            </div>
          <div style="margin-top: 45px;width: 100%">
              <input onclick="e.stopPropagation() ; return false;" id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0"/>
              <div style="position: absolute; left: 15px;">
@@ -204,6 +204,92 @@ function retriveFeedBackForm() {
    </span>`
 }
 
+function newIdeapopup() {
+  return `<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+	<div class="modal-content">
+  <div class="modal-header" style="padding: 20px">
+
+      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+
+      <img class="header-img" src="images/light-bulb.png" style="position: absolute;top: 5px;left: 45%; "/>
+  </div>
+		<div class="modal-body">
+
+            <!-- content goes here -->
+			<form role="form" method="post" id="new-idea-form" class="text-center border border-light">
+          <div class="form-group">
+              <div class="col">
+              <p style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px"> Wow! Name you Idea </p>
+              </div>
+              <div class="col">
+                <input onclick="return false;" type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Idea Name">
+              </div>
+          </div>
+          <div class="form-group">
+                <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">What whould you like to share with us?</label>
+                <textarea onclick="return false;"class="form-control" type="textarea" name="message" id="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="7"></textarea>
+          </div>
+          <div class="form-group" >
+                <div id="container" style="display: table;width: 100%;">
+                    <div style="position: absolute; left: 15px;display: table-cell;">
+                       <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Which section does it affect?</label>
+                    </div>
+                    <div class="right" style="position: absolute; right: 15px;">
+                       <select onclick="return false;" id="inputState" class="form-control" style="height: 30px;">
+                          <option>Products</option>
+                          <option>Test</option>
+                       </select>
+                    </div>
+               </div>
+         </div>
+         <div style="margin-top: 45px;width: 100%">
+             <input onclick="e.stopPropagation() ; return false;" id="ex1" data-slider-id='ex1Slider' type="text" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0"/>
+             <div style="position: absolute; left: 15px;">
+               <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Nice to have</label>
+             </div>
+             <div <div style="position: absolute; right: 15px;">
+               <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Must have</label>
+             </div>
+
+             <script>
+             $('#ex1').slider({
+               formatter: function(value) {
+               if ( value < 3 ) {
+                   value = "Nice to have";
+               }
+               else if ( value > 7 ) {
+                   value = "Must have";
+               } else {
+                 value = "Cannot say"
+               }
+               return value;
+               }
+             });
+             </script>
+         </div>
+         <button id="new-idea-submit" style="margin-top: 15px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" type="submit">Submit</button>
+    </form>
+
+		</div>
+		<div class="modal-footer">
+			<div class="btn-group btn-group-justified" role="group" aria-label="group button">
+      <div id="new-idea-success_message" style="width:100%; height:100%; display:none; ">
+          <label style="width: 50px;text-align: center; top: 50px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Thank you</label>
+          <h4 style="text-align: center;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">We value and appricate your commitment!</h4>
+       </div>
+       <div id="new-idea-error_message" style="width:100%; height:100%; display:none; ">
+           <h3>Error</h3>
+           Sorry there was an error sending your form.
+       </div>
+
+
+			</div>
+		</div>
+	</div>
+  </div>
+</div>`
+}
 // $(function () {
 //   $('#btnContactUs').click(function(e){
 //      e.preventDefault()

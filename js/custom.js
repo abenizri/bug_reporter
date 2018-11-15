@@ -3,7 +3,8 @@ var element = null;
 var firstClick = true
 var buttonState = false
 var highlight = false
-var styleMap = new Map()
+var styleFeedbackMap = new Map()
+var styleHelpMap = new Map()
 
 $(document).ready(function(){
 
@@ -15,16 +16,16 @@ $(document).ready(function(){
      resetHighlight()
      var currentCanvasElement = document.getElementById('canvas')
      currentCanvasElement.style.cursor = "crosshair";
-     // var span = document.createElement(span)
-     // span.setAttribute("mouse-follower-tooltip")
      $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
-
      mouseFollower('Mark the section you want to report', '#004DB3')
 
      if (buttonState === false) {
+       $(".cover").fadeIn(0);
+       $(".cover").fadeTo(0, 0.5);
        createMousemoveEvent(currentCanvasElement)
        createMouseclickEvent(currentCanvasElement)
        createMouseupEvent(currentCanvasElement)
+
        buttonState = true
      } else {
        currentCanvasElement.style.cursor = "default";
@@ -33,40 +34,54 @@ $(document).ready(function(){
      }
    });
 
+   $('#feedback-menuItem').click(function() {
+     resetHighlight()
+     for (var elem of elementArray) {
+       if ($(elem).length === 0) continue
+       $(elem).each(function( index ) {
+         var path = $(this).first().getPath()
+         var style = styleFeedbackMap.get(path)
+         document.querySelector(path).style = style
+       });
+       $('.mouse-follower-tooltip').remove()
+       $(elem).unbind('click', clickFeedbackHandler)
+      }
+    })
+
+    // $('#help').click(function(e) {
+    //   $('#canvas').prepend('<span class="mouse-follower-tooltip">Press escape to cancel</span>')
+    //   mouseFollower('Press escape to cancel', '#D88E8E')
+    //   for (var elem of elementArray) {
+    //     if ($(elem).length === 0) continue
+    //     $(elem).each(function( index ) {
+    //       var path = $(this).first().getPath()
+    //       var style = styleHelpMap.get(path)
+    //       document.querySelector(path).style = style
+    //     });
+    //     // $('.mouse-follower-tooltip').remove()
+    //     // $(elem).unbind('click', clickFeedbackHandler)
+    //    }
+    // })
+
    $('#feedback-menuItem').mouseover(function() {
       $('#feedback-menuItem > span').css('visibility', 'visible')
    })
 
    $('#newIdea , #feature-feedback, #feature-NPS').mouseleave(function() {
-     // setTimeout(function(){ $('#feedback-menuItem > span').css('visibility', 'hidden')}, 5000);
-   $('#feedback-menuItem > span').css('visibility', 'hidden')
+      $('#feedback-menuItem > span').css('visibility', 'hidden')
     })
 
    $('.single-item').mouseover(function() {
       $('#feedback-menuItem > span').css('visibility', 'hidden')
    })
 
-   $('#feedback-menuItem').click(function() {
-
-     resetHighlight()
-     for (var elem of elementArray) {
-       if ($(elem).length === 0) continue
-       $(elem).each(function( index ) {
-         var path = $(this).first().getPath()
-         var style = styleMap.get(path)
-         document.querySelector(path).style = style
-       });
-       $('.mouse-follower-tooltip').remove()
-       $(elem).unbind('click', clickFeedbackHandler)
-      }
-   })
 
    function stopBtn(e) {
       e.preventDefault()
       e.stopPropagation()
       $('body').find('.feedback-tooltip').remove()
       // var path = $(this).first().getPath()
-      // var style = styleMap.get(path)
+      // var style = styleFeedbackMap.get(path)
       // document.querySelector(path).style = style
       highlightClicked = true
       // $(this).bind( "mouseover", changeColor);
@@ -77,16 +92,15 @@ $(document).ready(function(){
    function changeColor(e) {
        var path = $(this).first().getPath()
        var selectorStyle = document.querySelector(path).style
-       styleMap.set(path, selectorStyle);
+       styleFeedbackMap.set(path, selectorStyle);
         $(this).css( {
           background: '-webkit-gradient(linear, left top, left bottom, from(#e5a0b3), to(#e5a0b3))',
           'border-color': 'red'})
-
      }
 
    function stopChangingColor() {
        var path = $(this).first().getPath()
-       var style = styleMap.get(path)
+       var style = styleFeedbackMap.get(path)
        document.querySelector(path).style = style
        highlightClicked = true
      }
@@ -96,7 +110,7 @@ $(document).ready(function(){
        $('#feedback-form, #feature-NPS-form, #new-idea-form').hide();
        $('#feedback-success_message, #nps-success_message, #new-idea-success_message').show();
        // var path = $(this).first().getPath()
-       // var style = styleMap.get(path)
+       // var style = styleFeedbackMap.get(path)
        // document.querySelector(path).style = style
 
        highlightClicked = true
@@ -105,7 +119,7 @@ $(document).ready(function(){
        e.preventDefault()
      }
 
-   $('#feature-feedback, #feature-NPS , #newIdea').click(function(e) {
+   $('#feature-feedback, #help').click(function(e) {
      e.stopPropagation()
      $('body').find('div.feedback-tooltip').remove()
      resetImgCapture()
@@ -123,16 +137,20 @@ $(document).ready(function(){
 
          var path = $(elem).first().getPath()
          var selectorStyle = document.querySelector(path).style
-         styleMap.set(path, selectorStyle);
+         styleFeedbackMap.set(path, selectorStyle);
+         var color = {
+           border: 'red',
+           background: '#e5a0b3'
+         }
+         if (id === 'help') color = { border: 'lightblue' , background: '#48A7EB' }
           $(elem).css( {
-            background: '-webkit-gradient(linear, left top, left bottom, from(#e5a0b3), to(#e5a0b3))',
-            'border-color': 'red',
+            background: `-webkit-gradient(linear, left top, left bottom, from(${color.background}), to(${color.background}))`,
+            'border-color': color.border,
             'border-style': 'solid',
             'border-width': '2px'
           })
 
             $(elem).each(function( index ) {
-              // $(elem).parents().outerHeight(550)
               $(elem).parents().css('backgroundColor', 'transparent')
               var path = $(this).first().getPath()
               $(this).bind('click', { elementId: id , elemenToAdd: this }, clickFeedbackHandler)
@@ -161,12 +179,11 @@ $(document).ready(function(){
    }
 
    function setMouseFollowerColorAndText(id){
+       var message = 'Press escape to cancel'
        if (id === 'feature-feedback') {
-         mouseFollower('Wanna giva a feedback', '#26B85A')
-      } else if (id === 'feature-NPS') {
-         mouseFollower("Let's share", '#26B85A')
-      } else {
-         mouseFollower("Have a new idea", '#26B85A')
+         mouseFollower(message, '#26B85A')
+      } else if (id === 'help') {
+         mouseFollower(message, '#D88E8E')
       }
    }
 
@@ -185,7 +202,8 @@ $(document).ready(function(){
      var currentCanvasElement = document.getElementById('canvas')
      var new_element = currentCanvasElement.cloneNode(true);
      currentCanvasElement.parentNode.replaceChild(new_element, currentCanvasElement);
-
+     $(".cover").fadeOut(0);
+     $(".cover").fadeOut(0);
      buttonState = false
    }
 
@@ -268,12 +286,10 @@ $(document).ready(function(){
             }
         });
     };
-
     $('#bug-report-close').click(function() {
       $('#bugImg').prop('src', 'images/bug-icon.png')
-      // $('form#reused_form').show();
       $('#bug-report-success_message').hide();
-      // $('#error_message').hide();
+      $('#bug-report-error_message').hide();
       $('#btnContactUs').text('Report')
     })
 
@@ -352,24 +368,24 @@ $(document).ready(function(){
       });
 
 
-      $(document).on('keyup',function(evt) {
-          if (evt.keyCode == 27) {
-            resetHighlight()
-            resetImgCapture()
-            var currentCanvasElement = document.getElementById('canvas')
-            currentCanvasElement.style.cursor = "default";
-            $('body').find('.feedback-tooltip').remove()
+    $(document).on('keyup',function(evt) {
+        if (evt.keyCode == 27) {
+          resetHighlight()
+          resetImgCapture()
+          var currentCanvasElement = document.getElementById('canvas')
+          currentCanvasElement.style.cursor = "default";
+          $('body').find('.feedback-tooltip').remove()
 
-            for (var elem of elementArray) {
-              if ($(elem).length === 0) continue
-              $(elem).each(function( index ) {
-                var path = $(this).first().getPath()
-                var style = styleMap.get(path)
-                document.querySelector(path).style = style
-              });
-              $('.mouse-follower-tooltip').remove()
-              $(elem).unbind('click', clickFeedbackHandler)
-             }
-          }
-      });
+          for (var elem of elementArray) {
+            if ($(elem).length === 0) continue
+            $(elem).each(function( index ) {
+              var path = $(this).first().getPath()
+              var style = styleFeedbackMap.get(path)
+              document.querySelector(path).style = style
+            });
+            $('.mouse-follower-tooltip').remove()
+            $(elem).unbind('click', clickFeedbackHandler)
+           }
+        }
+     });
 });

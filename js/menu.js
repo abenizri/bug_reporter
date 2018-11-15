@@ -1,7 +1,9 @@
 function createMenu() {
 
+  $('body').prepend('<div class="cover"></div>')
   $('body').wrapInner( "<div id='canvas'></div>");
-  $('body').prepend(retriveForm())
+  $('body').append(retriveForm())
+  $('body').append(newIdeapopup())
   $('body').prepend('<div id="floater"></div>')
 
   document.getElementById('floater').innerHTML =`
@@ -11,21 +13,22 @@ function createMenu() {
             </li>
             <li id="feedback-menuItem" class="menu-tooltip fa fa-comments-o multi-item"  style="--transparent-background-color:#26B85A;">
               <span class="secondery-menu-tooltiptext">
-                <div class="dropdown" >
-                  <a id="feature-NPS">  Let's share <span class="fas fa-thumbs-up"></span></a>
-                  <a  id="newIdea">  Have a new Idea <span class="fa-lightbulb-o"></span></a>
-                  <a id="feature-feedback">  Feature Feedback <span class="fa-check-square-o"></span></a>
+                <div class="dropdown">
+                  <a data-toggle="modal" data-target="#squarespaceModal"  id="newIdea"> Have a new Idea <span style="font-family: 'fontawesome';" class="fa-lightbulb-o"></span></a>
+                  <a id="feature-feedback"> Feature Feedback <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
                 </span>
               </li>
-         <li id="surveys" class="menu-tooltip fa-flask single-item" style="--transparent-background-color:#FFCB00;">
-           <span class="menu-tooltiptext">Surveys</span>
-         </li>
-          <li id="help" class="menu-tooltip fa-user single-item" style="--transparent-background-color:#D88E8E;">
-            <span class="menu-tooltiptext">Help</span>
-          </li>
+           <li id="surveys" class="menu-tooltip fa-flask single-item" style="--transparent-background-color:#FFCB00;">
+             <span class="menu-tooltiptext">Surveys</span>
+           </li>
+            <li id="help" class="menu-tooltip fa-user single-item" style="--transparent-background-color:#D88E8E;">
+              <span class="menu-tooltiptext">Help</span>
+           </li>
         </ul>`
 
+
+//   <a id="feature-NPS">  Let's share <span class="fas fa-thumbs-up"></span></a>
   // var body = document.body
   // var firstChild = body.firstElementChild // main
   // var newHtml = '<div id="floater-sticky-wrapper"><div id="floater"></div> </div>' + retriveForm ()+ ' <div id="canvas">' + firstChild.outerHTML + '</div>'
