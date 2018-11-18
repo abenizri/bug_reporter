@@ -22,7 +22,6 @@ function setMousePosition(e) {
 
 function createMousemoveEvent(e) {
   canvas.onmousemove = function (e) {
-    e.stopPropagation()
       if (firstClick === true) {
         firstClick = false
       } else {
@@ -33,6 +32,7 @@ function createMousemoveEvent(e) {
           element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
           element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
           element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
+          e.stopPropagation()
       }
       e.preventDefault()
   }
@@ -51,13 +51,17 @@ function createMouseupEvent(e) {
       var startY = rec.style.top.toString().replace('px', '')
 
       rec.parentNode.removeChild(rec)
-    //  canvas.style.cursor = "default";
+      $('body').find('.rectangle').remove()
       html2canvas(document.querySelector("#canvas")).then(canvas => {
         var tnCanvas = document.createElement('canvas');
         var tnCanvasContext = tnCanvas.getContext('2d');
         tnCanvas.width = newWidth; tnCanvas.height = newHeight;
 
-        tnCanvasContext.drawImage(canvas, startX * 2, startY * 2, newWidth * 2 , newHeight * 2,0,0,newWidth,newHeight);
+        if (window.screen.width > 1440) {
+          tnCanvasContext.drawImage(canvas, startX , startY , newWidth  , newHeight ,0,0,newWidth,newHeight);
+        } else {
+          tnCanvasContext.drawImage(canvas, startX * 2, startY * 2, newWidth * 2 , newHeight * 2,0,0,newWidth,newHeight);
+        }
         if (tnCanvas.toDataURL().length > 20) {
           document.querySelector('[class="btn btn-info btn-lg"]').click()
           // let resizeImg = imageResize(tnCanvas.toDataURL(), 550, 300)
@@ -69,6 +73,8 @@ function createMouseupEvent(e) {
       element = null;
     }
       console.log("finsihed.");
+      $(".cover").fadeOut(0);
+      $(".cover").fadeOut(0);
       $('.mouse-follower-tooltip').remove()
       e.preventDefault()
   }
@@ -80,7 +86,6 @@ function createMouseclickEvent(e) {
     // active buttom, show form and clean inputs
     $('form#bug-report-form').css('display', 'block');
     document.getElementById('btnContactUs').setAttribute('type', 'submit')
-    // document.getElementById('name').value = ''
     document.getElementById('message').value = ''
 
     console.log("begun.");
@@ -92,7 +97,7 @@ function createMouseclickEvent(e) {
     element.style.top = mouse.y + 'px';
     canvas.appendChild(element)
     canvas.style.cursor = "crosshair";
-    e.preventDefault()
+  //  e.preventDefault()
   }
  }
 

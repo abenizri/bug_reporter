@@ -1,72 +1,71 @@
-var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item']
+var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item', '.peers.ai-c.fxw-nw']
 var element = null;
 var firstClick = true
 var buttonState = false
 var highlight = false
-var styleMap = new Map()
+var styleFeedbackMap = new Map()
+var styleHelpMap = new Map()
 
-$(document).ready(function(){
+$(document).ready(function() {
+    createMenu()
+    $('#floater').sticky({topSpacing:5})
 
-   createMenu()
-
-   $("#floater").sticky({topSpacing:5});
-
-   $( "#open-bug" ).click(function() {
-     resetHighlight()
+    $('#open-bug-menuItem').click(function() {
+     resetAll()
      var currentCanvasElement = document.getElementById('canvas')
-     currentCanvasElement.style.cursor = "crosshair";
-     // var span = document.createElement(span)
-     // span.setAttribute("mouse-follower-tooltip")
+     currentCanvasElement.style.cursor = 'crosshair'
      $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
-
      mouseFollower('Mark the section you want to report', '#004DB3')
 
      if (buttonState === false) {
+       $('.cover').fadeIn(0);
+       $('.cover').fadeTo(0, 0.5);
        createMousemoveEvent(currentCanvasElement)
        createMouseclickEvent(currentCanvasElement)
        createMouseupEvent(currentCanvasElement)
+
        buttonState = true
      } else {
-       currentCanvasElement.style.cursor = "default";
-       resetImgCapture()
-       $('.mouse-follower-tooltip').remove()
+       resetAll()
      }
-   });
+    });
 
-   $('#feedback-menuItem').mouseover(function() {
-      $('#feedback-menuItem > span').css('visibility', 'visible')
-   })
-
-   $('#newIdea , #feature-feedback, #feature-NPS').mouseleave(function() {
-     // setTimeout(function(){ $('#feedback-menuItem > span').css('visibility', 'hidden')}, 5000);
-   $('#feedback-menuItem > span').css('visibility', 'hidden')
+    $('#feedback-menuItem').click(function() {
+     resetAll()
+     // for (var elem of elementArray) {
+     //   if ($(elem).length === 0) continue
+     //   $(elem).each(function( index ) {
+     //     var path = $(this).first().getPath()
+     //     var style = styleFeedbackMap.get(path)
+     //     document.querySelector(path).style = style
+     //   });
+     //   $('.mouse-follower-tooltip').remove()
+     //   $(elem).unbind('click', clickFeedbackHandler)
+     //  }
     })
 
-   $('.single-item').mouseover(function() {
+    $('#feedback-menuItem').mouseover(function() {
+      $('#feedback-menuItem > span').css('visibility', 'visible')
+    })
+
+    $('#newIdea , #feature-feedback, #feature-NPS').mouseleave(function() {
       $('#feedback-menuItem > span').css('visibility', 'hidden')
-   })
+    })
 
-   $('#feedback-menuItem').click(function() {
+    $('.single-item').mouseover(function() {
+      $('#feedback-menuItem > span').css('visibility', 'hidden')
+    })
 
-     resetHighlight()
-     for (var elem of elementArray) {
-       if ($(elem).length === 0) continue
-       $(elem).each(function( index ) {
-         var path = $(this).first().getPath()
-         var style = styleMap.get(path)
-         document.querySelector(path).style = style
-       });
-       $('.mouse-follower-tooltip').remove()
-       $(elem).unbind('click', clickFeedbackHandler)
-      }
-   })
+    $('#new-idea-submit').click(function(e) {
+     submitBtn(e).bind(this)
+    })
 
-   function stopBtn(e) {
+    function stopBtn(e) {
       e.preventDefault()
       e.stopPropagation()
       $('body').find('.feedback-tooltip').remove()
       // var path = $(this).first().getPath()
-      // var style = styleMap.get(path)
+      // var style = styleFeedbackMap.get(path)
       // document.querySelector(path).style = style
       highlightClicked = true
       // $(this).bind( "mouseover", changeColor);
@@ -74,29 +73,33 @@ $(document).ready(function(){
       $(this).off('click.disabled');
      }
 
-   function changeColor(e) {
+    function changeColor(e) {
        var path = $(this).first().getPath()
        var selectorStyle = document.querySelector(path).style
-       styleMap.set(path, selectorStyle);
+       styleFeedbackMap.set(path, selectorStyle);
         $(this).css( {
           background: '-webkit-gradient(linear, left top, left bottom, from(#e5a0b3), to(#e5a0b3))',
           'border-color': 'red'})
-
      }
 
-   function stopChangingColor() {
+    function stopChangingColor() {
        var path = $(this).first().getPath()
-       var style = styleMap.get(path)
+       var style = styleFeedbackMap.get(path)
        document.querySelector(path).style = style
        highlightClicked = true
      }
 
-   function submitBtn(e) {
+    $('#bug-report-form textarea ,#bug-report-form input, #bug-report-form select, #bug-report-form img, #bug-report-form label').click(function(e) {
+       e.stopPropagation()
+       e.preventDefault()
+    });
+
+    function submitBtn(e) {
        e.stopPropagation()
        $('#feedback-form, #feature-NPS-form, #new-idea-form').hide();
        $('#feedback-success_message, #nps-success_message, #new-idea-success_message').show();
        // var path = $(this).first().getPath()
-       // var style = styleMap.get(path)
+       // var style = styleFeedbackMap.get(path)
        // document.querySelector(path).style = style
 
        highlightClicked = true
@@ -105,15 +108,12 @@ $(document).ready(function(){
        e.preventDefault()
      }
 
-   $('#feature-feedback, #feature-NPS , #newIdea').click(function(e) {
+    $('#feature-feedback, #help').click(function(e) {
      e.stopPropagation()
-     $('body').find('div.feedback-tooltip').remove()
-     resetImgCapture()
-     resetHighlight()
+     resetAll()
      var currentCanvasElement = document.getElementById('canvas')
      var self = this
-     currentCanvasElement.style.cursor = "default";
-      if (highlight === false) {
+     if (highlight === false) {
        for (var elem of elementArray) {
          if ($(elem).length === 0) continue
          var id = $(this).attr('id')
@@ -123,14 +123,21 @@ $(document).ready(function(){
 
          var path = $(elem).first().getPath()
          var selectorStyle = document.querySelector(path).style
-         styleMap.set(path, selectorStyle);
+         styleFeedbackMap.set(path, selectorStyle);
+         var color = {
+           border: '#90EE90',
+           background: 'transparent'
+         }
+         if (id === 'help') color = { border: '#48A7EB' , background: 'transparent' }
           $(elem).css( {
-            background: '-webkit-gradient(linear, left top, left bottom, from(#e5a0b3), to(#e5a0b3))',
-            'border-color': 'red',
+            background: `-webkit-gradient(linear, left top, left bottom, from(${color.background}), to(${color.background}))`,
+            'border-color': color.border,
             'border-style': 'solid',
-            'border-width': '2px'})
+            'border-width': '2px'
+          })
 
             $(elem).each(function( index ) {
+              $(elem).parents().css('backgroundColor', 'transparent')
               var path = $(this).first().getPath()
               $(this).bind('click', { elementId: id , elemenToAdd: this }, clickFeedbackHandler)
             });
@@ -141,32 +148,32 @@ $(document).ready(function(){
       e.preventDefault()
     })
 
-   function clickFeedbackHandler(e) {
+    function clickFeedbackHandler(e) {
      e.stopPropagation()
      $('body').find('div.feedback-tooltip').remove()
      var id = $('#' + e.data.elementId).attr('id')
      var tooltipDiv = document.createElement('div')
      tooltipDiv.setAttribute('class', 'feedback-tooltip')
      tooltipDiv.innerHTML = retriveFormFeedback(id)
-     $(e.data.elemenToAdd).prepend(tooltipDiv)
+     $('body').prepend(tooltipDiv)
+     $(e.data.elemenToAdd).popupDiv('body > .feedback-tooltip');
      $(e.data.elemenToAdd).on('click.disabled', false);
-     $('.close').bind("click", stopBtn.bind(e.data.elemenToAdd))
-     $('[id*="-submit"]').bind("click", submitBtn.bind(e.data.elemenToAdd))
+     $('.close').bind('click', stopBtn.bind(e.data.elemenToAdd))
+     $('[id*="-submit"]').bind('click', submitBtn.bind(e.data.elemenToAdd))
      highlightClicked = true
-       e.preventDefault()
+     e.preventDefault()
    }
 
-   function setMouseFollowerColorAndText(id){
+    function setMouseFollowerColorAndText(id){
+       var message = 'Press escape to cancel'
        if (id === 'feature-feedback') {
-         mouseFollower('Wanna giva a feedback', '#26B85A')
-      } else if (id === 'feature-NPS') {
-         mouseFollower("Let's share", '#26B85A')
-      } else {
-         mouseFollower("Have a new idea", '#26B85A')
+         mouseFollower(message, '#26B85A')
+      } else if (id === 'help') {
+         mouseFollower(message, '#D88E8E')
       }
    }
 
-   function retriveFormFeedback(id) {
+    function retriveFormFeedback(id) {
        if (id === 'feature-feedback') {
          return retriveFeedBackForm()
       } else if (id === 'feature-NPS') {
@@ -175,29 +182,30 @@ $(document).ready(function(){
           return retriveNewIdeaForm()
       }
 
-   }
+    }
 
-   function resetImgCapture(){
+    function resetImgCapture(){
      var currentCanvasElement = document.getElementById('canvas')
      var new_element = currentCanvasElement.cloneNode(true);
      currentCanvasElement.parentNode.replaceChild(new_element, currentCanvasElement);
-
+     $('.cover').fadeOut(0);
+     $('.cover').fadeOut(0);
      buttonState = false
-   }
+    }
 
-   function resetHighlight() {
+    function resetHighlight() {
      for (var elem of elementArray) {
        if ($(elem).length === 0) continue
-       $('body').off( "mouseover", elem, function() {} )
+       $('body').off('mouseover', elem, function() {} )
      }
      highlight = false
-   }
+    }
 
-   function mouseFollower(text, color) {
-     var tooltip = document.querySelectorAll('.mouse-follower-tooltip');
-     document.addEventListener('mousemove', fn, false);
-      function fn(e) {
-         for (var i=tooltip.length; i--;) {
+    function mouseFollower(text, color) {
+      var tooltip = document.querySelectorAll('.mouse-follower-tooltip');
+      document.addEventListener('mousemove', fn, false);
+       function fn(e) {
+          for (var i=tooltip.length; i--;) {
              tooltip[i].style.left = e.pageX + 'px';
              tooltip[i].style.top = e.pageY + 'px';
              tooltip[i].style.background = color // '#004DB3'
@@ -206,7 +214,7 @@ $(document).ready(function(){
        }
     }
 
-   $.fn.extend({
+    $.fn.extend({
         getPath: function () {
             var path, node = this;
             while (node.length) {
@@ -231,6 +239,140 @@ $(document).ready(function(){
 
             return path;
         }
-    });
+     });
 
+    $.fn.popupDiv = function (divToPop) {
+        var pos=$(this).offset();
+        var h=$(this).height();
+        var w=$(this).width();
+        var windowWidht = screen.width;
+        var windowHeight = screen.height;
+
+        var reverse = 0;
+        var top = 0
+        if ((pos.left + 600) >  windowWidht) {
+            reverse = ((pos.left + 600) -  windowWidht) + 150
+        }
+
+        if ((pos.top + 500) > windowHeight ) {
+            top =   ((pos.top + 500) -  windowHeight) + 150
+        }
+
+        if (w < 280 ) w = 350
+
+        $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h  - 55 });
+
+        $(this).click(function(e) {
+            $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h - 55});
+            if ($(divToPop).css('display') !== 'none') {
+                $(divToPop).hide();
+            }
+            else {
+                $(divToPop).show();
+            }
+        });
+    };
+
+    $('#bug-report-close').click(function() {
+      $('#bugImg').prop('src', 'images/bug-icon.png')
+      $('#bug-report-success_message').hide();
+      $('#bug-report-error_message').hide();
+      $('#btnContactUs').text('Report')
+    })
+
+    function after_form_submitted(data) {
+         if(data.result == 'success')
+         {
+             $('#bug-report-form').hide();
+             $('#bug-report-success_message').show();
+             $('#error_message').hide();
+         }
+         else
+         {
+             $('#bug-report-error_message').append('<ul></ul>');
+
+             jQuery.each(data.errors,function(key,val)
+             {
+                 $('#bug-report-error_message ul').append('<li>'+key+':'+val+'</li>');
+             });
+             $('#bug-report-success_message').hide();
+             $('#bug-report-error_message').show();
+
+             //reverse the response on the button
+
+             $('button[type="button"]', $form).each(function(e)
+             {
+               e.preventDefault()
+               e.stopPropagation()
+               resetAll()
+                 $btn = $(this);
+                 label = $btn.prop('orig_label');
+                 if(label)
+                 {
+                     $btn.prop('type','submit' );
+                     $btn.text(label);
+                     $btn.prop('orig_label','');
+                 }
+                 e.preventDefault()
+             });
+
+         }//else
+     }
+
+    $('#bug-report-form').click(function(e)
+      {
+        e.preventDefault()
+        e.stopPropagation()
+        $form = $(this);
+        //show some response on the button
+        $('#btnContactUs', $form).each(function(e)
+        {
+
+            $btn = $(this);
+            $btn.prop('type','button' );
+            $btn.prop('orig_label',$btn.text());
+            $btn.text('Sending ...');
+            resetAll()
+
+        });
+          $('#bugImg').prop('src', 'images/checkmark-48.png')
+          resetAll()
+          var data = {
+            result: 'success'
+          }
+          after_form_submitted(data)
+            //         $.ajax({
+            //     type: "POST",
+            //     url: 'http://reusableforms.com/handler/p/bootstrap-popup-email-form',
+            //     data: $form.serialize(),
+            //     success: after_form_submitted,
+            //     dataType: 'json'
+            // });
+            e.preventDefault();
+      });
+
+    function resetAll() {
+      resetHighlight()
+      resetImgCapture()
+      var currentCanvasElement = document.getElementById('canvas')
+      currentCanvasElement.style.cursor = 'default';
+      $('body').find('.feedback-tooltip').remove()
+
+      for (var elem of elementArray) {
+        if ($(elem).length === 0) continue
+        $(elem).each(function( index ) {
+          var path = $(this).first().getPath()
+          var style = styleFeedbackMap.get(path)
+          document.querySelector(path).style = style
+        });
+        $('.mouse-follower-tooltip').remove()
+        $(elem).unbind('click', clickFeedbackHandler)
+       }
+    }
+
+    $(document).on('keyup',function(evt) {
+        if (evt.keyCode == 27) {
+          resetAll()
+        }
+     });
 });

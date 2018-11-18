@@ -7,35 +7,40 @@
 }
 
 .menu-tooltip .menu-tooltiptext {
+    font-size: 12px;
+    font-family: Comic Sans MS;
     visibility: hidden;
-    width: 150px;
+    width: 165px;
     background-color: inherit;
     color: #fff;
-    text-align: center;
+    text-align: left;
     border-radius: 6px;
-    padding: 2px 10;
+    padding: 2px 10px;
     position: absolute;
     z-index: 1;
-    top: 6px;
+    top: 15px;
     right: 115%;
-    height: 35px !important;
+    height: 22px !important;
     vertical-align: middle;
-    line-height: 35px;
+    line-height: 17px;
 
 }
 
 .menu-tooltip .secondery-menu-tooltiptext {
+  font-family: Comic Sans MS;
+  font-size: 12px;
   visibility: hidden;
-  width: 150px;
+  width: 165px;
   background-color: inherit;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-
+  line-height: 15px;
+  height: 40px !important;
   /* padding: 2px 10; */
   position: absolute;
   z-index: 1;
-  top: 0px;
+  top: 10px;
   right: 115%;
 }
 
@@ -56,7 +61,7 @@
   top: 25%;
   left: 100%;
   margin-top: -5px;
-  border-width: 5px;
+  border-width: 4px;
   border-style: solid;
   border-color: transparent transparent transparent var(--transparent-background-color);
 
@@ -68,7 +73,7 @@
 
 .menu-tooltip:hover .secondery-menu-tooltiptext{
    visibility: visible;
-}
+ }
 
 .feedback-tooltip {
   position: relative;
@@ -80,7 +85,7 @@
   /* visibility: hidden; */
  width: 400px;
 
-overflow: auto;
+ overflow: auto;
  background-color: white;
  color: black;
  text-align: center;
@@ -164,27 +169,56 @@ overflow: auto;
 .slider.slider-horizontal{
  width:360px !important;
  }
-/*
-#myRange:hover {
-  cursor: pointer;
-} */
 
 .dropdown a {
+    /* font-family: 'Josefin Sans', sans-serif; */
+    font-size: 12px;
     color: #fff;
     text-decoration: none;
     display: block;
     /* text-align: left; */
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: #fff;
+    /* border-radius: 6px; */
+
     /* height: 30px; */
     margin-top: 0px;
-    border-radius: 6px;
-    line-height: 30px;
 
+    line-height: 14px !important;
 
-    height: 30px !important;
+    padding: 2px 0 2px 10px;
+    width: 100%;
+    text-align: left;
+    height: 20px !important;
 
 }
-.dropdown a:hover {background-color: #29a806;}
+#feedback-menuItem .dropdown a:hover {background-color: #29a806;}
+#help-menuItem .dropdown a:hover {background-color: #D87878;}
+
+.modal-header {
+	padding-bottom: 5px;
+}
+
+.modal-footer {
+    	padding: 0;
+	}
+
+.modal-footer .btn-group button {
+	height:40px;
+	border-top-left-radius : 0;
+	border-top-right-radius : 0;
+	border: none;
+	border-right: 1px solid #ddd;
+}
+
+.modal-footer .btn-group:last-child > button {
+	border-right: 0;
+}
+
+.model-content {
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  border-style: solid;
+  border-color: #ccc #ccc #ccc #ccc;
+  border-width: 1px;
+  padding: 5px 0;
+}
 	/* content: '\2605'; /*unicode star character*/
