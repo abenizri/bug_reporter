@@ -52,13 +52,16 @@ function createMouseupEvent(e) {
 
       rec.parentNode.removeChild(rec)
       $('body').find('.rectangle').remove()
-    //  canvas.style.cursor = "default";
       html2canvas(document.querySelector("#canvas")).then(canvas => {
         var tnCanvas = document.createElement('canvas');
         var tnCanvasContext = tnCanvas.getContext('2d');
         tnCanvas.width = newWidth; tnCanvas.height = newHeight;
 
-        tnCanvasContext.drawImage(canvas, startX * 2, startY * 2, newWidth * 2 , newHeight * 2,0,0,newWidth,newHeight);
+        if (window.screen.width > 1440) {
+          tnCanvasContext.drawImage(canvas, startX , startY , newWidth  , newHeight ,0,0,newWidth,newHeight);
+        } else {
+          tnCanvasContext.drawImage(canvas, startX * 2, startY * 2, newWidth * 2 , newHeight * 2,0,0,newWidth,newHeight);
+        }
         if (tnCanvas.toDataURL().length > 20) {
           document.querySelector('[class="btn btn-info btn-lg"]').click()
           // let resizeImg = imageResize(tnCanvas.toDataURL(), 550, 300)
@@ -83,7 +86,6 @@ function createMouseclickEvent(e) {
     // active buttom, show form and clean inputs
     $('form#bug-report-form').css('display', 'block');
     document.getElementById('btnContactUs').setAttribute('type', 'submit')
-    // document.getElementById('name').value = ''
     document.getElementById('message').value = ''
 
     console.log("begun.");

@@ -62,7 +62,7 @@ function retriveForm() {
                   </form>
                     <div id="bug-report-success_message" style="width:100%; height:100%; display:none; ">
                       <label style="width: 550px;text-align: center;position: absolute; top: 0px;font-size: 14px;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;">Thank you</label>
-                      <h4 style="text-align: center">We value anf appricate your commitment!</h4>
+                      <h4 style="text-align: center">We value and appricate your commitment!</h4>
                    </div>
                     <div id="bug-report-error_message" style="width:100%; height:100%; display:none; ">
                       <h3>Error</h3>
@@ -182,8 +182,8 @@ function retriveFeedBackForm() {
       <img class="header-img" src="images/feedback-form-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
   </div>
     <div id="feedback-success_message" style="width:100%; height:100%; display:none; ">
-       <label style="width: 50px;text-align: center; top: 50px;font-size: 14px;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;">Thank you</label>
-       <h4 style="text-align: center">We value and appricate your commitment!</h4>
+      <label style="width: 100px;text-align: center;margin-left: 0px;top: 50px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;">Thank you</label>
+      <h4 style="text-align: center;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">We value and appricate your commitment!</h4>
      </div>
      <div id="feedback-error_message" style="width:100%; height:100%; display:none; ">
          <h3>Error</h3>
@@ -199,35 +199,30 @@ function retriveFeedBackForm() {
          </div>
          <button id="feedback-submit" style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button>
      </form>
-     <script>
-     </script>
    </span>`
 }
 
 function newIdeapopup() {
   return `<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-	<div class="modal-content">
-  <div class="modal-header" style="padding: 20px">
-
-      <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
-
-      <img class="header-img" src="images/light-bulb.png" style="position: absolute;top: 5px;left: 45%; "/>
-  </div>
+    <div class="modal-dialog">
+  	<div class="modal-content" style="width: 450px;border-radius: 6px;">
+    <div class="modal-header" style="padding: 20px">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
+        <img class="header-img" src="images/light-bulb.png" style="position: absolute;top: 5px;left: 45%; "/>
+    </div>
 		<div class="modal-body">
-
             <!-- content goes here -->
 			<form role="form" method="post" id="new-idea-form" class="text-center border border-light">
           <div class="form-group">
               <div class="col">
-              <p style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px"> Wow! Name you Idea </p>
+              <label  style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;"> Wow! Name you Idea </label>
               </div>
-              <div class="col">
+              <div class="col" style="padding-right:0px !important;padding-left: 0px !important;">
                 <input onclick="return false;" type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Idea Name">
               </div>
           </div>
           <div class="form-group">
-                <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">What whould you like to share with us?</label>
+                <label style="text-align: left;;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">What whould you like to share with us?</label>
                 <textarea onclick="return false;"class="form-control" type="textarea" name="message" id="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="7"></textarea>
           </div>
           <div class="form-group" >
@@ -268,7 +263,8 @@ function newIdeapopup() {
              });
              </script>
          </div>
-         <button id="new-idea-submit" style="margin-top: 15px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" type="submit">Submit</button>
+          <button id="new-idea-submit" style="color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button>
+         <!--button id="new-idea-submit" style="margin-top: 15px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" type="submit">Submit</button-->
     </form>
 
 		</div>
