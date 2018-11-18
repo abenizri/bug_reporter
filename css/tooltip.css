@@ -192,7 +192,7 @@
 }
 #feedback-menuItem .dropdown a:hover {background-color: #29a806;}
 #help-menuItem .dropdown a:hover {background-color: #D87878;}
-
+#surveys-menuItem .dropdown a:hover {background-color: #FFCB00;}
 .modal-header {
 	padding-bottom: 5px;
 }

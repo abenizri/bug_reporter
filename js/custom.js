@@ -1,6 +1,4 @@
 var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item', '.peers.ai-c.fxw-nw']
-var element = null;
-var firstClick = true
 var buttonState = false
 var highlight = false
 var styleFeedbackMap = new Map()
@@ -9,6 +7,17 @@ var styleHelpMap = new Map()
 $(document).ready(function() {
     createMenu()
     $('#floater').sticky({topSpacing:5})
+
+    $('#collapce_img').click(function(e) {
+      e.stopPropagation()
+        var display = $('#preview').css('display')
+        if (display && display === 'none') {
+          $('#preview').css('display', 'block')
+        } else {
+          $('#preview').css('display', 'none')
+        }
+        e.preventDefault()
+    })
 
     $('#open-bug-menuItem').click(function() {
      resetAll()
@@ -32,16 +41,6 @@ $(document).ready(function() {
 
     $('#feedback-menuItem').click(function() {
      resetAll()
-     // for (var elem of elementArray) {
-     //   if ($(elem).length === 0) continue
-     //   $(elem).each(function( index ) {
-     //     var path = $(this).first().getPath()
-     //     var style = styleFeedbackMap.get(path)
-     //     document.querySelector(path).style = style
-     //   });
-     //   $('.mouse-follower-tooltip').remove()
-     //   $(elem).unbind('click', clickFeedbackHandler)
-     //  }
     })
 
     $('#feedback-menuItem').mouseover(function() {
@@ -89,9 +88,9 @@ $(document).ready(function() {
        highlightClicked = true
      }
 
-    $('#bug-report-form textarea ,#bug-report-form input, #bug-report-form select, #bug-report-form img, #bug-report-form label').click(function(e) {
+    $('#bug-report-form div, #bug-report-form textarea ,#bug-report-form input, #bug-report-form select, #bug-report-form img, #bug-report-form label').click(function(e) {
        e.stopPropagation()
-       e.preventDefault()
+       // e.preventDefault()
     });
 
     function submitBtn(e) {
@@ -275,9 +274,13 @@ $(document).ready(function() {
 
     $('#bug-report-close').click(function() {
       $('#bugImg').prop('src', 'images/bug-icon.png')
+      $("#inputState").val($("#inputState option:first").val());
       $('#bug-report-success_message').hide();
       $('#bug-report-error_message').hide();
-      $('#btnContactUs').text('Report')
+      $('#report_submit').text('Report')
+      $('#message').text('')
+      $('#preview').prop('src','')
+      $('#preview').css('display', 'none')
     })
 
     function after_form_submitted(data) {
@@ -319,36 +322,18 @@ $(document).ready(function() {
          }//else
      }
 
-    $('#bug-report-form').click(function(e)
-      {
-        e.preventDefault()
-        e.stopPropagation()
-        $form = $(this);
-        //show some response on the button
-        $('#btnContactUs', $form).each(function(e)
-        {
+   $('#report_submit').click(function(e) {
 
-            $btn = $(this);
-            $btn.prop('type','button' );
-            $btn.prop('orig_label',$btn.text());
-            $btn.text('Sending ...');
-            resetAll()
-
-        });
-          $('#bugImg').prop('src', 'images/checkmark-48.png')
+          $btn = $(this);
+          $btn.prop('type','button' );
+          $btn.prop('orig_label',$btn.text());
+          $btn.text('Sending ...');
           resetAll()
+          $('#bugImg').prop('src', 'images/checkmark-48.png')
           var data = {
-            result: 'success'
+           result: 'success'
           }
           after_form_submitted(data)
-            //         $.ajax({
-            //     type: "POST",
-            //     url: 'http://reusableforms.com/handler/p/bootstrap-popup-email-form',
-            //     data: $form.serialize(),
-            //     success: after_form_submitted,
-            //     dataType: 'json'
-            // });
-            e.preventDefault();
       });
 
     function resetAll() {

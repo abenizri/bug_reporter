@@ -1,13 +1,13 @@
 function retriveForm() {
           return ` <div class="container-box">
-            <button style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Contact Us</button>
-         </div>
-          <div id="myModal" class="modal fade" role="dialog" style="display: none;">
+                      <button style="display: none;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Contact Us</button>
+                   </div>
+              <div id="myModal" class="modal fade" role="dialog" style="display: none;">
               <div class="modal-dialog" style="width: 500px">
                 <div class="modal-content">
                   <div class="modal-header" style="padding: 20px">
                       <button type="button" id="bug-report-close" class="close" data-dismiss="modal">X</button>
-                      <img id="bugImg" src="images/bug-icon.png" style="position: absolute;top: 5px;left: 45%; "/>
+                      <img id="bugImg" src="images/bug-icon.png" style="position: absolute;top: 5px;left: 45%;"/>
                   </div>
                   <div class="modal-body">
                     <form role="form" method="post" id="bug-report-form">
@@ -27,7 +27,7 @@ function retriveForm() {
                                  <option>Test</option>
                                  </select>
                               </div>
-                           </div>
+                          </div>
                      </div>
 
                      <div class="form-group">
@@ -37,26 +37,21 @@ function retriveForm() {
                        </div>
                        <div>
                            <img style="margin: 30px;" src="images/minor.png"/>
-                           <img style="margin: 30px;"  src="images/moderate.png"/>
-                           <img style="margin: 30px;"  src="images/major.png"/>
-                           <img style="margin: 30px;"  src="images/critical.png"/>
+                           <img style="margin: 30px;" src="images/moderate.png"/>
+                           <img style="margin: 30px;" src="images/major.png"/>
+                           <img style="margin: 30px;" src="images/critical.png"/>
                          </div>
                      </div>
 
                      <div class="form-group">
-                       <div>
-                         <label style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px">Priview: </label>
-                       </div>
-                       <div>
-                         <img id="preview" style="width: 470px; height: 150px; border-style: solid; border-width: 1px; border-color: grey; border-radius: 6px;"></img>
-                       </div>
+                         <img id="preview" style="width: 470px; height: 150px; border-style: solid; border-width: 1px; border-color: grey; border-radius: 6px;display: none"></img>
                      </div>
                      <div id="container" style="display: table">
                          <div style=" display: table-cell;width:120px">
-                             <button type="submit"  class="btn btn-lg btn-success btn-block" id="btnContactUs">Report</button>
+                             <button type="submit" id="report_submit" class="btn btn-lg btn-success btn-block">Report</button>
                          </div>
-                         <div class="right" style="text-align: right; font-color: black; width: 180px; margin-left: 200px">
-                             <p>Powered By LetUsKnow </p>
+                            <div class="right" style="text-align: right; font-color: black; width: 180px; margin-left: 200px">
+                            <button id="collapce_img" style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px"> Click here for preview </button>
                          </div>
                      </div>
                   </form>
