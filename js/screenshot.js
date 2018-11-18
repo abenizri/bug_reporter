@@ -1,3 +1,5 @@
+var firstClick = true
+var element = null;
 var mouse = {
    x: 0,
    y: 0,
@@ -85,7 +87,7 @@ function createMouseclickEvent(e) {
     e.stopPropagation()
     // active buttom, show form and clean inputs
     $('form#bug-report-form').css('display', 'block');
-    document.getElementById('btnContactUs').setAttribute('type', 'submit')
+    document.getElementById('report_submit').setAttribute('type', 'submit')
     document.getElementById('message').value = ''
 
     console.log("begun.");
