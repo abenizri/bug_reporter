@@ -94,7 +94,7 @@ function retriveNpsForm() {
             <div>
                <img style="margin-left: -4px;width: 370px; height:30px;" src="images/recomend.png"/>
             </div>
-            <textarea onclick="return false;" class="form-control" type="textarea" name="message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
+            <textarea onclick="return false;" class="form-control" type="textarea" name="message" placeholder="Your Message Here" maxlength="6000" rows="5"></textarea>
         </div>
            <button id="feature-NPS-submit" style="margin-top: 15px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" type="submit">Submit</button>
         </form>
@@ -193,14 +193,27 @@ function retriveFeedBackForm() {
          </div>
          <div class="form-group">
             <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color:black">Would you like to add a comment?</p>
-            <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px" onclick="return false;"class="form-control" type="textarea" name="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="7"></textarea>
+            <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px" onclick="return false;"class="form-control" type="textarea" name="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="5"></textarea>
          </div>
-           <button id="feedback-submit" style="margin-top: 50px; margin-left: 320px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button>
+           <button id="feedback-submit" style="margin-top: 15px; margin-left: 320px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button>
          <!--button id="feedback-submit" style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button-->
      </form>
    </span>`
 }
 
+function defaultHelp() {
+  return `<span class="feedback-tooltip-window">
+    <div style="margin-left:15px">
+    <img src='images/question1.png'>
+    <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color:black">
+     Here you can see the total number of visits per day.
+     The color indicates if there was any improvement in the number of visitors since the last login.<br/>
+     If the color is green - the number of visitors has been increased.<br/>
+     If the color is red - there was a drop in the number of visitors.
+     </div>
+    </P>
+  </span>`
+}
 function newIdeapopup() {
   return `<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -222,7 +235,7 @@ function newIdeapopup() {
           </div>
           <div class="form-group">
                 <p style="text-align: left;;font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color: black">What whould you like to share with us?</p>
-                <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px" onclick="return false;"class="form-control" type="textarea" name="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="7"></textarea>
+                <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px" onclick="return false;"class="form-control" type="textarea" name="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="5"></textarea>
           </div>
           <div class="form-group" >
                 <div id="container" style="display: table;width: 100%;">

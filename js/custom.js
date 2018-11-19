@@ -1,4 +1,6 @@
-var elementArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item', '.peers.ai-c.fxw-nw']
+var elementArray = ['#salesReport', '#quickChat', '#todoList', '#weather', '.search-box', '#mainContent > div > div.masonry-item.w-100 > div > div:nth-child(1)', '#mainContent > div > div.masonry-item.w-100 > div > div:nth-child(3)','#canvas > div:nth-child(10) > div.sidebar > div > ul > li:nth-child(4) > a > span.icon-holder','#canvas > div:nth-child(10) > div.sidebar > div > ul > li:nth-child(7) > a > span.icon-holder', '.sidebar-menu.scrollable.pos-r.ps li:nth-child(4) span.icon-holder','.sidebar-menu.scrollable.pos-r.ps li:nth-child(7) span.icon-holder']
+
+var elementHelpArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item', '.peers.ai-c.fxw-nw']
 var buttonState = false
 var highlight = false
 var styleFeedbackMap = new Map()
@@ -131,10 +133,11 @@ $(document).ready(function() {
     $('#feature-feedback, #help').click(function(e) {
      e.stopPropagation()
      resetAll()
+     var tempArray = ($(this).attr('id') === 'help') ? elementHelpArray : elementArray
      var currentCanvasElement = document.getElementById('canvas')
      var self = this
      if (highlight === false) {
-       for (var elem of elementArray) {
+       for (var elem of tempArray) {
          if ($(elem).length === 0) continue
          var id = $(this).attr('id')
          var highlightClicked = false
@@ -149,13 +152,14 @@ $(document).ready(function() {
            background: 'transparent'
          }
          if (id === 'help') color = { border: '#48A7EB' , background: 'transparent' }
-          $(elem).css( {
-            background: `-webkit-gradient(linear, left top, left bottom, from(${color.background}), to(${color.background}))`,
-            'border-color': color.border,
-            'border-style': 'solid',
-            'border-width': '2px'
-          })
-
+          // $(elem).css( {
+          //   // background: `-webkit-gradient(linear, left top, left bottom, from(${color.background}), to(${color.background}))`
+          //   'border-color': color.border,
+          //   'border-style': 'solid',
+          //   'border-width': '2px'
+          //
+          // })
+          $(elem).css("cssText", `border-color: ${color.border} !important; border-style: solid;border-width: 2px`);
             $(elem).each(function( index ) {
               $(elem).parents().css('backgroundColor', 'transparent')
               var path = $(this).first().getPath()
@@ -196,8 +200,8 @@ $(document).ready(function() {
     function retriveFormFeedback(id) {
        if (id === 'feature-feedback') {
          return retriveFeedBackForm()
-      } else if (id === 'feature-NPS') {
-        return retriveNpsForm()
+      } else if (id === 'help') {
+        return defaultHelp()
       } else {
           return retriveNewIdeaForm()
       }
@@ -226,11 +230,8 @@ $(document).ready(function() {
       document.addEventListener('mousemove', fn, false);
       var windowWidht = screen.width;
       var windowHeight = screen.height;
-      console.log(windowWidht);
-
 
        function fn(e) {
-         console.log(e.pageX );
           for (var i=tooltip.length; i--;) {
              tooltip[i].style.left =  ( (e.pageX + 270) > windowWidht  ) ? (e.pageX - 270) + 'px' : e.pageX + 'px';
              tooltip[i].style.top = e.pageY + 'px';
@@ -275,21 +276,24 @@ $(document).ready(function() {
         var windowHeight = screen.height;
 
         var reverse = 0;
+        var topReverse = 0
         var top = 0
-        if ((pos.left + 600) >  windowWidht) {
-            reverse = ((pos.left + 600) -  windowWidht) + 150
+        if ((pos.left + (w * 2) + 100) >  windowWidht) {
+            reverse = ((pos.left + (w * 2)) -  windowWidht) + 350
         }
 
-        if ((pos.top + 500) > windowHeight ) {
-            top =   ((pos.top + 500) -  windowHeight) + 150
+        if ((pos.top + h + 100) > windowHeight ) {
+          // console.log(windowHeight);
+          // console.log(pos.top + h + 200);
+            topReverse =   ((pos.top + (h) - 500) -  windowHeight) + 150
         }
 
         if (w < 280 ) w = 350
 
-        $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h  - 55 });
+        $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h  - topReverse - 55 });
 
         $(this).click(function(e) {
-            $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h - 55});
+            $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h - topReverse - 55});
             if ($(divToPop).css('display') !== 'none') {
                 $(divToPop).hide();
             }
@@ -308,6 +312,8 @@ $(document).ready(function() {
       $('#bug-report-form .message').text('')
       $('#preview').prop('src','')
       $('#preview').css('display', 'none')
+      $('#collapce_img').prop('src', 'images/hiddenCameraClose.png')
+
     })
 
     function after_form_submitted(data) {
