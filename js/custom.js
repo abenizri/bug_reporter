@@ -13,8 +13,10 @@ $(document).ready(function() {
         var display = $('#preview').css('display')
         if (display && display === 'none') {
           $('#preview').css('display', 'block')
+          $('#collapce_img').prop('src', 'images/hiddenCameraClose.png')
         } else {
           $('#preview').css('display', 'none')
+          $('#collapce_img').prop('src', 'images/hiddenScreenshot.png')
         }
         e.preventDefault()
     })
@@ -56,7 +58,12 @@ $(document).ready(function() {
     })
 
     $('#new-idea-submit').click(function(e) {
-     submitBtn(e).bind(this)
+       // submitBtn(e).bind(this)
+       e.stopPropagation()
+       $('#new-idea-form').hide();
+       $('#new-idea-success_message').show();
+       $('#new-idea-image').prop('src', 'images/checkmark-48.png')
+       e.preventDefault()
     })
 
     function stopBtn(e) {
@@ -90,13 +97,27 @@ $(document).ready(function() {
 
     $('#bug-report-form div, #bug-report-form textarea ,#bug-report-form input, #bug-report-form select, #bug-report-form img, #bug-report-form label').click(function(e) {
        e.stopPropagation()
-       // e.preventDefault()
-    });
+      });
+
+    $('#new-idea-close').click(function(e) {
+      // $("#new-idea-form").show()
+        clearNewIdeaForm()
+        $('#new-idea-image').prop('src', 'images/light-bulb.png')
+
+    })
+
+    function clearNewIdeaForm() {
+      $('#newIdeaTitle').val('')
+      $('#new-idea-form textarea').val('')
+      $("#new-idea-form select").val($("#new-idea-form select option:first").val());
+      $('#new-idea-success_message').hide();
+      $("#new-idea-form").show()
+    }
 
     function submitBtn(e) {
        e.stopPropagation()
-       $('#feedback-form, #feature-NPS-form, #new-idea-form').hide();
-       $('#feedback-success_message, #nps-success_message, #new-idea-success_message').show();
+       $('#feedback-form').hide();
+       $('#feedback-success_message').show();
        // var path = $(this).first().getPath()
        // var style = styleFeedbackMap.get(path)
        // document.querySelector(path).style = style
@@ -203,9 +224,15 @@ $(document).ready(function() {
     function mouseFollower(text, color) {
       var tooltip = document.querySelectorAll('.mouse-follower-tooltip');
       document.addEventListener('mousemove', fn, false);
+      var windowWidht = screen.width;
+      var windowHeight = screen.height;
+      console.log(windowWidht);
+
+
        function fn(e) {
+         console.log(e.pageX );
           for (var i=tooltip.length; i--;) {
-             tooltip[i].style.left = e.pageX + 'px';
+             tooltip[i].style.left =  ( (e.pageX + 270) > windowWidht  ) ? (e.pageX - 270) + 'px' : e.pageX + 'px';
              tooltip[i].style.top = e.pageY + 'px';
              tooltip[i].style.background = color // '#004DB3'
              tooltip[i].innerHTML = text // 'Mark the section you want to report'
@@ -274,11 +301,11 @@ $(document).ready(function() {
 
     $('#bug-report-close').click(function() {
       $('#bugImg').prop('src', 'images/bug-icon.png')
-      $("#inputState").val($("#inputState option:first").val());
+      $("#bug-report-form select").val($("#bug-report-form select option:first").val());
       $('#bug-report-success_message').hide();
       $('#bug-report-error_message').hide();
       $('#report_submit').text('Report')
-      $('#message').text('')
+      $('#bug-report-form .message').text('')
       $('#preview').prop('src','')
       $('#preview').css('display', 'none')
     })

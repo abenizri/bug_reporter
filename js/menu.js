@@ -14,7 +14,7 @@ function createMenu() {
             <li id="feedback-menuItem" class="menu-tooltip fa fa-comments-o multi-item"  style="--transparent-background-color:#26B85A;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
-                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" data-target="#squarespaceModal"  id="newIdea"> Have a new Idea? <span style="font-family: 'fontawesome';" class="fa-lightbulb-o"></span></a>
+                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" data-target="#squarespaceModal"  id="newIdea"> Have a new idea? <span style="font-family: 'fontawesome';" class="fa-lightbulb-o"></span></a>
                   <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="feature-feedback"> Feature Feedback <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
               </span>
@@ -23,7 +23,7 @@ function createMenu() {
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
                   <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="newIdea"> General Survey <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
-                  <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="help"> Version 1.0.1 Survey <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
+                  <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="help"> V1.0.1 Survey <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
               </span>
             </li>
@@ -31,7 +31,7 @@ function createMenu() {
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
                   <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="newIdea"> General walkthroughs <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
-                  <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="help"> Version 1.0.1 Walkthroughs <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
+                  <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="help"> V1.0.1 walkthroughs <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
               </span>
             </li>
