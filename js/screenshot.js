@@ -88,7 +88,7 @@ function createMouseclickEvent(e) {
     // active buttom, show form and clean inputs
     $('form#bug-report-form').css('display', 'block');
     document.getElementById('report_submit').setAttribute('type', 'submit')
-    document.getElementById('message').value = ''
+    document.querySelector('#bug-report-form textarea').value = ''
 
     console.log("begun.");
     mouse.startX = mouse.x;

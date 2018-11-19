@@ -10,7 +10,7 @@
     font-size: 12px;
     font-family: Comic Sans MS;
     visibility: hidden;
-    width: 165px;
+    width: 185px;
     background-color: inherit;
     color: #fff;
     text-align: left;
@@ -18,7 +18,7 @@
     padding: 2px 10px;
     position: absolute;
     z-index: 1;
-    top: 15px;
+    top: 12px;
     right: 115%;
     height: 22px !important;
     vertical-align: middle;
@@ -30,7 +30,7 @@
   font-family: Comic Sans MS;
   font-size: 12px;
   visibility: hidden;
-  width: 165px;
+  width: 185px;
   background-color: inherit;
   color: #fff;
   text-align: center;
@@ -47,10 +47,10 @@
 .menu-tooltip .menu-tooltiptext::after {
    content: "";
    position: absolute;
-   top: 50%;
-   right: -9px;
+   top: 40%;
+   right: -11px;
    margin-top: -5px;
-   border-width: 5px;
+   border-width: 7px;
    border-style: solid;
    border-color: transparent transparent transparent var(--transparent-background-color);
 }
@@ -58,10 +58,10 @@
 .menu-tooltip .secondery-menu-tooltiptext::after {
   content: "";
   position: absolute;
-  top: 25%;
-  left: 100%;
+  top: 22%;
+  right: -11px;
   margin-top: -5px;
-  border-width: 4px;
+  border-width: 6px;
   border-style: solid;
   border-color: transparent transparent transparent var(--transparent-background-color);
 
