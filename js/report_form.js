@@ -14,7 +14,7 @@ function retriveForm() {
                       <div class="form-group">
                           <p style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color: black" for="name" >
                               Yikes! Can you describe the bug?</p>
-                          <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px"  class="form-control" type="textarea" name="message" placeholder="Your Message Here" maxlength="6000" rows="7"></textarea>
+                            <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px"  class="form-control" type="textarea" name="message" placeholder="Your Message Here" maxlength="6000" rows="5"></textarea>
                       </div>
                       <div class="form-group">
                           <div id="container" style="display: table;width: 100%;">
@@ -36,10 +36,10 @@ function retriveForm() {
                                Rank the priority:</p>
                        </div>
                        <div>
-                           <img style="margin: 30px;" src="images/minorT.png"/>
-                           <img style="margin: 30px;" src="images/minorTest.png"/>
-                           <img style="margin: 30px;" src="images/minorTest.png"/>
-                           <img style="margin: 30px;" src="images/minorTest.png"/>
+                           <img style="margin: 30px;" src="images/minor_test.png"/>
+                           <img style="margin: 20px;" src="images/moderate_test.png"/>
+                           <img style="margin: 20px;" src="images/major_test.png"/>
+                           <img style="margin: 20px;" src="images/critical_test.png"/>
                          </div>
                      </div>
 
