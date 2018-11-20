@@ -69,8 +69,8 @@ $(document).ready(function() {
     })
 
     function stopBtn(e) {
-      e.preventDefault()
-      e.stopPropagation()
+      // e.preventDefault()
+      // e.stopPropagation()
       $('body').find('.feedback-tooltip').remove()
       // var path = $(this).first().getPath()
       // var style = styleFeedbackMap.get(path)
@@ -222,6 +222,10 @@ $(document).ready(function() {
        if ($(elem).length === 0) continue
        $('body').off('mouseover', elem, function() {} )
      }
+     for (var elem of elementHelpArray) {
+       if ($(elem).length === 0) continue
+       $('body').off('mouseover', elem, function() {} )
+     }
      highlight = false
     }
 
@@ -303,8 +307,8 @@ $(document).ready(function() {
         });
     };
 
-    $('#bug-report-close').click(function() {
-      $('#bugImg').prop('src', 'images/bug-icon.png')
+    $('#bug-report-close').click(function(e) {
+      $('#bugImg').prop('src', 'images/newBugIconNG.png')
       $("#bug-report-form select").val($("#bug-report-form select option:first").val());
       $('#bug-report-success_message').hide();
       $('#bug-report-error_message').hide();
@@ -312,8 +316,7 @@ $(document).ready(function() {
       $('#bug-report-form .message').text('')
       $('#preview').prop('src','')
       $('#preview').css('display', 'none')
-      $('#collapce_img').prop('src', 'images/hiddenCameraClose.png')
-
+      $('#collapce_img').prop('src', 'images/hiddenScreenshot.png')
     })
 
     function after_form_submitted(data) {
@@ -386,6 +389,17 @@ $(document).ready(function() {
         $('.mouse-follower-tooltip').remove()
         $(elem).unbind('click', clickFeedbackHandler)
        }
+
+       for (var elem of elementHelpArray) {
+         if ($(elem).length === 0) continue
+         $(elem).each(function( index ) {
+           var path = $(this).first().getPath()
+           var style = styleFeedbackMap.get(path)
+           document.querySelector(path).style = style
+         });
+         $('.mouse-follower-tooltip').remove()
+         $(elem).unbind('click', clickFeedbackHandler)
+        }
     }
 
     $(document).on('keyup',function(evt) {

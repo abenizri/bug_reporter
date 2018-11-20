@@ -87,7 +87,7 @@ function createMouseclickEvent(e) {
     e.stopPropagation()
     // active buttom, show form and clean inputs
     $('form#bug-report-form').css('display', 'block');
-    document.getElementById('report_submit').setAttribute('type', 'submit')
+   //  document.getElementById('report_submit').setAttribute('type', 'submit')
     document.querySelector('#bug-report-form textarea').value = ''
 
     console.log("begun.");
