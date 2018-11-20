@@ -53,7 +53,8 @@ function retriveForm() {
 
                          </div>
                           <div class="right" style="text-align: right; font-color: black; width: 120px; margin-left: 200px">
-                            <button type="submit" id="report_submit" class="btn btn-lg btn-success btn-block">Report</button>
+                            <!--button type="submit" id="report_submit" class="btn btn-lg btn-success btn-block">Report</button-->
+                            <a style="top: 28px; color: black !important;background: #499F48 !important;margin-left: 30px;-webkit-appearance: inherit;" id="report_submit" class="button green">Report</a>
                          </div>
                      </div>
                   </form>
@@ -187,6 +188,7 @@ function retriveFeedBackForm() {
          Sorry there was an error sending your form.
      </div>
     <form id="feedback-form" role="form "class="border border-light p-5">
+      <div style="margin: 5px;">
        <div class="form-group"">
          <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color: black">What do you think about it?</p>
          <img src="images/smile-inRow.png"/>
@@ -195,19 +197,23 @@ function retriveFeedBackForm() {
             <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color:black">Would you like to add a comment?</p>
             <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px" onclick="return false;"class="form-control" type="textarea" name="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="5"></textarea>
          </div>
-            <a style="margin-top: 15px; margin-left: 304px;" id="feedback-submit" class="button green">Submit</a>
+            <a style="margin-top: 15px; margin-left: 295px;" id="feedback-submit" class="button green">Submit</a>
            <!--button id="feedback-submit" style="margin-top: 15px; margin-left: 320px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button-->
          <!--button id="feedback-submit" style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button-->
+         </div>
      </form>
    </span>`
 }
 
 function defaultHelp() {
   return `<span class="feedback-tooltip-window">
+  <div class="modal-header" style="padding: 20px">
+    <button type="button" id="feedback-close" class="close">X</button>
+    <img class="header-img" src="images/question1.png" style="position: absolute;top: 0px; left: 36%; width: 100px; "/>
+  </div>
     <div style="margin-left:15px">
-    <img src='images/question1.png'>
-    <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color:black">
-     Here you can see the total number of visits per day.
+    <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 14px;color:black">
+     Here you can see the total number of visits per day.<br/>
      The color indicates if there was any improvement in the number of visitors since the last login.<br/>
      If the color is green - the number of visitors has been increased.<br/>
      If the color is red - there was a drop in the number of visitors.
@@ -276,7 +282,8 @@ function newIdeapopup() {
              });
              </script>
          </div>
-          <button id="new-idea-submit" style="margin-top: 50px; margin-left: 350px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button>
+         <a id="new-idea-submit" style="margin-top: 50px; margin-left: 333px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6;" class="button blue">Submit</a>
+          <!--button id="new-idea-submit" style="margin-top: 50px; margin-left: 350px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button-->
          <!--button id="new-idea-submit" style="margin-top: 15px;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px" type="submit">Submit</button-->
     </form>
 
