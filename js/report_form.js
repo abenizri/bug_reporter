@@ -7,7 +7,7 @@ function retriveForm() {
                 <div class="modal-content">
                   <div class="modal-header" style="padding: 20px">
                       <button type="button" id="bug-report-close" class="close" data-dismiss="modal">X</button>
-                      <img id="bugImg" src="images/newBugIconNG.png" style="position: absolute;top: 5px;left: 48%;"/>
+                      <img id="bugImg" src="images/newBugIconNG.png" style="position: absolute;top: 5px;left: 45%;"/>
                   </div>
                   <div class="modal-body">
                     <form role="form" method="post" id="bug-report-form">
@@ -195,7 +195,8 @@ function retriveFeedBackForm() {
             <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color:black">Would you like to add a comment?</p>
             <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px" onclick="return false;"class="form-control" type="textarea" name="message" placeholder="Please describe your idea in a few senetences" maxlength="6000" rows="5"></textarea>
          </div>
-           <button id="feedback-submit" style="margin-top: 15px; margin-left: 320px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button>
+            <a style="margin-top: 15px; margin-left: 304px;" id="feedback-submit" class="button green">Submit</a>
+           <!--button id="feedback-submit" style="margin-top: 15px; margin-left: 320px;color: black;font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button-->
          <!--button id="feedback-submit" style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 13px;background-color: #4f82d6; border-radius: 6px"  type="submit">Submit</button-->
      </form>
    </span>`
