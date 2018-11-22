@@ -12,9 +12,18 @@ function retriveForm() {
                   <div class="modal-body">
                     <form role="form" method="post" id="bug-report-form">
                       <div class="form-group">
+                      <div>
+                        <div>
                           <p style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 17px;color: black" for="name" >
                               Yikes! Can you describe the bug?</p>
-                            <textarea style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px"  class="form-control" type="textarea" name="message" placeholder="Your Message Here" maxlength="6000" rows="5"></textarea>
+                        </div>
+                              <!--img type="button" id="start-record-btn" style="border: solid 2px white;border-radius: 40px 40px 40px 41px;" src="images/stopRecording.png" title="Start Recording"/-->
+                              <!-- button type="button" id="pause-record-btn"  title="Finish Recording">Finish Recognition</button-->
+                              <div id="start_button" style="backgroundColor: whitesmoke;" onclick="if(variables.recognizing){isToRestartImmediately=false}startButton(event);" title="Start / Pause" style="display: inline-block;">
+                                <img alt="Start" id="start-record-btn" src="images/stopRecording.png">
+                              </div>
+                            </div>  
+                            <textarea id="note-textarea" style="font-family: Comic Sans MS, cursive, sans-serif;font-size: 15px"  class="form-control" type="textarea" name="message" placeholder="Your Message Here" maxlength="6000" rows="5"></textarea>
                       </div>
                       <div class="form-group">
                           <div id="container" style="display: table;width: 100%;">

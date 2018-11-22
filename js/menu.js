@@ -23,14 +23,14 @@ function createMenu() {
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
                   <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="newIdea"> General Survey <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
-                  <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="help"> V1.0.1 Survey <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
+                  <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="serveyV1"> V1.0.1 Survey <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
               </span>
             </li>
             <li id="help-menuItem" class="menu-tooltip fa-user single-item" style="--transparent-background-color:#D88E8E;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
-                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="newIdea"> General walkthroughs <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
+                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="generalHelp"> General walkthroughs <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
                   <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="help"> V1.0.1 walkthroughs <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
               </span>

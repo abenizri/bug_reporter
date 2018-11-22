@@ -1,10 +1,29 @@
 var elementArray = ['#salesReport', '#quickChat', '#todoList', '#weather', '.search-box', '#mainContent > div > div.masonry-item.w-100 > div > div:nth-child(1)', '#mainContent > div > div.masonry-item.w-100 > div > div:nth-child(3)','#canvas > div:nth-child(10) > div.sidebar > div > ul > li:nth-child(4) > a > span.icon-holder','#canvas > div:nth-child(10) > div.sidebar > div > ul > li:nth-child(7) > a > span.icon-holder', '.sidebar-menu.scrollable.pos-r.ps li:nth-child(4) span.icon-holder','.sidebar-menu.scrollable.pos-r.ps li:nth-child(7) span.icon-holder']
+var elementHelpGeneralArray = ['.peer[class*="w-100"]:has(.layers)', '.bd.bgc-white']
+var elementHelpV1Array = ['.search-box', '#mainContent > div > div.masonry-item.w-100 > div > div:nth-child(3) > div', 'ul.nav-right > li:nth-child(1)', '[class="peers pT-20 mT-20 bdT fxw-nw@lg+ jc-sb ta-c gap-10"]']
 
-var elementHelpArray = ['[class="btn btn-lg btn-success"]', '.nav-link', '.col-md-3', '.nav-item', '.peers.ai-c.fxw-nw']
 var buttonState = false
 var highlight = false
 var styleFeedbackMap = new Map()
 var styleHelpMap = new Map()
+var helpMessagesMap = new Map()
+var isRecording = false
+
+helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(6)>div:nth-child(2)>div>div>ul>li:nth-child(2)', 'Click on the icon and run a search within the dashboard.<br/>The results will be filtered out based on the search keyword')
+helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(3)>div', 'The percentage of unique visitors.<br/>If the same user visits your site 5 times during the day, it will increase the total number of visits, but the unique will remain 1.')
+helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(8)>div:nth-child(2)>div>div>ul:nth-child(2)>li', 'The notification list you sunscribed for as a part of the app settings.')
+helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(9)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div:nth-child(2)>div>div>div:nth-child(2)', 'The percentage of new users versus new purchases')
+
+
+var helpGeneralMessagesMap = new Map()
+
+helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div>div', 'Here you can see the total number of visits per day.<br/> The color indicates if there was any improvement in the number of visitors since the last login.')
+helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(2)>div', 'Total page views for the last day.<br/>There was a drop of 7% in the number of page viewers ')
+helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(3)>div', 'If the same user visits your site 5 times during the day it will increase the total number of visits, but the unique will be 1.')
+helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(4)>div', 'Bounce rate is 33%')
+helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(6)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div', 'Site visits - the map view displays all logins  from different destinations ')
+helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(6)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div:nth-child(2)', 'Distribution of all visitors per continent, country and city')
+
 
 $(document).ready(function() {
     createMenu()
@@ -79,6 +98,7 @@ $(document).ready(function() {
       // $(this).bind( "mouseover", changeColor);
       // $(this).bind( "mouseleave", stopChangingColor);
       $(this).off('click.disabled');
+      resetAll()
      }
 
     function changeColor(e) {
@@ -105,6 +125,7 @@ $(document).ready(function() {
       // $("#new-idea-form").show()
         clearNewIdeaForm()
         $('#new-idea-image').prop('src', 'images/light-bulb.png')
+        resetAll()
 
     })
 
@@ -130,10 +151,80 @@ $(document).ready(function() {
        e.preventDefault()
      }
 
-    $('#feature-feedback, #help').click(function(e) {
+     function clickHelpHandler(e) {
+      e.stopPropagation()
+      $('body').find('div.feedback-tooltip').remove()
+      var tempHelpMap = (e.data.elementId === 'help') ? helpMessagesMap : helpGeneralMessagesMap
+      var id = $('#' + e.data.elementId).attr('id')
+      var tooltipDiv = document.createElement('div')
+      tooltipDiv.setAttribute('class', 'feedback-tooltip')
+      var className = $(e.data.elemenToAdd).prop('class')
+      console.log(e.data.elementPath);
+      tooltipDiv.innerHTML =  `<span class="feedback-tooltip-window">
+            <div class="modal-header" style="padding: 20px">
+              <button type="button" id="feedback-close" class="close">X</button>
+              <img class="header-img" src="images/question1.png" style="position: absolute;top: 0px; left: 36%; width: 100px; "/>
+            </div>
+              <div style="margin-left:15px">
+              <p style="text-align: left;font-family: Comic Sans MS, cursive, sans-serif;font-size: 14px;color:black">
+                ${tempHelpMap.get(e.data.elementPath)}
+               </div>
+              </P>
+            </span>`
+      $('body').prepend(tooltipDiv)
+      $(e.data.elemenToAdd).popupDiv('body > .feedback-tooltip');
+      $(e.data.elemenToAdd).on('click.disabled', false);
+      $('.close').bind('click', stopBtn.bind(e.data.elemenToAdd))
+      $('[id*="-submit"]').bind('click', submitBtn.bind(e.data.elemenToAdd))
+      highlightClicked = true
+      e.preventDefault()
+     }
+
+    $('#help, #generalHelp').click(function(e) {
+      e.stopPropagation()
+      resetAll()
+      var tempArray = ($(this).attr('id') === 'help') ? elementHelpV1Array : elementHelpGeneralArray
+      var currentCanvasElement = document.getElementById('canvas')
+      var self = this
+      if (highlight === false) {
+        for (var elem of tempArray) {
+          if ($(elem).length === 0) continue
+          var id = $(this).attr('id')
+          var highlightClicked = false
+          $('#canvas').prepend('<span class="mouse-follower-tooltip">Mark the section you want to report</span>')
+          setMouseFollowerColorAndText(id)
+
+          var path = $(elem).first().getPath()
+          var selectorStyle = document.querySelector(path).style
+          styleFeedbackMap.set(path, selectorStyle);
+          var color = {
+            border: '#48A7EB',
+            background: 'transparent'
+          }
+                     // $(elem).css( {
+           //   // background: `-webkit-gradient(linear, left top, left bottom, from(${color.background}), to(${color.background}))`
+           //   'border-color': color.border,
+           //   'border-style': 'solid',
+           //   'border-width': '2px'
+           //
+           // })
+           $(elem).css("cssText", `border-color: ${color.border} !important; border-style: solid;border-width: 2px`);
+             $(elem).each(function( index ) {
+               $(elem).parents().css('backgroundColor', 'transparent')
+               var path = $(this).first().getPath()
+               $(this).bind('click', { elementId: id , elemenToAdd: this , elementPath: path}, clickHelpHandler)
+             });
+         }
+       } else {
+         highlight === true
+       }
+       e.preventDefault()
+    })
+
+    $('#feature-feedback').click(function(e) {
      e.stopPropagation()
      resetAll()
-     var tempArray = ($(this).attr('id') === 'help') ? elementHelpArray : elementArray
+     var tempArray = ($(this).attr('id') === 'help') ? elementHelpGeneralArray : elementArray
      var currentCanvasElement = document.getElementById('canvas')
      var self = this
      if (highlight === false) {
@@ -192,7 +283,7 @@ $(document).ready(function() {
        var message = 'Press escape to cancel'
        if (id === 'feature-feedback') {
          mouseFollower(message, '#26B85A')
-      } else if (id === 'help') {
+      } else if (id === 'help' || id === 'generalHelp') {
          mouseFollower(message, '#D88E8E')
       }
    }
@@ -222,7 +313,7 @@ $(document).ready(function() {
        if ($(elem).length === 0) continue
        $('body').off('mouseover', elem, function() {} )
      }
-     for (var elem of elementHelpArray) {
+     for (var elem of elementHelpGeneralArray) {
        if ($(elem).length === 0) continue
        $('body').off('mouseover', elem, function() {} )
      }
@@ -279,25 +370,12 @@ $(document).ready(function() {
         var windowWidht = screen.width;
         var windowHeight = screen.height;
 
-        var reverse = 0;
-        var topReverse = 0
-        var top = 0
-        if ((pos.left + (w * 2) + 100) >  windowWidht) {
-            reverse = ((pos.left + (w * 2)) -  windowWidht) + 350
-        }
-
-        if ((pos.top + h + 100) > windowHeight ) {
-          // console.log(windowHeight);
-          // console.log(pos.top + h + 200);
-            topReverse =   ((pos.top + (h) - 500) -  windowHeight) + 150
-        }
-
-        if (w < 280 ) w = 350
-
-        $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h  - topReverse - 55 });
+        var left = ( pos.left + w + 200 > screen.width ) ? screen.width - 400 : pos.left + 100
+        var top =  pos.top + 50
+        $(divToPop).css({ left , top });
 
         $(this).click(function(e) {
-            $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h - topReverse - 55});
+            $(divToPop).css({ left , top });
             if ($(divToPop).css('display') !== 'none') {
                 $(divToPop).hide();
             }
@@ -317,6 +395,7 @@ $(document).ready(function() {
       $('#preview').prop('src','')
       $('#preview').css('display', 'none')
       $('#collapce_img').prop('src', 'images/hiddenScreenshot.png')
+      resetAll()
     })
 
     function after_form_submitted(data) {
@@ -375,11 +454,15 @@ $(document).ready(function() {
     function resetAll() {
       resetHighlight()
       resetImgCapture()
+      recognition.stop();
+      instructions.text('Voice recognition.');
+      isRecording = false
+      var allArrayElements = elementArray.concat(elementHelpV1Array, elementHelpGeneralArray);
       var currentCanvasElement = document.getElementById('canvas')
       currentCanvasElement.style.cursor = 'default';
       $('body').find('.feedback-tooltip').remove()
 
-      for (var elem of elementArray) {
+      for (var elem of allArrayElements) {
         if ($(elem).length === 0) continue
         $(elem).each(function( index ) {
           var path = $(this).first().getPath()
@@ -388,18 +471,8 @@ $(document).ready(function() {
         });
         $('.mouse-follower-tooltip').remove()
         $(elem).unbind('click', clickFeedbackHandler)
+        $(elem).unbind('click', clickHelpHandler)
        }
-
-       for (var elem of elementHelpArray) {
-         if ($(elem).length === 0) continue
-         $(elem).each(function( index ) {
-           var path = $(this).first().getPath()
-           var style = styleFeedbackMap.get(path)
-           document.querySelector(path).style = style
-         });
-         $('.mouse-follower-tooltip').remove()
-         $(elem).unbind('click', clickFeedbackHandler)
-        }
     }
 
     $(document).on('keyup',function(evt) {
@@ -407,4 +480,246 @@ $(document).ready(function() {
           resetAll()
         }
      });
+
+
+     try {
+       var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+       var recognition = new SpeechRecognition();
+     }
+     catch(e) {
+       console.error(e);
+       $('.no-browser-support').show();
+       $('.app').hide();
+     }
+
+
+     var noteTextarea = $('#note-textarea');
+     var instructions = $('#recording-instructions');
+     var notesList = $('ul#notes');
+
+     var noteContent = '';
+
+     // Get all notes from previous sessions and display them.
+     var notes = getAllNotes();
+     renderNotes(notes);
+
+
+
+     /*-----------------------------
+           Voice Recognition
+     ------------------------------*/
+
+     // If false, the recording will stop after a few seconds of silence.
+     // When true, the silence period is longer (about 15 seconds),
+     // allowing us to keep recording even when the user pauses.
+     recognition.continuous = true;
+
+     // This block is called every time the Speech APi captures a line.
+     recognition.onresult = function(event) {
+
+       // event is a SpeechRecognitionEvent object.
+       // It holds all the lines we have captured so far.
+       // We only need the current one.
+       var current = event.resultIndex;
+
+       // Get a transcript of what was said.
+       var transcript = event.results[current][0].transcript;
+
+       // Add the current transcript to the contents of our Note.
+       // There is a weird bug on mobile, where everything is repeated twice.
+       // There is no official solution so far so we have to handle an edge case.
+       var mobileRepeatBug = (current == 1 && transcript == event.results[0][0].transcript);
+
+       if(!mobileRepeatBug) {
+         noteContent += transcript;
+         noteTextarea.val(noteContent);
+       }
+     };
+
+     recognition.onstart = function(event) {
+       console.log('here1');
+       // e.preventDefault()
+       event.preventDefault()
+       instructions.text('Voice recognition activated. Try speaking into the microphone.');
+
+       event.stopPropagation()
+     }
+
+     recognition.onspeechend = function(event) {
+     console.log('here2');
+       event.stopPropagation()
+       instructions.text('You were quiet for a while so voice recognition turned itself off.');
+       event.preventDefault()
+     }
+
+     recognition.onerror = function(event) {
+       event.preventDefault()
+       e.stopPropagation()
+       if(event.error == 'no-speech') {
+         instructions.text('No speech was detected. Try again.');
+       };
+       event.preventDefault()
+     }
+
+
+
+     /*-----------------------------
+           App buttons and input
+     ------------------------------*/
+
+     // function startSpeach() {
+     //   if (noteContent.length) {
+     //     noteContent += ' ';
+     //   }
+     //   recognition.start();
+     // }
+
+     $('#start-record-btn').click(function(e) {
+       // e.preventDefault()
+       if (isRecording === true) {
+         recognition.stop();
+         instructions.text('Voice recognition paused.');
+         isRecording = false
+         $(this).prop('src', 'images/stopRecording.png')
+       } else {
+         if (noteContent.length) {
+           noteContent += ' ';
+         }
+         recognition.start();
+         $(this).prop('src', 'images/miconRecoding.gif')
+         isRecording = true
+       }
+        e.preventDefault()
+
+
+     });
+
+
+     // $('#pause-record-btn').on('click', function(e) {
+     //   alert('end')
+     //   e.preventDefault()
+     //   recognition.stop();
+     //   instructions.text('Voice recognition paused.');
+     //   e.preventDefault()
+     // });
+
+     // Sync the text inside the text area with the noteContent variable.
+     noteTextarea.on('input', function(e) {
+       e.preventDefault()
+       noteContent = $(this).val();
+       e.preventDefault()
+     })
+
+     $('#save-note-btn').on('click', function(e) {
+       e.preventDefault()
+       recognition.stop();
+
+       if(!noteContent.length) {
+         instructions.text('Could not save empty note. Please add a message to your note.');
+       }
+       else {
+         // Save note to localStorage.
+         // The key is the dateTime with seconds, the value is the content of the note.
+         saveNote(new Date().toLocaleString(), noteContent);
+
+         // Reset variables and update UI.
+         noteContent = '';
+         renderNotes(getAllNotes());
+         noteTextarea.val('');
+         instructions.text('Note saved successfully.');
+       }
+       e.preventDefault()
+     })
+
+
+     notesList.on('click', function(e) {
+       e.preventDefault();
+       var target = $(e.target);
+
+       // Listen to the selected note.
+       if(target.hasClass('listen-note')) {
+         var content = target.closest('.note').find('.content').text();
+         readOutLoud(content);
+       }
+
+       // Delete note.
+       if(target.hasClass('delete-note')) {
+         var dateTime = target.siblings('.date').text();
+         deleteNote(dateTime);
+         target.closest('.note').remove();
+       }
+       e.preventDefault()
+     });
+
+
+
+     /*-----------------------------
+           Speech Synthesis
+     ------------------------------*/
+
+     function readOutLoud(message) {
+     	var speech = new SpeechSynthesisUtterance();
+
+       // Set the text and voice attributes.
+     	speech.text = message;
+     	speech.volume = 1;
+     	speech.rate = 1;
+     	speech.pitch = 1;
+
+     	window.speechSynthesis.speak(speech);
+     }
+
+
+
+     /*-----------------------------
+           Helper Functions
+     ------------------------------*/
+
+     function renderNotes(notes) {
+       var html = '';
+       if(notes.length) {
+         notes.forEach(function(note) {
+           html+= `<li class="note">
+             <p class="header">
+               <span class="date">${note.date}</span>
+               <a href="#" class="listen-note" title="Listen to Note">Listen to Note</a>
+               <a href="#" class="delete-note" title="Delete">Delete</a>
+             </p>
+             <p class="content">${note.content}</p>
+           </li>`;
+         });
+       }
+       else {
+         html = '<li><p class="content">You don\'t have any notes yet.</p></li>';
+       }
+       notesList.html(html);
+     }
+
+
+     function saveNote(dateTime, content) {
+       localStorage.setItem('note-' + dateTime, content);
+     }
+
+
+     function getAllNotes() {
+       var notes = [];
+       var key;
+       for (var i = 0; i < localStorage.length; i++) {
+         key = localStorage.key(i);
+
+         if(key.substring(0,5) == 'note-') {
+           notes.push({
+             date: key.replace('note-',''),
+             content: localStorage.getItem(localStorage.key(i))
+           });
+         }
+       }
+       return notes;
+     }
+
+
+     function deleteNote(dateTime) {
+       localStorage.removeItem('note-' + dateTime);
+     }
+
 });

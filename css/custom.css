@@ -6,6 +6,28 @@
   --forth-background-color: #D88E8E;
 }
 
+#start-record-btn {
+    /* width: 70px;
+    height: 70px;
+    display: inline-block;
+    margin: 0;
+    cursor: pointer;
+    background-color: white;
+    padding: 0;
+    vertical-align: middle; */
+    border: solid 2px white;
+    border-radius: 40px 40px 40px 41px;
+    width: 60px;
+    height: 60px;
+    display: inline-block;
+    margin-left: 400px;
+    margin-top: -77px;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0;
+    vertical-align: middle;
+}
+
 .checked {
     color: orange;
 }
