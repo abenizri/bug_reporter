@@ -367,25 +367,20 @@ $(document).ready(function() {
         var windowWidht = screen.width;
         var windowHeight = screen.height;
 
-        var reverse = 0;
-        var topReverse = 0
-        var top = 0
-        if ((pos.left + (w * 2) + 200) >  windowWidht) {
-            reverse = ((pos.left + (w * 2)) -  windowWidht) + 750
-        }
+        // console.log(pos.left);
+        // console.log(w);
+        // console.log(screen.width);
+        console.log(h);
+        console.log(pos.top);
+        var left = ( pos.left + w + 100 > screen.width ) ? screen.width - 400 : pos.left + w
 
-        if ((pos.top + h + 100) > windowHeight ) {
-          // console.log(windowHeight);
-          // console.log(pos.top + h + 200);
-            topReverse =   ((pos.top + (h) - 500) -  windowHeight) + 150
-        }
-
-        if (w < 280 ) w = 350
-
-        $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h  - topReverse - 55 });
+        var top = ( h > 250 ) ? pos.top + 250 : pos.top + h
+        $(divToPop).css({ left , top });
 
         $(this).click(function(e) {
-            $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h - topReverse - 55});
+            // $(divToPop).css({ left: pos.left + w , top: pos.top + h});
+            // $(divToPop).css({ left , top: pos.top + h  });
+            $(divToPop).css({ left , top });
             if ($(divToPop).css('display') !== 'none') {
                 $(divToPop).hide();
             }
@@ -393,6 +388,32 @@ $(document).ready(function() {
                 $(divToPop).show();
             }
         });
+        // var reverse = 0;
+        // var topReverse = 0
+        // var top = 0
+        // if ((pos.left + (w * 2) + 200) >  windowWidht) {
+        //     reverse = ((pos.left + (w * 2)) -  windowWidht) + 750
+        // }
+        //
+        // if ((pos.top + h + 100) > windowHeight ) {
+        //   // console.log(windowHeight);
+        //   // console.log(pos.top + h + 200);
+        //     topReverse =   ((pos.top + (h) - 500) -  windowHeight) + 150
+        // }
+        //
+        // if (w < 280 ) w = 350
+        //
+        // $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h  - topReverse - 55 });
+        //
+        // $(this).click(function(e) {
+        //     $(divToPop).css({ left: pos.left + w - reverse , top: pos.top + h - topReverse - 55});
+        //     if ($(divToPop).css('display') !== 'none') {
+        //         $(divToPop).hide();
+        //     }
+        //     else {
+        //         $(divToPop).show();
+        //     }
+        // });
     };
 
     $('#bug-report-close').click(function(e) {
