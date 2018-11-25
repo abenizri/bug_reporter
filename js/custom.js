@@ -9,20 +9,20 @@ var styleHelpMap = new Map()
 var helpMessagesMap = new Map()
 var isRecording = false
 
-helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(6)>div:nth-child(2)>div>div>ul>li:nth-child(2)', 'Click on the icon and run a search within the dashboard.<br/>The results will be filtered out based on the search keyword')
-helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(3)>div', 'The percentage of unique visitors.<br/>If the same user visits your site 5 times during the day, it will increase the total number of visits, but the unique will remain 1.')
-helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(8)>div:nth-child(2)>div>div>ul:nth-child(2)>li', 'The notification list you sunscribed for as a part of the app settings.')
-helpMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(9)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div:nth-child(2)>div>div>div:nth-child(2)', 'The percentage of new users versus new purchases')
+helpMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(6)>div:nth-child(2)>div>div>ul>li:nth-child(2)', 'Click on the icon and run a search within the dashboard.<br/>The results will be filtered out based on the search keyword')
+helpMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(3)>div', 'The percentage of unique visitors.<br/>If the same user visits your site 5 times during the day, it will increase the total number of visits, but the unique will remain 1.')
+helpMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(8)>div:nth-child(2)>div>div>ul:nth-child(2)>li', 'The notification list you sunscribed for as a part of the app settings.')
+helpMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(9)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div:nth-child(2)>div>div>div:nth-child(2)', 'The percentage of new users versus new purchases')
 
 
 var helpGeneralMessagesMap = new Map()
 
-helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div>div', 'Here you can see the total number of visits per day.<br/> The color indicates if there was any improvement in the number of visitors since the last login.')
-helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(2)>div', 'Total page views for the last day.<br/>There was a drop of 7% in the number of page viewers ')
-helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(3)>div', 'If the same user visits your site 5 times during the day it will increase the total number of visits, but the unique will be 1.')
-helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(4)>div', 'Bounce rate is 33%')
-helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(6)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div', 'Site visits - the map view displays all logins  from different destinations ')
-helpGeneralMessagesMap.set('html>body>div:nth-child(2)>div:nth-child(6)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div:nth-child(2)', 'Distribution of all visitors per continent, country and city')
+helpGeneralMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div>div', 'Here you can see the total number of visits per day.<br/> The color indicates if there was any improvement in the number of visitors since the last login.')
+helpGeneralMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(2)>div', 'Total page views for the last day.<br/>There was a drop of 7% in the number of page viewers ')
+helpGeneralMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(3)>div', 'If the same user visits your site 5 times during the day it will increase the total number of visits, but the unique will be 1.')
+helpGeneralMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(7)>div:nth-child(2)>main>div>div>div:nth-child(2)>div>div:nth-child(4)>div', 'Bounce rate is 33%')
+helpGeneralMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(6)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div', 'Site visits - the map view displays all logins  from different destinations ')
+helpGeneralMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(6)>div:nth-child(2)>main>div>div>div:nth-child(3)>div>div>div:nth-child(2)', 'Distribution of all visitors per continent, country and city')
 
 
 $(document).ready(function() {
