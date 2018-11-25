@@ -1,10 +1,9 @@
-$(function () {
+
 try {
   var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   var recognition = new SpeechRecognition();
 }
 catch(e) {
-  console.error(e);
   $('.no-browser-support').show();
   $('.app').hide();
 }
@@ -54,24 +53,20 @@ recognition.onresult = function(event) {
 };
 
 recognition.onstart = function(event) {
-  console.log('here1');
-  // e.preventDefault()
-  e.preventDefault()
+  event.preventDefault()
   instructions.text('Voice recognition activated. Try speaking into the microphone.');
-
-  e.stopPropagation()
+  event.stopPropagation()
 }
 
 recognition.onspeechend = function(event) {
-console.log('here2');
-  e.stopPropagation()
+  event.stopPropagation()
   instructions.text('You were quiet for a while so voice recognition turned itself off.');
-  e.preventDefault()
+  event.preventDefault()
 }
 
 recognition.onerror = function(event) {
   event.preventDefault()
-  e.stopPropagation()
+  event.stopPropagation()
   if(event.error == 'no-speech') {
     instructions.text('No speech was detected. Try again.');
   };
@@ -91,19 +86,19 @@ recognition.onerror = function(event) {
 //   recognition.start();
 // }
 
-$('#start-record-btn').click(function(e) {
-  alert('start')
-  // e.preventDefault()
+// $('#start-record-btn').click(function(e) {
+//   alert('start')
+//   // e.preventDefault()
+//
+//
+//   if (noteContent.length) {
+//     noteContent += ' ';
+//   }
+//   recognition.start();
+//   e.preventDefault()
+// });
 
-
-  if (noteContent.length) {
-    noteContent += ' ';
-  }
-  recognition.start();
-  e.preventDefault()
-});
-
-
+ $(function () {
 $('#pause-record-btn').on('click', function(e) {
   alert('end')
   e.preventDefault()
@@ -230,4 +225,4 @@ function getAllNotes() {
 function deleteNote(dateTime) {
   localStorage.removeItem('note-' + dateTime);
 }
-})
+});

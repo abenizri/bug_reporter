@@ -4,8 +4,10 @@ function createMenu() {
   $('body').wrapInner( "<div id='canvas'></div>");
   $('body').append(retriveForm())
   $('body').append(newIdeapopup())
+  $('body').prepend('<div id="sticky"></div>')
   $('body').prepend('<div id="floater"></div>')
 
+  document.getElementById('sticky').innerHTML = `<img src="images/intercom.png" style="width: 370px; height: 550px; border-radius: 6px; margin-left: 73%;"/>`
   document.getElementById('floater').innerHTML =`
         <ul id="mainSideMenu">
             <li id="open-bug-menuItem" class="menu-tooltip fas fa-bug single-item" style="--transparent-background-color:#004DB3;">
