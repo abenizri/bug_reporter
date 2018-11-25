@@ -62,6 +62,15 @@ $(document).ready(function() {
      }
     });
 
+    $('#intercom-menuItem').click(function() {
+      var display = $('#sticky').css('display')
+      if (display && display === 'none') {
+        $('#sticky').css('display', 'block')
+      } else {
+        $('#sticky').css('display', 'none')
+      }
+    })
+
     $('#feedback-menuItem').click(function() {
      resetAll()
     })
@@ -159,7 +168,6 @@ $(document).ready(function() {
       var tooltipDiv = document.createElement('div')
       tooltipDiv.setAttribute('class', 'feedback-tooltip')
       var className = $(e.data.elemenToAdd).prop('class')
-      console.log(e.data.elementPath);
       tooltipDiv.innerHTML =  `<span class="feedback-tooltip-window">
             <div class="modal-header" style="padding: 20px">
               <button type="button" id="feedback-close" class="close">X</button>
@@ -487,7 +495,6 @@ $(document).ready(function() {
        var recognition = new SpeechRecognition();
      }
      catch(e) {
-       console.error(e);
        $('.no-browser-support').show();
        $('.app').hide();
      }
@@ -537,24 +544,20 @@ $(document).ready(function() {
      };
 
      recognition.onstart = function(event) {
-       console.log('here1');
-       // e.preventDefault()
        event.preventDefault()
        instructions.text('Voice recognition activated. Try speaking into the microphone.');
-
        event.stopPropagation()
      }
 
      recognition.onspeechend = function(event) {
-     console.log('here2');
        event.stopPropagation()
        instructions.text('You were quiet for a while so voice recognition turned itself off.');
        event.preventDefault()
      }
 
      recognition.onerror = function(event) {
-       event.preventDefault()
-       e.stopPropagation()
+
+       event.stopPropagation()
        if(event.error == 'no-speech') {
          instructions.text('No speech was detected. Try again.');
        };

@@ -4,8 +4,10 @@ function createMenu() {
   $('body').wrapInner( "<div id='canvas'></div>");
   $('body').append(retriveForm())
   $('body').append(newIdeapopup())
+  $('body').prepend('<div id="sticky"></div>')
   $('body').prepend('<div id="floater"></div>')
 
+  document.getElementById('sticky').innerHTML = `<img src="images/intercom.png" style="width: 370px; height: 550px; border-radius: 6px; margin-left: 73%;"/>`
   document.getElementById('floater').innerHTML =`
         <ul id="mainSideMenu">
             <li id="open-bug-menuItem" class="menu-tooltip fas fa-bug single-item" style="--transparent-background-color:#004DB3;">
@@ -22,24 +24,15 @@ function createMenu() {
             <li id="surveys-menuItem" class="menu-tooltip fa-flask single-item" style="--transparent-background-color:#FFD533;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
-<<<<<<< HEAD
                   <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="newIdea"> General Survey <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
                   <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="serveyV1"> V1.0.1 Survey <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
-=======
-                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="survey"> General Survey <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
-                  <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="survey"> V1.0.1 Survey <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
->>>>>>> added new item to the menu
                 </div>
               </span>
             </li>
             <li id="help-menuItem" class="menu-tooltip fa-user single-item" style="--transparent-background-color:#D88E8E;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
-<<<<<<< HEAD
                   <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="generalHelp"> General walkthroughs <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
-=======
-                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" id="newIdea"> General walkthroughs <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
->>>>>>> added new item to the menu
                   <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="help"> V1.0.1 walkthroughs <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
               </span>
@@ -48,9 +41,12 @@ function createMenu() {
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
                   <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;"  href="index1.html" id="newDesign1"> New Design 1 <span style="font-family: 'fontawesome';" class="fas fa-random"></span></a>
-                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" href="index2.html" id="newDesign2"> New Design 2 <span style="font-family: 'fontawesome';" class="fas fa-random"></span></a>
+                  <a style="border-top-left-radius:6px; border-top-right-radius:6px;" href="index2.html" id="newDesign2"> New Design 2 <span style="font-family: 'fontawesome';" class="fas fa-random"></span></a>
                 </div>
               </span>
+            </li>
+            <li id="intercom-menuItem" class="menu-tooltip fas fa-bug single-item" style="--transparent-background-color:#f4b042;">
+              <span class="menu-tooltiptext">Click here to open intercom</span>
             </li>
         </ul>`
 
