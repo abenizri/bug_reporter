@@ -17,15 +17,6 @@
   display: none;
 }
 
-#sticky {
-  position: sticky;
-  top: 200px;
-  font-size: 20px;
-  height: 0px;
-  z-index: 100;
-  /* display: none; */
-}
-
 #start-record-btn {
     /* width: 70px;
     height: 70px;
