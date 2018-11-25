@@ -62,6 +62,15 @@ $(document).ready(function() {
      }
     });
 
+    $('#intercom-menuItem').click(function() {
+      var display = $('#sticky').css('display')
+      if (display && display === 'none') {
+        $('#sticky').css('display', 'block')
+      } else {
+        $('#sticky').css('display', 'none')
+      }
+    })
+
     $('#feedback-menuItem').click(function() {
      resetAll()
     })
