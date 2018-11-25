@@ -462,9 +462,11 @@ $(document).ready(function() {
     function resetAll() {
       resetHighlight()
       resetImgCapture()
-      recognition.stop();
-      instructions.text('Voice recognition.');
-      isRecording = false
+         if (navigator.userAgent.includes("Chrome")) {
+           recognition.stop();
+           instructions.text('Voice recognition.');
+           isRecording = false
+         }
       var allArrayElements = elementArray.concat(elementHelpV1Array, elementHelpGeneralArray);
       var currentCanvasElement = document.getElementById('canvas')
       currentCanvasElement.style.cursor = 'default';
@@ -489,14 +491,13 @@ $(document).ready(function() {
         }
      });
 
-
+     if (navigator.userAgent.includes("Chrome")) {
      try {
-       var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+       var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
        var recognition = new SpeechRecognition();
      }
      catch(e) {
-       $('.no-browser-support').show();
-       $('.app').hide();
+       alert(e)
      }
 
 
@@ -724,5 +725,5 @@ $(document).ready(function() {
      function deleteNote(dateTime) {
        localStorage.removeItem('note-' + dateTime);
      }
-
+   }
 });
