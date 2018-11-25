@@ -24,7 +24,7 @@ function createMenu() {
             <li id="surveys-menuItem" class="menu-tooltip fa-flask single-item" style="--transparent-background-color:#FFD533;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
-                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="newIdea"> General Survey <span style="font-family: 'fontawesome';" class="fa-question-circle"></span></a>
+                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;" data-toggle="modal" id="newIdea"> General Survey <span style="font-family: 'fontawesome';" class="fa fa-pencil-square-o"></span></a>
                   <a style="border-bottom-left-radius:6px; border-bottom-right-radius:6px;" id="serveyV1"> V1.0.1 Survey <span style="font-family: 'fontawesome';" class="fa-check-square-o"></span></a>
                 </div>
               </span>
@@ -40,13 +40,13 @@ function createMenu() {
             <li id="ui-shafel-menuItem" class="menu-tooltip fas fa-random single-item" style="--transparent-background-color:#00ffff;">
               <span class="secondery-menu-tooltiptext">
                 <div class="dropdown">
-                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;"  href="index1.html" id="newDesign1"> New Design 1 <span style="font-family: 'fontawesome';" class="fas fa-random"></span></a>
-                  <a style="border-top-left-radius:6px; border-top-right-radius:6px;" href="index2.html" id="newDesign2"> New Design 2 <span style="font-family: 'fontawesome';" class="fas fa-random"></span></a>
+                  <a style="border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #fff;  border-top-left-radius:6px; border-top-right-radius:6px;"  href="index1.html" id="newDesign1"> Beta design <span style="font-family: 'fontawesome';" class="fas fa-random"></span></a>
+                  <a style="border-top-left-radius:6px; border-top-right-radius:6px;" href="index.html" id="newDesign2"> Back <span style="font-family: 'fontawesome';" class="fas fa-arrow-left"></span></a>
                 </div>
               </span>
             </li>
-            <li id="intercom-menuItem" class="menu-tooltip fas fa-bug single-item" style="--transparent-background-color:#f4b042;">
-              <span class="menu-tooltiptext">Click here to open intercom</span>
+            <li id="intercom-menuItem" class="menu-tooltip fa-commenting-o  single-item" style="--transparent-background-color:#f4b042;">
+              <span class="menu-tooltiptext"> Chat with us </span>
             </li>
         </ul>`
 
