@@ -4,6 +4,7 @@
   --second-background-color: #26B85A;
   --third-background-color: #FFD533;
   --forth-background-color: #D88E8E;
+  --fifth-background-color: #00ffff;
 }
 
 #start-record-btn {
@@ -229,29 +230,36 @@ z-index: 1000;
 #floater li:nth-child(1) {
   background-color: var(--first-background-color);
   transform: translate(0, -20%);
-  z-index: 3;
+  z-index: 4;
   transition-duration: 0.12s;
 }
 
 #floater li:nth-child(2) {
   background-color: var(--second-background-color);
   transform: translate(20%, 0);
-  z-index: 2;
+  z-index: 3;
   transition-duration: 0.24s;
 }
 
 #floater li:nth-child(3) {
   background-color: var(--third-background-color);
   transform: translate(0, 20%);
-  z-index: 1;
+  z-index: 2;
   transition-duration: 0.36s;
 }
 
 #floater li:nth-child(4) {
   background-color: var(--forth-background-color);
   transform: translate(-20%, 0);
-  z-index: 0;
+  z-index: 1;
   transition-duration: 0.48s;
+}
+
+#floater li:nth-child(5) {
+  background-color: var(--fifth-background-color);
+  transform: translate(0, -20%);
+  z-index: 0;
+  transition-duration: 0.60s;
 }
 
 #floater ul:hover {
@@ -311,4 +319,19 @@ z-index: 1000;
 #floater ul:hover li:nth-child(4):after {
   opacity: 1;
   transition-delay: 0.32s;
+}
+
+#floater ul:hover li:nth-child(5) {
+  transform: translate(0, 440%);
+}
+
+#floater ul:hover li:nth-child(5):hover {
+  opacity: 1;
+  transition-timing-function: cubic-bezier(0.5, 0, 0.5, 1);
+  transform: translate(0, 440%) scale(1.15, 1.15);
+  transition-duration: 0.24s;
+}
+#floater ul:hover li:nth-child(5):after {
+  opacity: 1;
+  transition-delay: 0.40s;
 }
