@@ -27,6 +27,8 @@ helpGeneralMessagesMap.set('html>body>div:nth-child(3)>div:nth-child(6)>div:nth-
 
 $(document).ready(function() {
     createMenu()
+
+
     $('#floater').sticky({topSpacing:5})
 
     $('#collapce_img').click(function(e) {
@@ -726,4 +728,86 @@ $(document).ready(function() {
        localStorage.removeItem('note-' + dateTime);
      }
    }
+
+
+   ['click'].forEach(function (name) {
+
+     window.addEventListener(name, function (ev) {
+       var path = $(ev.target).first().getPath()
+       var domain = $(location).attr('host') || 'localhost'
+       // console.log($(ev.target).attr());
+       console.log(domain);
+       console.log(path);
+       let elementInfo = {}
+
+       console.log(ev.target.tagName);
+       $(ev.target).each(function() {
+         $.each(this.attributes, function() {
+           // this.attributes is not a plain object, but an array
+           // of attribute nodes, which contain both the name and value
+           if(this.specified) {
+             elementInfo[this.name] = this.value;
+           }
+         });
+       });
+
+       let text = $(ev.target).text().replace(/[\n\r]+|[\s]{2,}/g, ' ').trim()
+       if (text && text.length && text.length < 15) elementInfo['text'] = text
+       elementInfo['tagName'] = ev.target.tagName
+
+         let data =  {
+           domain,
+           userId: 1,
+           eventType: name,
+           selector: path,
+           elementInfo,
+           url: window.location.href.split('?')[0]
+         }
+
+         let success = function(result) {
+             alert(result)
+          }
+
+          let uri = 'http://localhost:3000/update/'
+
+          $.ajax({
+            url: uri,
+            method: 'PUT',
+            contentType: 'application/x-www-form-urlencoded',
+            headers: {
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers': 'Authorization, Content-Type'
+              // 'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data,
+            success: function(result) {
+             console.log(result)
+            },
+            error: function(request,msg,error) {
+            alert(error)
+          }
+    });
+
+
+    });
+  });
 });
+
+
+
+// $.ajax({
+//
+//   url: 'http://localhost:3000/update',
+//   dataType: 'json',
+//   type: 'POST',
+//   headers: {"X-HTTP-Method-Override": "PUT", "Access-Control-Allow-Origin": "*", "Content-Type": "application/json", "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS", "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"},
+//   data: {
+//     domainId: 1,
+//     userId: 1,
+//     selector: path
+//   },
+//   success: function(result) {
+//     // Do something with the result
+//     alert(result)
+// }
+// });
